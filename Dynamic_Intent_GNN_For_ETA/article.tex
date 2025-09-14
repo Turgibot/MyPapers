@@ -1,0 +1,706 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  10pt,
+  letterpaper,
+  lettersize,
+  journal]{IEEEtran}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{5}
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
+  \fi
+  % set entry spacing
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+\usepackage{amsmath,amsfonts}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{array}
+\usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
+\usepackage{textcomp}
+\usepackage{stfloats}
+\usepackage{url}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{balance}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+
+% IEEE-specific commands
+\hyphenation{op-tical net-works semi-conduc-tor IEEE-Xplore}
+
+% Running heads
+\markboth{IEEE Transactions on Intelligent Transportation Systems,~Vol.~XX, No.~X, Month~2025}%
+{Tordjman \MakeLowercase{\textit{et al.}}: Incorporating User Intent into Dynamic Spatio-Temporal Graph Neural Networks for ETA Prediction}
+
+% Copyright line (will be added by IEEE)
+\IEEEpubid{0000--0000/00\$00.00~\copyright~2025 IEEE}
+
+% Override Quarto's automatic formatting to match IEEE template
+\makeatletter
+% Remove Quarto's automatic title formatting
+\renewcommand{\maketitle}{%
+  \newpage
+  \null
+  \vskip 2em%
+  \begin{center}%
+  \let \footnote \thanks
+    {\LARGE \@title \par}%
+    \vskip 1.5em%
+    {\large
+      \lineskip .5em%
+      \begin{tabular}[t]{c}%
+        \@author
+      \end{tabular}\par}%
+    \vskip 1em%
+    {\large \@date}%
+  \end{center}%
+  \par
+  \vskip 1.5em}
+\makeatother
+
+% Override abstract environment to use IEEE format
+\renewenvironment{abstract}{%
+  \small
+  \begin{center}%
+    {\bfseries \abstractname\vspace{-.5em}\vspace{0pt}}%
+  \end{center}%
+  \quotation
+}{%
+  \endquotation
+}
+
+% IEEE keywords are already defined in IEEEtran class
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Dynamic Graph Neural Networks for Accurate ETA prediction},
+  pdfauthor={Guy Tordjman; Nadav Voloch},
+  pdfkeywords={ETA prediction, graph neural networks, spatio-temporal
+graphs, user intent, traffic forecasting},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Dynamic Graph Neural Networks for Accurate ETA prediction}
+\author{Guy Tordjman \and Nadav Voloch}
+\date{}
+
+\begin{document}
+\maketitle
+
+
+\section{Abstract}\label{abstract}
+
+Accurate Estimated Time of Arrival (ETA) prediction is crucial for
+modern navigation systems and intelligent transportation applications.
+While existing approaches rely on static routing algorithms or machine
+learning models that infer likely paths between origin and destination,
+they fail to leverage the user's actual intended route and the dynamic
+nature of traffic interactions. This paper introduces a novel Dynamic
+Graph Neural Network (DGNN) architecture that explicitly incorporates
+user route intent and temporal memory to achieve superior ETA prediction
+accuracy.
+
+Our approach represents the transportation network as a dynamic
+multi-relational graph where junctions and vehicles are nodes, connected
+by typed edges capturing road segments, vehicle traversals, traffic
+interactions, and route intentions. The model employs a
+mixture-of-experts architecture with 6 specialized experts and a memory
+layer that records historical snapshots to capture temporal
+dependencies. Unlike existing benchmarks that lack explicit route
+representation, our dataset unifies junction states, vehicle dynamics,
+and pre-planned route information, enabling the model to condition
+predictions on the actual path intended by travelers.
+
+Experimental results on simulated traffic data demonstrate the
+effectiveness of our approach. The model achieves a validation MAE of
+{[}RESULTS\_PLACEHOLDER{]} seconds, representing a
+{[}IMPROVEMENT\_PLACEHOLDER{]}\% improvement over baseline methods.
+Performance analysis across different trip duration bins shows
+particularly strong results for {[}DETAILED\_RESULTS\_PLACEHOLDER{]}.
+The mixture-of-experts architecture with route awareness proves
+essential for handling heterogeneous traffic regimes, with the router
+entropy stabilizing at {[}ENTROPY\_PLACEHOLDER{]} indicating effective
+expert specialization.
+
+\textbf{Key contributions:} (1) First dynamic graph-based dataset for
+ETA prediction incorporating explicit user route intent, (2) Novel DGNN
+architecture with mixture-of-experts and temporal memory layers, (3)
+Comprehensive evaluation demonstrating significant accuracy improvements
+over existing approaches that lack route awareness and dynamic graph
+modeling.
+
+\section{Introduction}\label{introduction}
+
+\IEEEPARstart{E}{stimated} Time of Arrival (ETA) prediction is a
+fundamental component of modern navigation systems and intelligent
+transportation applications. Accurate ETA enables commuters to make
+informed travel decisions, supports fleet management and logistics
+operations, and reduces congestion by distributing demand across the
+road network. With the ubiquity of GPS-enabled devices and connected
+vehicles, navigation platforms such as Google Maps and Waze {[}1{]},
+{[}2{]}, {[}3{]} have transformed how travelers plan and adapt their
+journeys. However, despite significant progress, ETA estimation remains
+challenging due to the dynamic and stochastic nature of urban traffic.
+
+Traditional approaches to ETA computation rely on shortest-path
+algorithms such as Dijkstra's algorithm {[}4{]}, which provide efficient
+solutions under static conditions but do not account for evolving
+congestion or interaction effects between vehicles. As a result, travel
+times computed via such methods can diverge substantially from reality
+when traffic conditions fluctuate during the trip.
+
+With the growth of urban mobility datasets, machine-learning approaches
+have been introduced. Tree-based models such as XGBoost {[}5{]} predict
+ETA from handcrafted features (e.g., distance, departure time,
+day-of-week) and perform well on aggregated trip records like NYC Taxi
+{[}6{]} and Porto Taxi {[}7{]}. Deep learning methods improve
+performance by modeling temporal patterns and spatio-temporal context
+along a route: DeepTTE learns ETA from raw GPS traces {[}8{]}; TADNM
+incorporates transportation-mode awareness {[}9{]}; MetaTTE applies
+meta-learning for cross-city generalization {[}10{]}; and STAD corrects
+routing-engine outputs using spatio-temporal adjustments {[}11{]}.
+
+In parallel, graph-based spatio-temporal learning has advanced traffic
+prediction by representing road networks as graphs and learning their
+dynamics with diffusion or convolution operators (e.g., DCRNN, ST-GCN,
+Graph WaveNet) {[}12{]}, {[}13{]}, {[}14{]}. Nevertheless, existing
+benchmarks (NYC, Porto, Chengdu/DiDi, Geolife) {[}6{]}, {[}7{]},
+{[}15{]}, {[}16{]} lack explicit representation of the user's
+\textbf{pre-planned route}. Models must therefore infer the likely path
+between origin and destination, introducing ambiguity and reducing
+prediction accuracy. Early work proposed incorporating
+future-traffic--aware route selection to improve ETA accuracy {[}17{]}.
+We build on this direction by explicitly modeling user intent and the
+pre-planned route within a dynamic spatio-temporal graph, and by
+learning ETA with a graph-based mixture-of-experts architecture.
+
+This paper addresses these limitations by introducing a novel Dynamic
+Graph Neural Network (DGNN) that explicitly incorporates user route
+intent and temporal memory. Our approach represents the transportation
+network as a dynamic multi-relational graph where both junctions and
+vehicles are nodes, connected by typed edges that capture road segments,
+vehicle traversals, traffic interactions, and route intentions. The
+model employs a mixture-of-experts architecture with specialized experts
+and a memory layer that records historical snapshots to capture temporal
+dependencies.
+
+\textbf{Contributions.}\\
+1) We introduce the first dynamic graph-based dataset for ETA prediction
+that unifies junction states, vehicle dynamics, and explicit pre-planned
+route information.\\
+2) We propose a novel DGNN architecture that combines graph attention,
+temporal encoding, and mixture-of-experts specialization for accurate
+ETA prediction.\\
+3) We conduct comprehensive experiments on simulated traffic data,
+demonstrating significant accuracy improvements over existing approaches
+that lack route awareness and dynamic graph modeling.
+
+\section{Related Work}\label{related-work}
+
+\subsection{Classical pathfinding and
+routing}\label{classical-pathfinding-and-routing}
+
+Modern navigation stacks historically separate \textbf{route
+computation} from \textbf{travel-time estimation}. On a static graph
+\(G=(V,E)\) with non-negative edge costs, the canonical approach is to
+compute the minimum-cost path using Dijkstra's label-setting algorithm
+{[}4{]}, then obtain an ETA by summing edge weights along the selected
+path. This paradigm assumes costs are fixed during the trip and ignores
+how congestion evolves while the vehicle is en route.
+
+\subsubsection{Static vs.~time-dependent
+routing}\label{static-vs.-time-dependent-routing}
+
+In practice, edge costs are \textbf{time-dependent}: the travel time of
+a road segment \(e\in E\) is a function \(c_e(t)\) of the departure time
+\(t\). The \textbf{time-dependent shortest path (TDSP)} problem
+generalizes classical routing by optimizing arrival time given these
+functions. Under the FIFO (first-in--first-out) property---i.e.,
+departing later cannot lead to an earlier arrival---label-setting
+methods can be adapted to TD networks; otherwise, label-correcting
+techniques are required (with weaker optimality guarantees). Despite
+this, most production systems still approximate TDSP by (i) computing a
+route under ``current'' costs and (ii) aggregating ETAs along that
+route, or by using coarse predictive layers on top of a static
+route---both approaches remain \textbf{route-first} rather than
+\textbf{ETA-first} and can drift as traffic evolves.
+
+\subsubsection{Speed-up techniques for web-scale
+routing}\label{speed-up-techniques-for-web-scale-routing}
+
+Because city- and nation-scale graphs contain millions of nodes, raw
+Dijkstra is too slow for interactive use. A large body of work speeds up
+queries via preprocessing:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{A*} with \textbf{ALT landmarks} adds an admissible heuristic
+  via triangle inequalities to reduce the search space {[}18{]}.\\
+\item
+  \textbf{Contraction Hierarchies (CH)} contract low-importance vertices
+  to build shortcuts, enabling millisecond-level exact queries on road
+  networks {[}19{]}.\\
+\item
+  \textbf{Highway-dimension theory} explains why such hierarchies are
+  effective on real networks and yields provable bounds {[}20{]}.\\
+\item
+  \textbf{Arc-flags/SHARC} and \textbf{Multi-Level/Customizable Route
+  Planning (CRP)} partition the graph; CRP separates metric-independent
+  preprocessing from a fast ``customization'' step for new cost profiles
+  {[}21{]}.
+\end{itemize}
+
+These techniques deliver fast \textbf{static} (or piecewise-static)
+queries. Extensions exist for \textbf{time-dependent} costs, but
+accuracy hinges on the fidelity of \(c_e(t)\), and updates must be
+frequent to track live congestion.
+
+\subsubsection{Multi-criteria and k-shortest
+paths}\label{multi-criteria-and-k-shortest-paths}
+
+In urban routing, users often optimize multiple criteria (time, tolls,
+reliability). \textbf{k-shortest paths} (e.g., Yen's algorithm)
+enumerate alternatives for robustness or post-processing {[}22{]}, yet
+the ETA still depends on exogenous edge-time models rather than
+endogenous traffic interactions.
+
+\subsubsection{Limitations for ETA
+prediction}\label{limitations-for-eta-prediction}
+
+Classical routing \textbf{treats travel time as input}, not as a learned
+outcome of interacting flows. Even TDSP with high-quality \(c_e(t)\)
+remains \textbf{myopic} if those functions are derived from
+current/historical averages: it does not anticipate \textbf{how vehicles
+currently en route will reshape future speeds} on the chosen path.
+Consequently, route-first stacks can systematically under- or
+over-estimate arrival times when congestion is building or dissipating.
+This motivates \textbf{learning-based, graph-temporal} approaches that
+(i) reason over interactions between vehicles and junctions, and (ii)
+condition ETA on \textbf{the intended route} (when available) to remove
+path ambiguity---directions pursued by our method.
+
+\section{Methodology}\label{methodology}
+
+\subsection{Graph representation and construction
+(formal)}\label{graph-representation-and-construction-formal}
+
+Let \(t\in\mathbb{Z}\) index uniformly spaced snapshots (interval
+\(\Delta t\)). The transportation state at time \(t\) is a
+\textbf{directed, multi-relational graph}
+\[G_t=\big(V_t,\ E_t,\ \{A_t^{(\rho)}\}_{\rho\in\mathcal{R}}\big),\]
+with \[V_t=V^{j}\ \cup\ V_t^{v},\qquad V^{j}\cap V_t^{v}=\varnothing,\]
+where \(V^{j}\) are \textbf{junction nodes} (static across time) and
+\(V_t^{v}\) are \textbf{vehicle nodes} present at time \(t\). Each
+vehicle \(i\) maintains a persistent identity across time; we denote its
+node at time \(t\) by \(v_i^{t}\in V_t^{v}\).
+
+We consider a finite set of \textbf{edge relations} (types)
+\[\mathcal{R}=\{\text{road},\ \text{trav},\ \text{inter},\ \text{intent}\}.\]
+For each relation \(\rho\in\mathcal{R}\) we define a binary adjacency
+\(A_t^{(\rho)}\in\{0,1\}^{|V_t|\times |V_t|}\) and an optional weight
+matrix \(W_t^{(\rho)}\in\mathbb{R}_{\ge 0}^{|V_t|\times |V_t|}\). The
+(typed) edge set is
+\[E_t^{(\rho)}=\{(u,v): A_t^{(\rho)}[u,v]=1\},\qquad E_t=\biguplus_{\rho\in\mathcal{R}}E_t^{(\rho)}.\]
+
+\textbf{Typed edges.} At time \(t\),
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  \textbf{Road segment edges} (\(\rho=\text{road}\)): for adjacent
+  junctions \(u,v\in V^{j}\) with legal driving direction \(u\!\to\!v\),
+  \[(u,v)\in E^{(\text{road})}_t,\quad A_t^{(\text{road})}[u,v]=1.\]
+\item
+  \textbf{Traversal edges} (\(\rho=\text{trav}\)): if vehicle
+  \(v_i^{t}\) occupies directed segment \((a,b)\) with \(a,b\in V^{j}\),
+  \[(a, v_i^{t})\in E_t^{(\text{trav})},\qquad (v_i^{t}, b)\in E_t^{(\text{trav})}.\]
+\item
+  \textbf{Interaction edges} (\(\rho=\text{inter}\)): for vehicles
+  \(v_i^{t}, v_{j}^{t}\in V_t^{v}\) on the same segment (or lane group)
+  with longitudinal spacing \(d_{ij}(t)\le \varepsilon\) and aligned
+  headings,
+  \[(v_i^{t}, v_{j}^{t})\in E_t^{(\text{inter})},\quad W_t^{(\text{inter})}[v_i^{t},v_{j}^{t}]=\omega\!\big(d_{ij}(t)\big),\]
+  where \(\omega:\mathbb{R}_{\ge 0}\!\to\!\mathbb{R}_{\ge 0}\) is a
+  monotone kernel (e.g., \(\omega(d)=\exp(-d/\lambda)\)).
+\item
+  \textbf{Intent edges} (\(\rho=\text{intent}\)): let the
+  \textbf{planned route} for vehicle \(i\) at departure time
+  \(t_0\le t\) be the ordered edge sequence
+  \[\mathcal{R}_{i}=\big(e_1,e_2,\ldots,e_{K}\big),\qquad e_k=(u_k,u_{k+1})\in E^{(\text{road})}_{t_0}.\]
+  We connect the vehicle to upcoming junctions along its route,
+  \[(v_i^{t},\ u_{t,i}^{(k)})\in E_t^{(\text{intent})}\quad \text{for }k=1,\ldots,K_0,\]
+  with \textbf{decay weights}
+  \(W_t^{(\text{intent})}[v_i^{t},u_{t,i}^{(k)}]=\alpha_k\) where
+  \(\alpha_1\ge\cdots\ge \alpha_{K_0}>0\) (e.g.,
+  \(\alpha_k\in\{1.0,0.8,0.6,0.4,0.2\}\)).
+\end{enumerate}
+
+The learning context is a length-\(H\) \textbf{temporal window}
+\[\mathcal{G}_{t-H+1:t}=\big\{G_{\tau}\big\}_{\tau=t-H+1}^{t},\] used to
+predict vehicle ETAs at time \(t\).
+
+\section{Results}\label{results}
+
+Run the actual system, evaluate results, and compare to baselines.
+
+\section{Discussion}\label{discussion}
+
+Reflect on the results. Where did your model perform well? Where did it
+struggle? Why?
+
+\section{Conclusion}\label{conclusion}
+
+Summarize what was learned and propose next steps.
+
+\section{Acknowledgments}\label{acknowledgments}
+
+This should be a simple paragraph before the References to thank those
+individuals and institutions who have supported your work on this
+article.
+
+\section*{References}\label{references}
+\addcontentsline{toc}{section}{References}
+
+\phantomsection\label{refs}
+\begin{CSLReferences}{0}{0}
+\bibitem[\citeproctext]{ref-derrowpinion2021googlemaps}
+\CSLLeftMargin{{[}1{]} }%
+\CSLRightInline{A. Derrow-Pinion \emph{et al.}, {``ETA prediction with
+graph neural networks in google maps,''} in \emph{Proceedings of the
+27th ACM SIGKDD conference on knowledge discovery \& data mining}, 2021,
+pp. e.g., 4034--4042. doi:
+\href{https://doi.org/10.1145/3459637.3481916}{10.1145/3459637.3481916}.}
+
+\bibitem[\citeproctext]{ref-hoseinzadeh2020waze}
+\CSLLeftMargin{{[}2{]} }%
+\CSLRightInline{N. Hoseinzadeh, Y. Liu, L. D. Han, C. Brakewood, and A.
+Mohammadnazar, {``Quality of location-based crowdsourced speed data on
+surface streets: A case study of waze and bluetooth speed data in
+sevierville, TN,''} \emph{Computers, Environment and Urban Systems},
+vol. 83, p. 101518, 2020, doi:
+\href{https://doi.org/10.1016/j.compenvurbsys.2020.101518}{10.1016/j.compenvurbsys.2020.101518}.}
+
+\bibitem[\citeproctext]{ref-amin-naseri2018waze}
+\CSLLeftMargin{{[}3{]} }%
+\CSLRightInline{M. Amin-Naseri, P. Chakraborty, A. Sharma, S. B.
+Gilbert, and M. Hong, {``Evaluating the reliability, coverage, and added
+value of crowdsourced traffic incident reports from waze,''}
+\emph{Transportation Research Record}, vol. 2672, no. 43, pp. 34--43,
+2018, doi:
+\href{https://doi.org/10.1177/0361198118790619}{10.1177/0361198118790619}.}
+
+\bibitem[\citeproctext]{ref-dijkstra1959}
+\CSLLeftMargin{{[}4{]} }%
+\CSLRightInline{E. W. Dijkstra, {``A note on two problems in connexion
+with graphs,''} \emph{Numerische Mathematik}, vol. 1, no. 1, pp.
+269--271, 1959, doi:
+\href{https://doi.org/10.1007/BF01386390}{10.1007/BF01386390}.}
+
+\bibitem[\citeproctext]{ref-chen2016xgboost}
+\CSLLeftMargin{{[}5{]} }%
+\CSLRightInline{T. Chen and C. Guestrin, {``XGBoost: A scalable tree
+boosting system,''} in \emph{Proceedings of the 22nd ACM SIGKDD
+international conference on knowledge discovery and data mining}, ACM,
+2016, pp. 785--794. doi:
+\href{https://doi.org/10.1145/2939672.2939785}{10.1145/2939672.2939785}.}
+
+\bibitem[\citeproctext]{ref-nyc_tlc}
+\CSLLeftMargin{{[}6{]} }%
+\CSLRightInline{NYC TLC, {``New york city taxi and limousine commission
+trip record data.''}
+\url{https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page},
+2013-\/-.}
+
+\bibitem[\citeproctext]{ref-moreira2013porto}
+\CSLLeftMargin{{[}7{]} }%
+\CSLRightInline{L. Moreira-Matias, J. Gama, M. Ferreira, J.
+Mendes-Moreira, and L. Damas, {``Predicting taxi--passenger demand using
+streaming data,''} in \emph{2013 IEEE 16th international conference on
+intelligent transportation systems (ITSC)}, IEEE, 2013, pp. 140--145.
+doi:
+\href{https://doi.org/10.1109/ITSC.2013.6728228}{10.1109/ITSC.2013.6728228}.}
+
+\bibitem[\citeproctext]{ref-wang2018deeptte}
+\CSLLeftMargin{{[}8{]} }%
+\CSLRightInline{J. Wang, Y. Fu, and Z. Zhang, {``When will you arrive?
+Estimating travel time based on deep neural networks,''} in
+\emph{Proceedings of the AAAI conference on artificial intelligence},
+2018, pp. 2500--2507. doi:
+\href{https://doi.org/10.1609/aaai.v32i1.11772}{10.1609/aaai.v32i1.11772}.}
+
+\bibitem[\citeproctext]{ref-xu2020tadnm}
+\CSLLeftMargin{{[}9{]} }%
+\CSLRightInline{W. Xu, Z. Lin, Y. Zhao, T. Zhang, and B. Yang, {``TADNM:
+A transportation-mode aware deep neural model for travel time
+estimation,''} \emph{Applied Sciences}, vol. 10, no. 21, p. 7599, 2020,
+doi: \href{https://doi.org/10.3390/app10217599}{10.3390/app10217599}.}
+
+\bibitem[\citeproctext]{ref-wang2022metatte}
+\CSLLeftMargin{{[}10{]} }%
+\CSLRightInline{X. Wang, J. Li, and N. J. Yuan, {``MetaTTE: A
+meta-learning framework for travel time estimation,''} in
+\emph{Proceedings of the 28th ACM SIGKDD conference on knowledge
+discovery and data mining}, ACM, 2022, pp. 4080--4088. doi:
+\href{https://doi.org/10.1145/3534678.3539066}{10.1145/3534678.3539066}.}
+
+\bibitem[\citeproctext]{ref-abbar2020stad}
+\CSLLeftMargin{{[}11{]} }%
+\CSLRightInline{S. Abbar, A. Anagnostopoulos, S. Bhagat, P.
+Cudre-Mauroux, and A. Kumar, {``STAD: Spatio-temporal adjustment for
+improving travel-time estimation,''} in \emph{Proceedings of the web
+conference 2020}, ACM, 2020, pp. 2839--2845. doi:
+\href{https://doi.org/10.1145/3366423.3380127}{10.1145/3366423.3380127}.}
+
+\bibitem[\citeproctext]{ref-li2018dcrnn}
+\CSLLeftMargin{{[}12{]} }%
+\CSLRightInline{Y. Li, R. Yu, C. Shahabi, and Y. Liu, {``Diffusion
+convolutional recurrent neural network: Data-driven traffic
+forecasting,''} in \emph{International conference on learning
+representations}, 2018.}
+
+\bibitem[\citeproctext]{ref-yu2018stgcn}
+\CSLLeftMargin{{[}13{]} }%
+\CSLRightInline{B. Yu, H. Yin, and Z. Zhu, {``Spatio-temporal graph
+convolutional networks: A deep learning framework for traffic
+forecasting,''} in \emph{Proceedings of the 27th international joint
+conference on artificial intelligence}, 2018, pp. 3634--3640. doi:
+\href{https://doi.org/10.24963/ijcai.2018/505}{10.24963/ijcai.2018/505}.}
+
+\bibitem[\citeproctext]{ref-wu2019graphwavenet}
+\CSLLeftMargin{{[}14{]} }%
+\CSLRightInline{Z. Wu, S. Pan, G. Long, J. Jiang, and C. Zhang, {``Graph
+WaveNet for deep spatial-temporal graph modeling,''} in
+\emph{Proceedings of the 28th international joint conference on
+artificial intelligence}, 2019, pp. 1907--1913. doi:
+\href{https://doi.org/10.24963/ijcai.2019/264}{10.24963/ijcai.2019/264}.}
+
+\bibitem[\citeproctext]{ref-didi2016}
+\CSLLeftMargin{{[}15{]} }%
+\CSLRightInline{DiDi Chuxing Research, {``Di-tech challenge 2016.''}
+\url{https://outreach.didichuxing.com/research/opendata/en/}, 2016.}
+
+\bibitem[\citeproctext]{ref-zheng2012geolife}
+\CSLLeftMargin{{[}16{]} }%
+\CSLRightInline{Y. Zheng, L. Zhang, Z. Ma, X. Xie, and W.-Y. Ma,
+{``Mining interesting locations and travel sequences from GPS
+trajectories,''} in \emph{Proceedings of the 18th international
+conference on world wide web}, ACM, 2009, pp. 791--800. doi:
+\href{https://doi.org/10.1145/1526709.1526816}{10.1145/1526709.1526816}.}
+
+\bibitem[\citeproctext]{ref-voloch2021}
+\CSLLeftMargin{{[}17{]} }%
+\CSLRightInline{N. Voloch and N. Voloch-Bloch, {``Finding the fastest
+navigation route by real-time future traffic estimations,''} \emph{2021
+IEEE International Conference on Microwaves, Communications, Antennas
+and Electronic Systems (COMCAS)}, 2021, doi:
+\href{https://doi.org/10.1109/COMCAS52884.2021.9628700}{10.1109/COMCAS52884.2021.9628700}.}
+
+\bibitem[\citeproctext]{ref-goldberg2005alt}
+\CSLLeftMargin{{[}18{]} }%
+\CSLRightInline{A. V. Goldberg and C. Harrelson, {``Computing the
+shortest path: A* search meets graph theory,''} in \emph{Proceedings of
+the sixteenth annual ACM-SIAM symposium on discrete algorithms (SODA)},
+2005, pp. 156--165.}
+
+\bibitem[\citeproctext]{ref-geisberger2008ch}
+\CSLLeftMargin{{[}19{]} }%
+\CSLRightInline{R. Geisberger, P. Sanders, D. Schultes, and D. Delling,
+{``Contraction hierarchies: Faster and simpler hierarchical routing in
+road networks,''} in \emph{International workshop on experimental and
+efficient algorithms (WEA)}, Springer, 2008, pp. 319--333.}
+
+\bibitem[\citeproctext]{ref-abraham2010highwaydimension}
+\CSLLeftMargin{{[}20{]} }%
+\CSLRightInline{I. Abraham, A. Fiat, A. V. Goldberg, and R. F. Werneck,
+{``Highway dimension, shortest paths, and provably efficient
+algorithms,''} in \emph{Proceedings of the 21st annual ACM-SIAM
+symposium on discrete algorithms (SODA)}, 2010, pp. 782--793. doi:
+\href{https://doi.org/10.1137/1.9781611973075.64}{10.1137/1.9781611973075.64}.}
+
+\bibitem[\citeproctext]{ref-delling2011crp}
+\CSLLeftMargin{{[}21{]} }%
+\CSLRightInline{D. Delling, A. V. Goldberg, T. Pajor, and R. F. Werneck,
+{``Customizable route planning,''} in \emph{International symposium on
+experimental algorithms (SEA)}, Springer, 2011, pp. 376--387.}
+
+\bibitem[\citeproctext]{ref-yen1971ksp}
+\CSLLeftMargin{{[}22{]} }%
+\CSLRightInline{J. Y. Yen, {``Finding the k shortest loopless paths in a
+network,''} in \emph{Management science}, 1971, pp. 712--716. doi:
+\href{https://doi.org/10.1287/mnsc.17.11.712}{10.1287/mnsc.17.11.712}.}
+
+\end{CSLReferences}
+
+
+
+
+\end{document}

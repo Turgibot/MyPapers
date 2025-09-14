@@ -1,0 +1,60 @@
+\usepackage{amsmath,amsfonts}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{array}
+\usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
+\usepackage{textcomp}
+\usepackage{stfloats}
+\usepackage{url}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{balance}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+
+% IEEE-specific commands
+\hyphenation{op-tical net-works semi-conduc-tor IEEE-Xplore}
+
+% Running heads
+\markboth{IEEE Transactions on Intelligent Transportation Systems,~Vol.~XX, No.~X, Month~2025}%
+{Tordjman \MakeLowercase{\textit{et al.}}: Incorporating User Intent into Dynamic Spatio-Temporal Graph Neural Networks for ETA Prediction}
+
+% Copyright line (will be added by IEEE)
+\IEEEpubid{0000--0000/00\$00.00~\copyright~2025 IEEE}
+
+% Override Quarto's automatic formatting to match IEEE template
+\makeatletter
+% Remove Quarto's automatic title formatting
+\renewcommand{\maketitle}{%
+  \newpage
+  \null
+  \vskip 2em%
+  \begin{center}%
+  \let \footnote \thanks
+    {\LARGE \@title \par}%
+    \vskip 1.5em%
+    {\large
+      \lineskip .5em%
+      \begin{tabular}[t]{c}%
+        \@author
+      \end{tabular}\par}%
+    \vskip 1em%
+    {\large \@date}%
+  \end{center}%
+  \par
+  \vskip 1.5em}
+\makeatother
+
+% Override abstract environment to use IEEE format
+\renewenvironment{abstract}{%
+  \small
+  \begin{center}%
+    {\bfseries \abstractname\vspace{-.5em}\vspace{0pt}}%
+  \end{center}%
+  \quotation
+}{%
+  \endquotation
+}
+
+% IEEE keywords are already defined in IEEEtran class
