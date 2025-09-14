@@ -1,0 +1,69 @@
+saved_at: '2025-09-14T13:59:04'
+ckpt_path: /home/guy/Projects/Traffic/DynamicMoeIntentGNN/logs/full_moe/mae/y_log_z/moe_best.pt
+epoch: 92
+best_val_secMAE: 50.83365401659789
+target_key: y_log_z
+loss_type: null
+arch:
+  fusion_out: 192
+  top_k: 2
+  dropout: 0.1
+  predict_on: last
+  route_awareness: full
+config:
+  seed: 42
+  data:
+    allow_incomplete_tail: false
+    train_path: /home/guy/Projects/Traffic/traffic_data_2_weeks_30s_pt
+    num_files: 20160
+    start_idx: 0
+    shuffle_windows: true
+    stride_size: 10
+    test_path: /home/guy/Projects/Traffic/traffic_data_2_weeks_30s_pt
+    test_num_files: 720
+    test_start_idx: 5040
+    val_path: /home/guy/Projects/Traffic/traffic_data_2_weeks_30s_pt
+    val_num_files: 20160
+    val_start_idx: 20160
+    window_size: 30
+  model:
+    hidden: 128
+    fusion_out: 192
+    experts: 6
+    top_k: 2
+    dropout: 0.1
+    route_awareness_level: full
+    route_clip_std: 4.0
+    route_momentum: 0.01
+    route_warmup_updates: 200
+    route_gate_init: 0.2
+  train:
+    exp_name: full_moe
+    logdir: ./logs
+    resume: true
+    log_interval: 1
+    val_log_interval: 1
+    num_workers: 4
+    persistent_workers: true
+    batch_size: 4
+    lr: 0.001
+    weight_decay: 0.01
+    epochs: 500
+    t_max: 500
+    target_key: y_log_z
+  losses:
+    lb_weight: 0.05
+    router_entropy_w: 0.002
+    router_entropy_keep_grad: true
+    router_entropy_mode: kl_uniform
+    type: mae
+state_dict:
+  num_tensors: 81
+  num_params_total: 777420
+  example_keys:
+  - encoder.convs.0.att
+  - encoder.convs.0.bias
+  - encoder.convs.0.lin_l.weight
+  - encoder.convs.0.lin_l.bias
+  - encoder.convs.0.lin_r.weight
+  - encoder.convs.0.lin_r.bias
