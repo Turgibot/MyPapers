@@ -1,0 +1,4 @@
+\section{Experiments}
+We evaluate on simulated urban traffic with explicit route plans per trip. We report MAE (seconds) and relative improvements vs. baselines. Baselines include: (i) static route-sum ETA; (ii) XGBoost with handcrafted features \cite{chen2016xgboost}; (iii) deep sequence models (e.g., DeepTTE \cite{wang2018deeptte}); and (iv) graph models (DCRNN, ST-GCN, Graph WaveNet) \cite{li2018dcrnn,yu2018stgcn,wu2019graphwavenet}. We ablate intent edges and the MoE router.
+
+Implementation uses PyTorch Geometric \cite{fey2019pyg}. Training details: optimizer, learning rate, window $H$, batch size, and early stopping. We stratify results by trip duration bins to analyze regimes.

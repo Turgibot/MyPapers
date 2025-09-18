@@ -1,0 +1,9 @@
+\section{Related Work}
+\subsection{Classical pathfinding and routing}
+On static graphs \(G=(V,E)\) with non-negative edge costs, shortest paths are computed via Dijkstra's algorithm \cite{dijkstra1959}. Numerous speed-up techniques enable web-scale routing: A*/ALT landmarks \cite{goldberg2005alt}, Contraction Hierarchies \cite{geisberger2008ch}, highway-dimension theory \cite{abraham2010highwaydimension}, and Customizable Route Planning \cite{delling2011crp}. Multi-criteria and k-shortest paths \cite{yen1971ksp} broaden the option set, but ETA still depends on exogenous edge-time models.
+
+\subsection{Learning-based ETA and traffic forecasting}
+ETA prediction leverages classic ML (e.g., gradient boosting \cite{chen2016xgboost}) and deep models operating on GPS traces and route contexts \cite{wang2018deeptte,xu2020tadnm,wang2022metatte,abbar2020stad}. Spatio-temporal GNNs such as DCRNN, ST-GCN, and GraphWaveNet \cite{li2018dcrnn,yu2018stgcn,wu2019graphwavenet} learn dynamics over road graphs, often on benchmarks like NYC/Porto/DiDi/Geolife \cite{nyc_tlc,moreira2013porto,didi2016,zheng2012geolife}.
+
+\subsection{Intent- and route-aware prediction}
+Route intent matters for ETA accuracy. Incorporating future-traffic–aware route selection improves travel-time estimates \cite{voloch2021}. Recent trajectory-prediction and destination-aware works also model intent and downstream effects, complementing our focus on ETA within a dynamic multi-relational graph.

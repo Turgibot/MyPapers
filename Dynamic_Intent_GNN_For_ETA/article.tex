@@ -20,7 +20,7 @@
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-\usepackage{lmodern}
+% \usepackage{lmodern} % not required for IEEEtran; omit to avoid missing package on TeX Live 2019
 \ifPDFTeX\else  
     % xetex/luatex font selection
 \fi
@@ -41,6 +41,7 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
+\usepackage{xparse} % provides \NewDocumentCommand used by citeproc macros
 \usepackage[margin=1in]{geometry}
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \setcounter{secnumdepth}{5}

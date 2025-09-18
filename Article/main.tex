@@ -1,0 +1,48 @@
+\documentclass[journal]{IEEEtran}
+
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{microtype}
+\usepackage{url}
+\usepackage[caption=false,font=footnotesize]{subfig}
+\usepackage{stfloats}
+\usepackage{balance}
+\usepackage[hidelinks]{hyperref}
+
+\title{Dynamic Route-Aware Graph Neural Networks for Accurate ETA Prediction}
+\author{Guy~Tordjman, and Nadav~Voloch%
+\thanks{G. Tordjman is with The Open University, Israel.}%
+\thanks{N. Voloch is with Ruppin Academic Center, Israel.}%
+}
+
+\markboth{IEEE Transactions on Intelligent Transportation Systems}{Tordjman \MakeLowercase{\textit{et al.}}: Dynamic Route-Aware Graph Neural Networks for Accurate ETA Prediction}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\input{sections/abstract}
+\end{abstract}
+
+\begin{IEEEkeywords}
+\input{sections/keywords}
+\end{IEEEkeywords}
+
+\input{sections/introduction}
+\input{sections/related_work}
+\input{sections/methodology}
+\input{sections/experiments}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/conclusion}
+\input{sections/acknowledgments}
+
+\bibliographystyle{IEEEtran}
+\balance
+\bibliography{references}
+
+\end{document}

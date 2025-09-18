@@ -1,0 +1,17 @@
+\section{Methodology}
+We represent the transportation system at snapshot time $t$ as a directed, multi-relational graph
+$$G_t = \big(V_t, E_t, \{A_t^{(\rho)}\}_{\rho\in\mathcal{R}}\big),$$
+with $V_t = V^j \cup V_t^v$ where $V^j$ are junction nodes (static) and $V_t^v$ are vehicle nodes present at time $t$. Edge relations
+$$\mathcal{R}=\{\text{road},\,\text{trav},\,\text{inter},\,\text{intent}\}$$
+are encoded via binary adjacencies $A_t^{(\rho)}$ and optional weights $W_t^{(\rho)}\in\mathbb{R}_{\ge 0}^{|V_t|\times|V_t|}$.
+
+Typed edges:
+1) Road segments ($\rho=\text{road}$): for adjacent $u,v\in V^j$ with legal direction $u\!\to\!v$, $(u,v)\in E_t^{(\text{road})}$.
+
+2) Traversal ($\rho=\text{trav}$): if vehicle $v_i^t$ occupies directed segment $(a,b)$, then $(a, v_i^t)$ and $(v_i^t, b)$ exist in $E_t^{(\text{trav})}$.
+
+3) Interaction ($\rho=\text{inter}$): for vehicles $v_i^t, v_j^t$ on the same segment with spacing $d_{ij}(t)\le \varepsilon$ and aligned headings, $(v_i^t, v_j^t)\in E_t^{(\text{inter})}$ with weights $\omega\big(d_{ij}(t)\big)$ (e.g., $\omega(d)=e^{-d/\lambda}$).
+
+4) Intent ($\rho=\text{intent}$): for planned route $\mathcal{R}_i=(e_1,\ldots,e_K)$ at departure $t_0$, connect $v_i^t$ to upcoming junctions on its route with decay weights $\alpha_k$.
+
+We learn ETA from a temporal window $\mathcal{G}_{t-H+1:t}=\{G_{\tau}\}_{\tau=t-H+1}^{t}$. Our DGNN employs spatio-temporal encoding and a mixture-of-experts module that routes vehicles/segments to specialized experts; a memory layer captures longer-range temporal dependencies. We train with supervised ETA loss (e.g., MAE) and evaluate across trip-duration buckets and ablations of intent edges.
