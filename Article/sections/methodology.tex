@@ -1,17 +1,139 @@
 \section{Methodology}
-We represent the transportation system at snapshot time $t$ as a directed, multi-relational graph
-$$G_t = \big(V_t, E_t, \{A_t^{(\rho)}\}_{\rho\in\mathcal{R}}\big),$$
-with $V_t = V^j \cup V_t^v$ where $V^j$ are junction nodes (static) and $V_t^v$ are vehicle nodes present at time $t$. Edge relations
-$$\mathcal{R}=\{\text{road},\,\text{trav},\,\text{inter},\,\text{intent}\}$$
-are encoded via binary adjacencies $A_t^{(\rho)}$ and optional weights $W_t^{(\rho)}\in\mathbb{R}_{\ge 0}^{|V_t|\times|V_t|}$.
 
-Typed edges:
-1) Road segments ($\rho=\text{road}$): for adjacent $u,v\in V^j$ with legal direction $u\!\to\!v$, $(u,v)\in E_t^{(\text{road})}$.
+\subsection{Dynamic Graph Representation}
+We represent the transportation system at snapshot time $t$ as a directed multi-relational graph
+\[
+G_t = \big(V_t, E_t, \{A_t^{(\rho)}, W_t^{(\rho)}\}_{\rho\in\mathcal{R}}\big),
+\]
+where $V_t = V^j \cup V_t^v$ consists of static junction nodes $V^j$ and dynamic vehicle nodes $V_t^v$. 
+Each relation $\rho\in\mathcal{R}$ corresponds to a typed edge set with optional weights. 
+We define four relation types:
+\begin{enumerate}
+    \item \textbf{Road edges ($\rho=\text{road}$):} For adjacent junctions $(u,v)$ with legal direction $u\!\to\!v$, we add $(u,v)\in E_t^{(\text{road})}$, encoding static road topology.
+    \item \textbf{Traversal edges ($\rho=\text{trav}$):} If vehicle $v_i^t$ occupies segment $(a,b)$, we add $(a,v_i^t)$ and $(v_i^t,b)$, linking the vehicle to its upstream and downstream junctions.
+    \item \textbf{Interaction edges ($\rho=\text{inter}$):} For vehicles $v_i^t,v_j^t$ on the same segment with spacing $d_{ij}(t)\le\varepsilon$ and aligned headings, we add $(v_i^t,v_j^t)$ weighted by $\omega(d_{ij}(t)) = e^{-d_{ij}(t)/\lambda}$.
+    \item \textbf{Intent edges ($\rho=\text{intent}$):} Given a pre-computed route $\mathcal{R}_i = (e_1,\ldots,e_K)$, vehicle $v_i^t$ is connected to upcoming junctions with decaying weights $\alpha_k$, encoding future intent.
+\end{enumerate}
 
-2) Traversal ($\rho=\text{trav}$): if vehicle $v_i^t$ occupies directed segment $(a,b)$, then $(a, v_i^t)$ and $(v_i^t, b)$ exist in $E_t^{(\text{trav})}$.
+Each node and edge carries feature vectors capturing static attributes (e.g., number of lanes, road type), dynamic states (e.g., vehicle speed, occupancy), and route-related information.
 
-3) Interaction ($\rho=\text{inter}$): for vehicles $v_i^t, v_j^t$ on the same segment with spacing $d_{ij}(t)\le \varepsilon$ and aligned headings, $(v_i^t, v_j^t)\in E_t^{(\text{inter})}$ with weights $\omega\big(d_{ij}(t)\big)$ (e.g., $\omega(d)=e^{-d/\lambda}$).
+\subsection{Temporal Windowing}
+ETA prediction requires reasoning over temporal dynamics. We construct a window of $H$ consecutive snapshots:
+\[
+\mathcal{G}_{t-H+1:t} = \{G_\tau\}_{\tau=t-H+1}^t,
+\]
+where $H=30$ in our experiments (30-second interval). The prediction target is the ETA of vehicles present in the final snapshot $G_t$.
 
-4) Intent ($\rho=\text{intent}$): for planned route $\mathcal{R}_i=(e_1,\ldots,e_K)$ at departure $t_0$, connect $v_i^t$ to upcoming junctions on its route with decay weights $\alpha_k$.
+\subsection{Model Architecture}
+Our Dynamic Graph Neural Network (DGNN) integrates spatial, temporal, and route information. 
+The workflow is illustrated in Fig.~\ref{fig:temporal-moe-eta}.
 
-We learn ETA from a temporal window $\mathcal{G}_{t-H+1:t}=\{G_{\tau}\}_{\tau=t-H+1}^{t}$. Our DGNN employs spatio-temporal encoding and a mixture-of-experts module that routes vehicles/segments to specialized experts; a memory layer captures longer-range temporal dependencies. We train with supervised ETA loss (e.g., MAE) and evaluate across trip-duration buckets and ablations of intent edges.
+\begin{itemize}
+    \item \textbf{Graph Encoder:} Each snapshot $G_t$ is processed by a multi-layer GATv2-based encoder with residual connections and edge features, producing embeddings for junction and vehicle nodes.
+    \item \textbf{Temporal Aggregator:} Encoded snapshots are fed to a temporal module. In our current implementation, prediction is made at the final snapshot ($t$), but the architecture supports GRU/Transformer-based sequence aggregation.
+    \item \textbf{Vehicle Selection:} Only vehicle node embeddings at $t$ are retained for prediction.
+    \item \textbf{Route Encoder:} For the full intent-aware variant, each vehicle’s remaining route is embedded via an edge-ID embedding with mean pooling, then concatenated with its vehicle embedding.
+    \item \textbf{Fusion and MoE Head:} Vehicle embeddings are fused through a feed-forward network and routed to a sparse Top-$k$ Mixture-of-Experts (MoE) head, where specialized experts capture heterogeneous traffic regimes. The output is the ETA prediction for each vehicle.
+\end{itemize}
+
+% ===== TikZ Diagram of Model Architecture =====
+\begin{figure}[t]
+    \centering
+    \resizebox{0.95\columnwidth}{!}{%
+    % Styles used by nodes in this diagram
+    \tikzset{
+      block/.style = {draw, rounded corners=2pt, thick, align=center, inner sep=6pt, fill=black!3},
+      small/.style = {draw, rounded corners=2pt, align=center, inner sep=4pt, fill=black!3},
+      op/.style    = {block, fill=blue!6},
+      opt/.style   = {block, fill=green!7},
+      moe/.style   = {block, fill=orange!12}
+    }
+    \begin{tikzpicture}[>=Latex, node distance=12mm]
+    
+    % --- Snapshots as an overlapped deck (shared encoder) ---
+    \node[block, minimum width=40mm, minimum height=16mm] (snapdeck)
+      {Snapshots $t{-}H{+}1,\ldots,t$ \\ \footnotesize Dynamic graphs ($x$, $edge\_index$, $edge\_attr$)};
+    
+    % faint background cards behind the main one (deck effect)
+    \begin{scope}[on background layer]
+      % soft shadow under/behind the top card (horizontal alignment)
+      \node[fill=black!12, draw=none, rounded corners=2pt, minimum width=42mm, minimum height=18mm]
+        at ($(snapdeck.center)+(1.2mm,0mm)$) {};
+      % aligned background cards with thicker frames (exact same size as snapdeck)
+      % use snapdeck's corners to draw identically sized rectangles behind it
+      \draw[rounded corners=2pt, line width=1.4pt, draw=black!70, fill=white]
+        ($(snapdeck.south west)+(6mm,6mm)$) rectangle ($(snapdeck.north east)+(6mm,6mm)$);
+      \draw[rounded corners=2pt, line width=1.4pt, draw=black!70, fill=white]
+        ($(snapdeck.south west)+(5mm,5mm)$) rectangle ($(snapdeck.north east)+(5mm,5mm)$);
+      \draw[rounded corners=2pt, line width=1.4pt, draw=black!70, fill=white]
+        ($(snapdeck.south west)+(4mm,4mm)$) rectangle ($(snapdeck.north east)+(4mm,4mm)$);
+      \draw[rounded corners=2pt, line width=1.4pt, draw=black!70, fill=white]
+        ($(snapdeck.south west)+(3mm,3mm)$) rectangle ($(snapdeck.north east)+(3mm,3mm)$);
+      \draw[rounded corners=2pt, line width=1.4pt, draw=black!70, fill=white]
+        ($(snapdeck.south west)+(2mm,2mm)$) rectangle ($(snapdeck.north east)+(2mm,2mm)$);
+      \draw[rounded corners=2pt, line width=1.4pt, draw=black!70, fill=white]
+        ($(snapdeck.south west)+(1mm,1mm)$)  rectangle ($(snapdeck.north east)+(1mm,1mm)$);
+    \end{scope}
+    
+    % --- Single Graph Encoder (shared across time) ---
+    \node[op, below=of snapdeck, minimum width=45mm] (encoder)
+      {Graph Encoder \\ \footnotesize (shared across snapshots)};
+    
+    % --- Temporal module (predict-on-last in impl) ---
+    \node[op, below=15mm of encoder, minimum width=60mm] (temp)
+      {Temporal module GRU \\ \footnotesize predict at last $t^*$ };
+    
+    % --- Vehicle selection ---
+    \node[small, below=of temp] (vehsel) {Select vehicle nodes at $t^*$};
+    
+    % --- Route encoder (optional, Full) ---
+    \node[opt, right=20mm of vehsel, align=left, minimum width=55mm] (routeenc)
+      {Route Encoder\\ \footnotesize edge-id embedding + mean pooling\\
+       \footnotesize inputs: $vehicle\_route\_left$, $vehicle\_route\_left\_splits$};
+    
+    % --- Fusion / Router / Experts / Output ---
+    \node[op,   below=of vehsel,  minimum width=70mm] (fusion)  {Fusion MLP};
+    \node[moe,  below=of fusion,  minimum width=70mm] (router)  {Router (softmax, temperature, noise) \\ Top-$k$ selection};
+    \node[moe,  below=of router,  minimum width=70mm] (experts) {Experts (Residual MLPs) $\times 6$, weighted by Top-$2$};
+    \node[block,below=of experts, minimum width=70mm] (pred)    {Per-vehicle ETA at $t^*$};
+    
+    % --- Connections ---
+    \draw[->] (snapdeck) -- (encoder);
+    \draw[->] (encoder) -- (temp);
+    \draw[->] (temp) -- (vehsel);
+    \draw[->] (vehsel) -- (fusion);
+    \draw[->] (fusion) -- (router);
+    \draw[->] (router) -- (experts);
+    \draw[->] (experts) -- (pred);
+    
+    % optional route path (Full)
+    \draw[->, dashed] (vehsel) -- (routeenc);
+    \draw[->, dashed] (routeenc.south) |- (fusion.east);
+    
+    % small notes
+    % \node[above=0mm of snapdeck, font=\footnotesize] {Input from sliding window dataset};
+    % \node[right=2mm of pred,  font=\footnotesize, align=left] {target inverted to seconds for metrics};
+    
+    \end{tikzpicture}%
+    }
+    \caption{Temporal MoE ETA model. A window of $T{=}30$ dynamic graph snapshots (shown as an overlapped deck) is processed by a \emph{shared} Graph Encoder; prediction is made at the last snapshot $t^*$. In the Full variant, a Route Encoder summarizes each vehicle's remaining path before Fusion and a Top-$k$ MoE head produces per-vehicle ETA.}
+    \label{fig:temporal-moe-eta}
+    \end{figure}
+    
+    
+
+\subsection{Loss Functions and Ablation Variants}
+We train the model with supervised regression on ETA targets using mean absolute error (MAE) in seconds:
+\[
+\mathcal{L}_{\text{MAE}} = \frac{1}{N}\sum_{i=1}^N \big| \hat{y}_i - y_i \big|,
+\]
+where $\hat{y}_i$ and $y_i$ are the predicted and true ETAs. Additional metrics include RMSE, weighted absolute percentage error (WAPE), and percentile errors (P50, P90, P95).
+
+To assess the contribution of each component, we design four ablation variants:
+\begin{itemize}
+    \item \textbf{None (structural baseline):} Road edges only; static features.
+    \item \textbf{Weak (interaction-aware):} Adds dynamic traversal and interaction edges.
+    \item \textbf{Medium (demand-aware):} Adds aggregate route-related features (e.g., edge route counts).
+    \item \textbf{Full (intent-aware):} Adds explicit route encoder over remaining vehicle paths.
+\end{itemize}
+All variants share the same training protocol and data splits, enabling a controlled comparison of structural, dynamic, demand, and intent features.
