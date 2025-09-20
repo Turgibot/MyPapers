@@ -1,0 +1,79 @@
+% TikZ diagram: Temporal MoE ETA model
+% This file is included by sections/methodology.tex
+
+% Styles used by nodes in this diagram
+\tikzset{
+  block/.style = {draw, rounded corners=2pt, thick, align=center, inner sep=6pt, fill=black!3},
+  small/.style = {draw, rounded corners=2pt, align=center, inner sep=4pt, fill=black!3},
+  op/.style    = {block, fill=blue!6},
+  opt/.style   = {block, fill=green!7},
+  moe/.style   = {block, fill=orange!12}
+}
+
+\begin{tikzpicture}[>=Latex, node distance=12mm]
+
+% --- Snapshots as an overlapped deck (shared encoder) ---
+\node[block, minimum width=40mm, minimum height=16mm] (snapdeck)
+  {Snapshots $t{-}H{+}1,\ldots,t$ \\ \footnotesize Dynamic graphs ($x$, $edge\_index$, $edge\_attr$)};
+
+% faint background cards behind the main one (deck effect)
+\begin{scope}[on background layer]
+  % soft shadow under/behind the top card (horizontal alignment)
+  \node[fill=black!12, draw=none, rounded corners=2pt, minimum width=42mm, minimum height=18mm]
+    at ($(snapdeck.center)+(1.2mm,0mm)$) {};
+  % aligned background cards with thicker frames (exact same size as snapdeck)
+  % use snapdeck's corners to draw identically sized rectangles behind it
+  \draw[rounded corners=2pt, line width=1.4pt, draw=black!70, fill=white]
+    ($(snapdeck.south west)+(6mm,6mm)$) rectangle ($(snapdeck.north east)+(6mm,6mm)$);
+  \draw[rounded corners=2pt, line width=1.4pt, draw=black!70, fill=white]
+    ($(snapdeck.south west)+(5mm,5mm)$) rectangle ($(snapdeck.north east)+(5mm,5mm)$);
+  \draw[rounded corners=2pt, line width=1.4pt, draw=black!70, fill=white]
+    ($(snapdeck.south west)+(4mm,4mm)$) rectangle ($(snapdeck.north east)+(4mm,4mm)$);
+  \draw[rounded corners=2pt, line width=1.4pt, draw=black!70, fill=white]
+    ($(snapdeck.south west)+(3mm,3mm)$) rectangle ($(snapdeck.north east)+(3mm,3mm)$);
+  \draw[rounded corners=2pt, line width=1.4pt, draw=black!70, fill=white]
+    ($(snapdeck.south west)+(2mm,2mm)$) rectangle ($(snapdeck.north east)+(2mm,2mm)$);
+  \draw[rounded corners=2pt, line width=1.4pt, draw=black!70, fill=white]
+    ($(snapdeck.south west)+(1mm,1mm)$)  rectangle ($(snapdeck.north east)+(1mm,1mm)$);
+\end{scope}
+
+% --- Single Graph Encoder (shared across time) ---
+\node[op, below=of snapdeck, minimum width=45mm] (encoder)
+  {Graph Encoder \\ \footnotesize (shared across snapshots)};
+
+% --- Temporal module (predict-on-last in impl) ---
+\node[op, below=15mm of encoder, minimum width=60mm] (temp)
+  {Temporal module GRU \\ \footnotesize predict at last $t^*$ };
+
+% --- Vehicle selection ---
+\node[small, below=of temp] (vehsel) {Select vehicle nodes at $t^*$};
+
+% --- Route encoder (optional, Full) ---
+\node[opt, right=20mm of vehsel, align=left, minimum width=55mm] (routeenc)
+  {Route Encoder\\ \footnotesize edge-id embedding + mean pooling\\
+   \footnotesize inputs: $vehicle\_route\_left$, $vehicle\_route\_left\_splits$};
+
+% --- Fusion / Router / Experts / Output ---
+\node[op,   below=of vehsel,  minimum width=70mm] (fusion)  {Fusion MLP};
+\node[moe,  below=of fusion,  minimum width=70mm] (router)  {Router (softmax, temperature, noise) \\ Top-$k$ selection};
+\node[moe,  below=of router,  minimum width=70mm] (experts) {Experts (Residual MLPs) $\times E$, weighted by Top-$k$};
+\node[block,below=of experts, minimum width=70mm] (pred)    {Per-vehicle ETA at $t^*$};
+
+% --- Connections ---
+\draw[->] (snapdeck) -- (encoder);
+\draw[->] (encoder) -- (temp);
+\draw[->] (temp) -- (vehsel);
+\draw[->] (vehsel) -- (fusion);
+\draw[->] (fusion) -- (router);
+\draw[->] (router) -- (experts);
+\draw[->] (experts) -- (pred);
+
+% optional route path (Full)
+\draw[->, dashed] (vehsel) -- (routeenc);
+\draw[->, dashed] (routeenc.south) |- (fusion.east);
+
+% small notes (optional)
+% \node[above=0mm of snapdeck, font=\footnotesize] {Input from sliding window dataset};
+% \node[right=2mm of pred,  font=\footnotesize, align=left] {target inverted to seconds for metrics};
+
+\end{tikzpicture}
