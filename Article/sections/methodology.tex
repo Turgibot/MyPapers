@@ -18,6 +18,26 @@ where:
     \item $W_t^{(\rho)} \in \mathbb{R}_{\ge 0}^{|V_t|\times |V_t|}$ is the optional weighted adjacency for relation $\rho$ (e.g., distance-based interaction weights).
 \end{itemize}
 
+\begin{figure}[t]
+    \centering
+    % Prefer provided PNG; fallback to overview PDF/PNG; else placeholder
+    \IfFileExists{figures/dynamic_nodes_edges.png}{%
+      \includegraphics[width=0.9\linewidth]{figures/dynamic_nodes_edges.png}%
+    }{%
+      \IfFileExists{figures/dynamic_graph_overview.pdf}{%
+        \includegraphics[width=0.9\linewidth]{figures/dynamic_graph_overview.pdf}%
+      }{%
+        \IfFileExists{figures/dynamic_graph_overview.png}{%
+          \includegraphics[width=0.9\linewidth]{figures/dynamic_graph_overview.png}%
+        }{\fbox{\parbox{0.88\linewidth}{\centering Dynamic graph overview figure placeholder}}}%
+      }%
+    }
+    \caption{Dynamic, multi-relational traffic graph: static junction nodes (labeled A--D) and road edges (solid gray) with dynamic vehicle nodes (hollow green circles) and interaction edges (blue dashed).}
+    \label{fig:dyn-graph}
+\end{figure}
+
+% (Model Configuration moved after Model Architecture)
+
 We define three relation types:
 \begin{enumerate}
     \item \textbf{Road edges ($\rho=\text{road}$):} For adjacent junctions $(u,v)$ with legal direction $u\!\to\!v$, we add $(u,v)\in E_t^{(\text{road})}$, encoding static road topology.
@@ -25,55 +45,77 @@ We define three relation types:
     \item \textbf{Interaction edges ($\rho=\text{inter}$):} For vehicles $v_i^t,v_j^t$ on the same segment with spacing $d_{ij}(t)\le\varepsilon$ and aligned headings, we add $(v_i^t,v_j^t)$ weighted by $\omega(d_{ij}(t)) = e^{-d_{ij}(t)/\lambda}$.
 \end{enumerate}
 
-Each node and edge carries feature vectors capturing static attributes (e.g., number of lanes, road type), dynamic states (e.g., vehicle speed, occupancy), and local traffic interactions.
+\paragraph{Dynamic edge construction.}
+In implementation, vehicles on each road segment are ordered by their normalized position along the edge. We then create a short chain per segment: a junction$\to$first-vehicle edge (type 1), vehicle$\to$vehicle links along the ordered list (type 3), and last-vehicle$\to$junction (type 2). These dynamic edges sit on top of the static road graph (type 0).
+
+Each node and edge carries feature vectors. Nodes use 28 features per snapshot (junction/vehicle type, kinematics, temporal encodings, zone one-hot, coordinates, current-edge attributes, demand/occupancy surrogates, and junction type). Edges use 7 features (average speed, lanes one-hot, length, demand, occupancy). Average speed, demand, and occupancy are updated per snapshot from data; vehicle features at indices for current-edge demand/occupancy are filled from the corresponding edge attributes.
 
 \paragraph{Route intent.}
-In addition to graph-based relations, each vehicle node includes a feature called \texttt{vehicle\_route\_left}, which encodes the sequence of upcoming edges along its pre-computed source--destination path. 
-This representation explicitly provides route intent, ensuring predictions are conditioned on the actual trajectory a vehicle will follow rather than an inferred path. 
-The sequence is later processed by a Route Encoder, described below.
+In addition to graph-based relations, each vehicle node includes a feature called \texttt{vehicle\_route\_left}, which encodes the sequence of upcoming edges along its pre-computed source--destination path. This sequence is later summarized by a Route Encoder (edge-ID embedding + mean pooling) and used in fusion.
 
 \subsection{Temporal Windowing}
 ETA prediction requires reasoning over temporal dynamics. We construct a window of $H$ consecutive snapshots:
 \[
 \mathcal{G}_{t-H+1:t} = \{G_\tau\}_{\tau=t-H+1}^t,
 \]
-where $H=30$ in our experiments (30-second interval). The prediction target is the ETA of vehicles present in the final snapshot $G_t$.
+where $H$ is configurable (default $H{=}30$ in our experiments, with 30-second spacing). The prediction target is the ETA of vehicles present in the final snapshot $G_t$.
+
+\subsection{Problem Statement}
+Given a temporal window of dynamic graphs $\mathcal{G}_{t-H+1:t}=\{G_{\tau}\}_{\tau=t-H+1}^{t}$, where each snapshot $G_{\tau}$ contains static junction nodes $V^{j}$, dynamic vehicle nodes $V^{v}_{\tau}$, static road edges, and time-varying interaction edges, the goal is to predict per-vehicle ETAs at the final snapshot $t^*{=}t$. Let $\mathcal{V}_t = V^{v}_{t}$ denote vehicles present at time $t$. We learn a function $f_{\theta}$ that maps
+\[
+f_{\theta}\big(\mathcal{G}_{t-H+1:t},\;\texttt{vehicle\_route\_left}\big) \;\to\; \hat{\mathbf{y}}_t \in \mathbb{R}^{|\mathcal{V}_t|},
+\]
+where $\hat{\mathbf{y}}_t[i]$ is the ETA for vehicle $i\in\mathcal{V}_t$. Training minimizes mean absolute error (MAE) over vehicles present at $t$ (additional terms are described in Section~\ref{sec:loss}):
+\[
+\mathcal{L}_{\text{MAE}} = \frac{1}{|\mathcal{V}_t|}\sum_{i\in\mathcal{V}_t} \big| \hat{y}_t[i] - y_t[i] \big|.
+\]
 
 \subsection{Model Architecture}
 Our Dynamic Graph Neural Network (DGNN) integrates spatial, temporal, and route information. The main components are:
 
 \begin{itemize}
     \item \textbf{Graph Encoder:} Each snapshot $G_t$ is processed by a multi-layer GATv2-based encoder with residual connections and edge features, producing embeddings for junction and vehicle nodes.
-    \item \textbf{Temporal Aggregator:} The sequence of snapshot embeddings is summarized into fixed-size context vectors by concatenating the mean of junction embeddings and the mean of vehicle embeddings at each step. A GRU then processes the resulting sequence of $H$ context vectors to produce a history-aware temporal context. This vector is broadcast to all vehicles at $t^*$, allowing each prediction to incorporate recent traffic evolution.
+    \item \textbf{Temporal Aggregator:} For each pre-final snapshot $\tau\in\{t{-}H{+}1,\ldots,t{-}1\}$ we take the static road-edge features (edge\_type$=0$) and build edge-wise sequences across time. A temporal module (GRU or Transformer with sinusoidal positional encodings) processes these sequences per edge; the temporally aggregated edge features are then projected and pooled over all static edges to a graph-level context vector. This context is broadcast to all vehicles at $t^*$ for prediction. For \emph{all} temporal variants, temporal context is computed from static road edges only for $t{-}H{+}1\ldots t{-}1$, while the final snapshot $G_t$ is encoded with the appropriate spatial topology (static or full dynamic) per variant.
     \item \textbf{Vehicle Selection:} From the final snapshot $G_t$, we retain only vehicle node embeddings, as these are the prediction targets for ETA.
-    \item \textbf{Route Encoder:} Each vehicle’s remaining route (the \texttt{vehicle\_route\_left} feature) is embedded via an edge-ID embedding with mean pooling, then concatenated with its vehicle embedding.
+    \item \textbf{Route Encoder:} Each vehicle’s remaining route (\texttt{vehicle\_route\_left} with splits) is embedded via an edge-ID embedding with mean pooling, and concatenated with its vehicle embedding and temporal context when route awareness is enabled.
     \item \textbf{Fusion and MoE Head:} Vehicle embeddings, enriched with route and temporal context, are fused through a feed-forward network and routed to a sparse Top-$k$ Mixture-of-Experts (MoE) head, where specialized experts capture heterogeneous traffic regimes. The output is the ETA prediction for each vehicle.
 \end{itemize}
 
 % ===== TikZ Diagram of Model Architecture =====
 \begin{figure}[t]
     \centering
-    \resizebox{0.95\columnwidth}{!}{%
+    \resizebox{\linewidth}{!}{%
     \input{figures/fig_temporal_moe_eta.tikz}%
     }
     \caption{Temporal MoE ETA model. A window of $T{=}30$ dynamic graph snapshots (shown as an overlapped deck) is processed by a \emph{shared} Graph Encoder; prediction is made at the last snapshot $t^*$. In the Full variant, a Route Encoder summarizes each vehicle's remaining path before Fusion and a Top-$k$ MoE head produces per-vehicle ETA.}
     \label{fig:temporal-moe-eta}
 \end{figure}
-\subsection{Loss Functions and Training Protocol}
+\subsection{Model Configuration}
+Unless stated otherwise, experiments use the following settings:
+\begin{itemize}
+    \item \textbf{Node/edge features}: 28 node features; 7 edge features. Temporal window $H{=}30$ consecutive snapshots.
+    \item \textbf{Graph encoder}: 2-layer GATv2 with edge features, hidden size 128, 4 heads per layer, GELU activations, LayerNorm residuals, dropout 0.1.
+    \item \textbf{Temporal module}: static-road edge sequences over the first $H{-}1$ snapshots. Default is a Transformer Encoder with $n_\text{head}{=}4$, $n_\text{layers}{=}2$, GELU, FFN size $2d$, dropout 0.1, and sinusoidal positional encodings; an optional single-layer GRU (hidden 128) is also supported. Aggregated edge context is projected, mean-pooled over static edges to a graph vector, then broadcast to vehicles.
+    \item \textbf{Route encoder}: edge-ID embedding of size 64 with mean pooling over \texttt{vehicle\_route\_left} (vocabulary size 1294).
+    \item \textbf{Fusion}: MLP  (256 hidden with GELU, LayerNorm, dropout 0.1) to a 192-dim fused representation.
+    \item \textbf{MoE head}: Top-$k{=}2$ sparse routing over $6$ experts (dropout 0.1). Predictions are made for vehicles in the last snapshot only.
+    \item \textbf{Training}: AdamW (lr $10^{-3}$, weight decay $10^{-2}$), linear warmup then cosine annealing ($T_{\text{max}}{=}200$), batch size 2, 200 epochs. Primary loss in target space (default $y_{\text{log\_z}}$) with metrics reported after inversion to seconds.
+    \item \textbf{Router regularization}: load-balancing weight $\lambda_\text{lb}{=}0.05$ plus optional KL-to-uniform router regularization with weight 0.002.
+\end{itemize}
+\subsection{Loss Functions and Training Protocol}\label{sec:loss}
 We train the model with supervised regression on ETA targets using mean absolute error (MAE) in seconds:
 \[
 \mathcal{L}_{\text{MAE}} = \frac{1}{N}\sum_{i=1}^N \big| \hat{y}_i - y_i \big|,
 \]
-where $\hat{y}_i$ and $y_i$ are the predicted and true ETAs. Additional evaluation metrics include RMSE, weighted absolute percentage error (WAPE), and percentile errors (P50, P90, P95). 
-All experiments are run on the same dataset splits, enabling consistent comparisons.
-
-
-\subsection{Loss Functions and Training Protocol}
-We train the model with supervised regression on ETA targets using mean absolute error (MAE) in seconds:
+where $\hat{y}_i$ and $y_i$ are the predicted and true ETAs. Additional evaluation metrics include RMSE, weighted absolute percentage error (WAPE), and percentile errors (P50, P90, P95). The optimization objective includes MoE load balancing and optional router regularization:
 \[
-\mathcal{L}_{\text{MAE}} = \frac{1}{N}\sum_{i=1}^N \big| \hat{y}_i - y_i \big|,
+\mathcal{L} = \mathcal{L}_{\text{reg}} + \lambda_{\text{lb}}\,\mathcal{L}_{\text{lb}} \;\; (\text{and optionally } 
+\lambda_{\text{kl}}\,\mathrm{KL}(p\,\Vert\,\text{Uniform})),
 \]
-where $\hat{y}_i$ and $y_i$ are the predicted and true ETAs. Additional evaluation metrics include RMSE, weighted absolute percentage error (WAPE), and percentile errors (P50, P90, P95). 
+where $\mathcal{L}_{\text{lb}}$ encourages uniform expert usage via importance/load terms from the router, and $p$ are routing probabilities. Training occurs in a chosen target space (e.g., $y_{\text{log}}$ or $y_{\text{log\_z}}$), while metrics are reported after consistent inversion to seconds.
+
+\paragraph{Complexity and inference.}
+Per-snapshot spatial encoding is $\mathcal{O}(|E_t|)$; temporal aggregation is $\mathcal{O}(|E_\text{road}|\cdot(H{-}1))$ over static road edges only. Inference processes a window and emits per-vehicle ETAs at $t^*$ with negligible overhead beyond a single forward pass of the encoder plus temporal aggregator.
 
 The dataset spans four simulated weeks of traffic. We partition this chronologically into two weeks for training, one week for validation, and one week for testing. This split ensures that models are evaluated on non-overlapping time intervals that include different traffic patterns (rush hours, weekends, and long trips).
 
@@ -84,7 +126,29 @@ To quantify the contribution of each modeling component, we design several contr
     \item \textbf{Weak (interaction-aware):} Adds dynamic traversal and interaction edges.
     \item \textbf{Medium (demand-aware):} Adds aggregate route-related features (e.g., edge route counts).
     \item \textbf{Full (intent-aware):} Adds explicit route encoder over each vehicle's remaining path (\texttt{vehicle\_route\_left}).
-    \item \textbf{Full+Temporal:} Extends Full by concatenating a GRU-based temporal context aggregated from past snapshots.
-    \item \textbf{Full+Memory:} Further extends Full+Temporal with a memory mechanism that accumulates historical contexts across windows, capturing longer-range dependencies beyond the local horizon.
+    \item \textbf{Full+Temporal:} Extends Full by concatenating a temporal context aggregated from past snapshots; in the \texttt{temporal\_base} setting, temporal context uses static edges only for $0..H{-}2$.
 \end{itemize}
 All variants share the same training protocol and data splits, enabling a controlled comparison of structural, dynamic, demand, intent, and temporal features.
+
+\subsection{Ablation Design Summary}
+\begin{table}[t]
+    \centering
+    \caption{Ablation Study Variants and Configurations}
+    \label{tab:ablation_variants}
+    \resizebox{\columnwidth}{!}{%
+    \begin{tabular}{@{}lccc@{}}
+        \toprule
+        \textbf{Variant} & \textbf{Dyn. Edges} & \textbf{Route Feat.} & \textbf{Temporal} \\
+        \midrule
+        \texttt{base\_graph} & $\times$ & $\times$ & $\times$ \\
+        \texttt{dynamic\_graph} & \checkmark & $\times$ & $\times$ \\
+        \texttt{route\_graph} & \checkmark & \checkmark & $\times$ \\
+        \texttt{temporal\_base} & $\times$ & $\times$ & \checkmark \\
+        \texttt{temporal\_dynamic} & \checkmark & $\times$ & \checkmark \\
+        \texttt{temporal\_route\_aware} & \checkmark & \checkmark & \checkmark \\
+        \bottomrule
+    \end{tabular}%
+    }
+\end{table}
+
+% (ablation flow figure removed per request)
