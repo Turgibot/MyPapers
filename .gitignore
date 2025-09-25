@@ -6,3 +6,9 @@ Article/main.log
 Article/main.out
 Article/main.bbl
 Dynamic_Intent_GNN_For_ETA/quarto_env/lib64
+ablation
+Article/*
+code
+Article/*.tex
+Article/main.tex
+Article/sections/

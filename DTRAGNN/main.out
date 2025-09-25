@@ -1,0 +1,24 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Related Work}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Classical pathfinding and routing}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Learning-based ETA and traffic forecasting}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Spatio-temporal graph neural networks}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{State-of-the-art production models}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.5}{Summary}{section.2}% 7
+\BOOKMARK [1][-]{section.3}{Methodology}{}% 8
+\BOOKMARK [2][-]{subsection.3.1}{Dynamic Graph Representation}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.2}{Temporal Windowing}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.3}{Problem Statement}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.4}{Model Architecture}{section.3}% 12
+\BOOKMARK [2][-]{subsection.3.5}{Model Configuration}{section.3}% 13
+\BOOKMARK [2][-]{subsection.3.6}{Loss Functions and Training Protocol}{section.3}% 14
+\BOOKMARK [1][-]{section.4}{Experimental Evaluation}{}% 15
+\BOOKMARK [2][-]{subsection.4.1}{Dataset}{section.4}% 16
+\BOOKMARK [2][-]{subsection.4.2}{Dataset Statistics}{section.4}% 17
+\BOOKMARK [2][-]{subsection.4.3}{Experimental Setup}{section.4}% 18
+\BOOKMARK [2][-]{subsection.4.4}{Baselines and Ablations}{section.4}% 19
+\BOOKMARK [2][-]{subsection.4.5}{Evaluation Metrics}{section.4}% 20
+\BOOKMARK [1][-]{section.5}{Results and Analysis}{}% 21
+\BOOKMARK [1][-]{section.6}{Discussion}{}% 22
+\BOOKMARK [1][-]{section.7}{Conclusion}{}% 23
+\BOOKMARK [1][-]{section*.2}{References}{}% 24
