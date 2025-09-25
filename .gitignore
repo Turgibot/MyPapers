@@ -3,5 +3,6 @@
 ablation
 Article
 code
-.vscode
+.vscode/
+*.vscode
 .vscode/settings.json
