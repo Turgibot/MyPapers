@@ -1,0 +1,33 @@
+\section{Work Description}
+
+\subsection{What Has Already Been Done}
+
+The DSTRA-GNN architecture has been implemented and evaluated on a four-week simulated SUMO dataset, achieving a mean absolute error (MAE) of 46.2 seconds, representing an 82.3\% improvement over the average baseline (260.6 seconds MAE). These initial results provide evidence for the effectiveness of the route-aware dynamic graph neural network approach for ETA prediction.
+
+The current implementation includes: (1) complete DSTRA-GNN architecture with dynamic graph representation, route encoding, and temporal learning mechanisms, (2) evaluation framework tested on simulated SUMO traffic data, (3) initial comparison showing significant improvement over average baseline models, and (4) four-week simulated dataset with dynamic graph snapshots at 30-second intervals.
+
+While these results demonstrate the approach's potential, they are based on simulated data. The next phase will focus on validating the model's effectiveness on real-world data and establishing fair comparison with state-of-the-art baseline methods.
+
+\subsection{Planned Research Work}
+
+The planned research work is organized into three main phases, building upon the foundation established in the initial implementation:
+
+\subsubsection{Phase 1: Real Data Enhancement and Ground Truth Establishment}
+
+To validate the DSTRA-GNN model on real-world data, existing benchmark datasets (NYC Taxi, Porto Taxi, or similar) will be enhanced with additional features required by the DSTRA-GNN architecture. These datasets typically provide trip-level records with origin, destination, timestamps, and travel times, but lack explicit route information, dynamic graph structures, and vehicle-level interactions that DSTRA-GNN requires.
+
+The enhancement process will add missing features in a statistically valid manner using controlled randomness and normal distributions that preserve the statistical properties of the original real data. This approach is critical because: (1) it maintains ground truth travel times from real-world observations, ensuring model evaluation reflects actual traffic conditions, (2) it preserves the statistical distribution and temporal patterns of the original dataset, (3) it enables fair comparison with baseline models using original dataset features while DSTRA-GNN benefits from enhanced features, and (4) it provides a common evaluation framework where all models are tested on the same underlying real-world traffic patterns, with ground truth established from actual observed travel times.
+
+This approach preserves the real-world trajectories and travel-time ground truth, while enriching the dataset with additional contextual features generated from empirically calibrated statistical distributions to ensure completeness and consistency. The enhanced dataset will undergo comprehensive validation and statistical analysis to ensure that the original data properties are preserved, including distributional characteristics, temporal patterns, and ground truth travel times, before being approved for use in model evaluation.
+
+\subsubsection{Phase 2: Architecture Enhancements}
+
+Building upon the initial DSTRA-GNN implementation, this phase will explore architectural improvements to further enhance ETA prediction accuracy. Enhancements will focus on refining the model's ability to capture spatio-temporal traffic dynamics and route-aware patterns, determined through systematic analysis of the model's performance on the enhanced real-world dataset.
+
+\subsubsection{Phase 3: Comprehensive Baseline Comparison and Validation}
+
+Once the enhanced real-world dataset is available, comprehensive evaluation will be conducted comparing DSTRA-GNN against state-of-the-art baseline methods. This phase will: (1) implement and evaluate baseline models (DeepTTE, STAD, DCRNN, ST-GCN, DuETA) on the enhanced dataset, (2) establish performance benchmarks using standard metrics (MAE, RMSE, MAPE), (3) compare DSTRA-GNN performance against all baseline methods on the same real-world enhanced dataset, (4) conduct ablation studies to quantify the contribution of different architectural components, and (5) analyze performance across different trip characteristics and traffic conditions. This comprehensive evaluation will demonstrate whether the improvements observed on simulated data translate to real-world scenarios, providing stronger evidence for the effectiveness of the route-aware dynamic graph neural network approach.
+
+\subsection{Expected Deliverables}
+
+The work will produce: (1) an enhanced DSTRA-GNN architecture validated on real-world data, (2) a real-world dataset enhancement tool that adds necessary features while preserving statistical validity, (3) comprehensive experimental results comparing DSTRA-GNN against state-of-the-art baselines on real-world data, (4) detailed ablation studies quantifying architectural contributions, and (5) analysis demonstrating the effectiveness of route-aware dynamic graph modeling for ETA prediction in real-world scenarios.

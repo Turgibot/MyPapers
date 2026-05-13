@@ -1,0 +1,88 @@
+\begin{thebibliography}{10}
+
+\bibitem{deepTTE2018}
+Y.~Wang, F.~Yin, Y.~Chen, J.~Zhao, C.~Xu, and J.~Ye, ``Deeptte: End-to-end
+  trajectory-based travel time estimation,'' in {\em Proceedings of the 24th
+  ACM SIGKDD International Conference on Knowledge Discovery \& Data Mining},
+  pp.~861--870, 2018.
+
+\bibitem{abbar2020stad}
+S.~Abbar, A.~Anagnostopoulos, S.~Bhagat, P.~Cudre-Mauroux, and A.~Kumar,
+  ``Stad: Spatio-temporal adjustment for improving travel-time estimation,'' in
+  {\em Proc. Web Conf.}, pp.~2839--2845, 2020.
+
+\bibitem{dcrnn2018}
+Y.~Li, R.~Yu, C.~Shahabi, and Y.~Liu, ``Diffusion convolutional recurrent
+  neural network: Data-driven traffic forecasting,'' in {\em Int. Conf. Learn.
+  Represent. (ICLR)}, 2018.
+
+\bibitem{yu2018stgcn}
+B.~Yu, H.~Yin, and Z.~Zhu, ``Spatio-temporal graph convolutional networks: A
+  deep learning framework for traffic forecasting,'' in {\em Proc. Int. Joint
+  Conf. Artif. Intell. (IJCAI)}, pp.~3634--3640, 2018.
+
+\bibitem{dueta2023}
+J.~Zhou, X.~Jin, X.~Huang, and H.~Tong, ``Dueta: Duration-aware travel time
+  estimation with graph neural networks,'' in {\em Adv. Neural Inf. Process.
+  Syst. (NeurIPS)}, 2023.
+
+\bibitem{SmartSimulativeRoute2025}
+N.~Voloch, N.~Penkar, and G.~Tordjman, ``Estimating accurate traffic time by
+  smart simulative route predictions,'' in {\em Proceedings of the 24th IFIP
+  Conference on e-Business, e-Services and e-Society (I3E 2025)}, Lecture Notes
+  in Computer Science, (Limassol, Cyprus), pp.~3--15, IFIP WG 6.11, Springer,
+  2025.
+
+\bibitem{voloch2021}
+N.~Voloch and N.~Voloch-Bloch, ``Finding the fastest navigation route by
+  real-time future traffic estimations,'' {\em 2021 IEEE International
+  Conference on Microwaves, Communications, Antennas and Electronic Systems
+  (COMCAS)}, 2021.
+
+\bibitem{chen2016xgboost}
+T.~Chen and C.~Guestrin, ``Xgboost: A scalable tree boosting system,'' in {\em
+  Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge
+  Discovery and Data Mining}, pp.~785--794, ACM, 2016.
+
+\bibitem{stann2021}
+X.~Zhou, Y.~Liu, L.~Wu, Y.~Xu, and J.~Ye, ``Stann: Spatio-temporal attention
+  neural network for eta prediction,'' in {\em Proc. ACM SIGKDD Int. Conf.
+  Knowl. Discov. Data Min.}, pp.~220--229, 2021.
+
+\bibitem{li2018_metrla}
+Y.~Li, R.~Yu, C.~Shahabi, and Y.~Liu, ``Metr-la dataset for traffic
+  forecasting.'' \url{https://github.com/liyaguang/DCRNN}, 2018.
+\newblock accessed: Apr. 7, 2025.
+
+\bibitem{pemsbay}
+Y.~Li, R.~Yu, C.~Shahabi, and Y.~Liu, ``Pems-bay dataset for traffic
+  forecasting.'' \url{https://github.com/liyaguang/DCRNN}, 2018.
+\newblock accessed: Apr. 7, 2025.
+
+\bibitem{wu2019graphwavenet}
+Z.~Wu, S.~Pan, G.~Long, J.~Jiang, and C.~Zhang, ``Graph wavenet for deep
+  spatial-temporal graph modeling,'' in {\em Proc. Int. Joint Conf. Artif.
+  Intell. (IJCAI)}, pp.~1907--1913, 2019.
+
+\bibitem{nyc_tlc}
+{NYC TLC}, ``New york city taxi and limousine commission trip record data.''
+  \url{https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page}, 2013--.
+\newblock accessed: Aug. 26, 2025.
+
+\bibitem{moreira2013porto}
+L.~Moreira-Matias, J.~Gama, M.~Ferreira, J.~Mendes-Moreira, and L.~Damas,
+  ``Predicting taxi--passenger demand using streaming data,'' in {\em 2013 IEEE
+  16th International Conference on Intelligent Transportation Systems (ITSC)},
+  pp.~140--145, IEEE, 2013.
+
+\bibitem{didi2016}
+{DiDi Chuxing Research}, ``Di-tech challenge 2016.''
+  \url{https://outreach.didichuxing.com/research/opendata/en/}, 2016.
+\newblock accessed: Aug. 26, 2025.
+
+\bibitem{zheng2012geolife}
+Y.~Zheng, L.~Zhang, Z.~Ma, X.~Xie, and W.-Y. Ma, ``Mining interesting locations
+  and travel sequences from gps trajectories,'' in {\em Proceedings of the 18th
+  international conference on World wide web}, pp.~791--800, ACM, 2009.
+
+\end{thebibliography}

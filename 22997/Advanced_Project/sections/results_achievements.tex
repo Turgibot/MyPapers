@@ -2,15 +2,28 @@
 
 \subsection{Primary Achievements}
 
-\subsubsection{System Development}
-Successfully developed a fully functional real-time web-based testing system for DSTRA-GNN models. The system integrates all planned components and provides a seamless user experience for testing and evaluating ETA prediction models.
+\subsubsection{Multi-Variant Dataset Generation}
+Successfully developed a comprehensive multi-variant dataset generation framework that produces synchronized data formats from a single SUMO simulation. The framework creates four variants (dynamic graph, trajectory, static graph, route segment) that enable fair comparison across different model architectures. The dataset supports both flow forecasting (aggregate speed, volume, occupancy) and ETA prediction (individual vehicle travel times), making it a comprehensive resource for the research community.
+
+\subsubsection{Research Contribution}
+The multi-variant dataset addresses a critical gap in traffic prediction research by providing:
+\begin{itemize}
+    \item Synchronized variants from a single underlying simulation, ensuring identical traffic patterns
+    \item Support for both flow forecasting and ETA prediction from the same data source
+    \item Consistent train/validation/test splits across all variants for fair comparison
+    \item Standardized benchmark enabling reproducible, fair comparisons across state-of-the-art methods
+    \item Publicly accessible dataset for the research community
+\end{itemize}
 
 \subsubsection{SUMO Integration}
-Complete integration with SUMO traffic simulation, enabling realistic traffic scenarios. The integration supports:
+Complete integration with SUMO traffic simulation, enabling realistic traffic scenarios and multi-variant extraction. The integration supports:
 \begin{itemize}
-    \item Real-time vehicle tracking
-    \item Dynamic graph generation
-    \item Traffic state monitoring
+    \item Real-time vehicle tracking for all variants
+    \item Dynamic graph generation for dynamic GNN models
+    \item GPS trajectory extraction for trajectory-based models
+    \item Sensor aggregation for static graph models
+    \item Route segment extraction for route-aware models
+    \item Traffic state monitoring for flow prediction
     \item Route computation and optimization
 \end{itemize}
 
@@ -52,14 +65,17 @@ Developed an intuitive and responsive web interface featuring:
 
 \subsection{Research Contributions}
 
-\subsubsection{Novel Architecture}
-Created the first real-time web-based testing system specifically designed for DSTRA-GNN models, combining state-of-the-art technologies in a unified platform.
+\subsubsection{Multi-Variant Dataset Framework}
+Created the first comprehensive multi-variant dataset generation framework for traffic prediction research. This framework enables fair comparison across different model architectures (trajectory-based, static graph, route-aware, dynamic graph) by providing synchronized variants from a single underlying simulation. The dataset supports both flow forecasting and ETA prediction, addressing a critical gap in the research community.
+
+\subsubsection{Standardized Benchmark}
+Developed a standardized benchmark dataset that enables reproducible, fair comparisons across state-of-the-art methods. The dataset provides consistent train/validation/test splits, synchronized timestamps, and identical traffic patterns across all variants, ensuring that performance differences reflect model capabilities rather than dataset variations.
 
 \subsubsection{Integration Framework}
-Developed a comprehensive framework for integrating SUMO simulations with deep learning models, enabling real-time evaluation of traffic prediction models.
+Developed a comprehensive framework for integrating SUMO simulations with multi-variant dataset generation and deep learning models, enabling both dataset creation and real-time evaluation of traffic prediction models.
 
 \subsubsection{Evaluation Methodology}
-Established a new methodology for real-time model evaluation that can be applied to other traffic prediction models.
+Established a new methodology for multi-variant dataset generation and real-time model evaluation that can be applied to other traffic prediction research domains.
 
 \subsection{Challenges Overcome}
 
@@ -75,13 +91,16 @@ Implemented connection pooling and efficient message broadcasting to support mul
 \subsection{Impact}
 
 \subsubsection{Research Community}
-The system provides tools for traffic prediction research, enabling real-time evaluation of models in realistic conditions.
+The multi-variant dataset provides a standardized benchmark for traffic prediction research, enabling fair comparison across different model architectures. This contribution addresses a fundamental challenge in the field by providing synchronized variants that ensure models are evaluated on identical traffic patterns. The dataset supports both flow forecasting and ETA prediction, making it a comprehensive resource for researchers working on different aspects of traffic prediction.
+
+\subsubsection{Reproducibility and Fair Comparison}
+The framework enables reproducible research by providing consistent train/validation/test splits and synchronized timestamps across all variants. This ensures that performance differences reflect model capabilities rather than dataset variations, enabling rigorous comparison across state-of-the-art methods.
 
 \subsubsection{Industry Relevance}
-The system demonstrates practical application of GNN models in intelligent transportation systems.
+The system demonstrates practical application of multi-variant dataset generation and GNN models in intelligent transportation systems, providing both research tools and practical evaluation frameworks.
 
 \subsubsection{Educational Value}
-The project serves as a learning resource for students and researchers interested in traffic prediction and web-based systems.
+The project serves as a learning resource for students and researchers interested in traffic prediction, multi-variant dataset generation, and web-based systems. The open-source nature of the framework makes it accessible for educational purposes.
 
 \subsection{Performance Metrics}
 

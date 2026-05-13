@@ -1,0 +1,171 @@
+\begin{thebibliography}{29}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{{#1}}
+\providecommand{\urlprefix}{URL }
+\providecommand{\doi}[1]{\url{https://doi.org/#1}}
+\providecommand{\eprint}[2][]{\url{#2}}
+ \bibcommenthead
+
+\bibitem[{Abbar et~al.(2020)Abbar, Anagnostopoulos, Bhagat, Cudre-Mauroux, and
+  Kumar}]{abbar2020stad}
+Abbar S, Anagnostopoulos A, Bhagat S, et~al (2020) Stad: Spatio-temporal
+  adjustment for improving travel-time estimation. In: Proc. Web Conf., pp
+  2839--2845, \doi{10.1145/3366423.3380127}
+
+\bibitem[{Amin-Naseri et~al.(2018)Amin-Naseri, Chakraborty, Sharma, Gilbert,
+  and Hong}]{amin-naseri2018waze}
+Amin-Naseri M, Chakraborty P, Sharma A, et~al (2018) Evaluating the
+  reliability, coverage, and added value of crowdsourced traffic incident
+  reports from waze. Transp Res Rec 2672(43):34--43.
+  \doi{10.1177/0361198118790619}
+
+\bibitem[{Bellman(1958)}]{bellman1958routing}
+Bellman R (1958) On a routing problem. Q Appl Math 16:87--90
+
+\bibitem[{Chen and Guestrin(2016)}]{chen2016xgboost}
+Chen T, Guestrin C (2016) Xgboost: A scalable tree boosting system. In:
+  Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge
+  Discovery and Data Mining, ACM, pp 785--794, \doi{10.1145/2939672.2939785}
+
+\bibitem[{Delling et~al.(2011)Delling, Goldberg, Pajor, and
+  Werneck}]{delling2011}
+Delling D, Goldberg AV, Pajor T, et~al (2011) Customizable route planning. In:
+  Proceedings of the 10th International Symposium on Experimental Algorithms
+  (SEA). Springer, pp 376--387, \doi{10.1007/978-3-642-20662-7_32}
+
+\bibitem[{Derrow-Pinion et~al.(2021)Derrow-Pinion, She, Wong, Lange, Hester,
+  Perez, Nunkesser, Lee, Guo, Wiltshire, Battaglia, Gupta, Li, Xu,
+  Sanchez-Gonzalez, Li, and Veličković}]{derrowpinion2021googlemaps}
+Derrow-Pinion A, She J, Wong D, et~al (2021) Eta prediction with graph neural
+  networks in google maps. In: Proc. ACM SIGKDD Int. Conf. Knowl. Discov. Data
+  Min., pp 4034--4042, \doi{10.1145/3459637.3481916},
+  \urlprefix\url{https://arxiv.org/abs/2108.11482}
+
+\bibitem[{{DiDi Chuxing Research}(2016)}]{didi2016}
+{DiDi Chuxing Research} (2016) Di-tech challenge 2016.
+  \url{https://outreach.didichuxing.com/research/opendata/en/}, accessed: Aug.
+  26, 2025
+
+\bibitem[{Dijkstra(1959)}]{dijkstra1959}
+Dijkstra EW (1959) A note on two problems in connexion with graphs. Numer Math
+  1(1):269--271. \doi{10.1007/BF01386390}
+
+\bibitem[{{DLR and contributors}(2018)}]{SUMO2018}
+{DLR and contributors} (2018) {SUMO} - simulation of urban mobility.
+  \url{https://www.eclipse.org/sumo/}, accessed: Aug. 26, 2025
+
+\bibitem[{Geisberger et~al.(2008)Geisberger, Sanders, Schultes, and
+  Vetter}]{geisberger2008}
+Geisberger R, Sanders P, Schultes D, et~al (2008) Contraction hierarchies:
+  Faster and simpler hierarchical routing in road networks. In: Proceedings of
+  the 7th International Conference on Experimental Algorithms (WEA). Springer,
+  pp 319--333, \doi{10.1007/978-3-540-68552-4_24}
+
+\bibitem[{Goldberg and Harrelson(2005)}]{goldberg2005}
+Goldberg AV, Harrelson C (2005) Computing the shortest path: A* search meets
+  graph theory. In: Proceedings of the 16th Annual ACM-SIAM Symposium on
+  Discrete Algorithms (SODA). SIAM, pp 156--165,
+  \urlprefix\url{https://dl.acm.org/doi/10.5555/1070432.1070459}
+
+\bibitem[{Hoseinzadeh et~al.(2020)Hoseinzadeh, Liu, Han, Brakewood, and
+  Mohammadnazar}]{hoseinzadeh2020waze}
+Hoseinzadeh N, Liu Y, Han LD, et~al (2020) Quality of location-based
+  crowdsourced speed data on surface streets: A case study of waze and
+  bluetooth speed data in sevierville, tn. Comput, Environ Urban Syst
+  83:101518. \doi{10.1016/j.compenvurbsys.2020.101518}
+
+\bibitem[{Li et~al.(2018)Li, Yu, Shahabi, and Liu}]{dcrnn2018}
+Li Y, Yu R, Shahabi C, et~al (2018) Diffusion convolutional recurrent neural
+  network: Data-driven traffic forecasting. In: Int. Conf. Learn. Represent.
+  (ICLR), \urlprefix\url{https://arxiv.org/abs/1707.01926}
+
+\bibitem[{Moreira-Matias et~al.(2013)Moreira-Matias, Gama, Ferreira,
+  Mendes-Moreira, and Damas}]{moreira2013porto}
+Moreira-Matias L, Gama J, Ferreira M, et~al (2013) Predicting taxi--passenger
+  demand using streaming data. In: 2013 IEEE 16th International Conference on
+  Intelligent Transportation Systems (ITSC), IEEE, pp 140--145,
+  \doi{10.1109/ITSC.2013.6728228}
+
+\bibitem[{{NYC TLC}(2013--)}]{nyc_tlc}
+{NYC TLC} (2013--) New york city taxi and limousine commission trip record
+  data. \url{https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page},
+  accessed: Aug. 26, 2025
+
+\bibitem[{Pohl(1971)}]{pohl1971bi}
+Pohl I (1971) Bi-directional search. Machine Intelligence 6:127--140
+
+\bibitem[{Song et~al.(2020)Song, Lin, Guo, Wan, Yu, Liang, and
+  Xie}]{constgat2020}
+Song C, Lin Y, Guo S, et~al (2020) Contextualized spatial-temporal graph
+  attention network for traffic forecasting. In: AAAI Conference on Artificial
+  Intelligence, pp 10049--10056,
+  \urlprefix\url{https://ojs.aaai.org/index.php/AAAI/article/view/6503}
+
+\bibitem[{Voloch and Voloch-Bloch(2021)}]{voloch2021}
+Voloch N, Voloch-Bloch N (2021) Finding the fastest navigation route by
+  real-time future traffic estimations. In: 2021 IEEE International Conference
+  on Microwaves, Communications, Antennas and Electronic Systems (COMCAS).
+  IEEE, \doi{10.1109/COMCAS52884.2021.9628700}
+
+\bibitem[{Voloch et~al.(2025)Voloch, Penkar, and
+  Tordjman}]{SmartSimulativeRoute2025}
+Voloch N, Penkar N, Tordjman G (2025) Estimating accurate traffic time by smart
+  simulative route predictions. In: Proceedings of the 24th IFIP Conference on
+  e-Business, e-Services and e-Society (I3E 2025), IFIP WG 6.11, Limassol,
+  Cyprus, session: Smart Public Services and Technologies -- 1. LNCS
+  (Springer), to appear
+
+\bibitem[{Wang et~al.(2022)Wang, Li, and Yuan}]{wang2022metatte}
+Wang X, Li J, Yuan NJ (2022) Metatte: A meta-learning framework for travel time
+  estimation. In: Proc. ACM SIGKDD Int. Conf. Knowl. Discov. Data Min., pp
+  4080--4088, \doi{10.1145/3534678.3539066}
+
+\bibitem[{Wang et~al.(2018)Wang, Yin, Chen, Zhao, Xu, and Ye}]{deepTTE2018}
+Wang Y, Yin F, Chen Y, et~al (2018) Deeptte: End-to-end trajectory-based travel
+  time estimation. In: Proceedings of the 24th ACM SIGKDD International
+  Conference on Knowledge Discovery \& Data Mining, pp 861--870,
+  \doi{10.1145/3219819.3219845}
+
+\bibitem[{Wu et~al.(2019)Wu, Pan, Long, Jiang, and Zhang}]{wu2019graphwavenet}
+Wu Z, Pan S, Long G, et~al (2019) Graph wavenet for deep spatial-temporal graph
+  modeling. In: Proc. Int. Joint Conf. Artif. Intell. (IJCAI), pp 1907--1913,
+  \doi{10.24963/ijcai.2019/264}
+
+\bibitem[{Xu et~al.(2020)Xu, Lin, Zhao, Zhang, and Yang}]{xu2020tadnm}
+Xu W, Lin Z, Zhao Y, et~al (2020) Tadnm: A transportation-mode aware deep
+  neural model for travel time estimation. Appl Sci 10(21):7599.
+  \doi{10.3390/app10217599}
+
+\bibitem[{Yu et~al.(2018)Yu, Yin, and Zhu}]{yu2018stgcn}
+Yu B, Yin H, Zhu Z (2018) Spatio-temporal graph convolutional networks: A deep
+  learning framework for traffic forecasting. In: Proc. Int. Joint Conf. Artif.
+  Intell. (IJCAI), pp 3634--3640, \doi{10.24963/ijcai.2018/505}
+
+\bibitem[{Zheng et~al.(2009)Zheng, Zhang, Ma, Xie, and Ma}]{zheng2012geolife}
+Zheng Y, Zhang L, Ma Z, et~al (2009) Mining interesting locations and travel
+  sequences from gps trajectories. In: Proceedings of the 18th international
+  conference on World wide web, ACM, pp 791--800, \doi{10.1145/1526709.1526816}
+
+\bibitem[{Zhou et~al.(2023)Zhou, Jin, Huang, and Tong}]{dueta2023}
+Zhou J, Jin X, Huang X, et~al (2023) Dueta: Duration-aware travel time
+  estimation with graph neural networks. In: Adv. Neural Inf. Process. Syst.
+  (NeurIPS), \urlprefix\url{https://arxiv.org/abs/2306.02833}
+
+\bibitem[{Zhou et~al.(2021)Zhou, Liu, Wu, Xu, and Ye}]{stann2021}
+Zhou X, Liu Y, Wu L, et~al (2021) Stann: Spatio-temporal attention neural
+  network for eta prediction. In: Proc. ACM SIGKDD Int. Conf. Knowl. Discov.
+  Data Min. ACM, pp 220--229, \doi{10.1145/3447548.3467297}
+
+\bibitem[{{Ruppin-SmartTransportation}(2024)}]{sumo_data_generator}
+{Ruppin-SmartTransportation} (2024) SUMO Data Generator: A tool to generate
+  simulation-derived dynamic traffic datasets.
+  \url{https://github.com/Ruppin-SmartTransportation/sumo_data_generator},
+  GitHub repository
+
+\bibitem[{{Ruppin-SmartTransportation}(2024)}]{trafficlab}
+{Ruppin-SmartTransportation} (2024) TrafficLab: Test environment for traffic
+  model validation.
+  \url{https://github.com/Ruppin-SmartTransportation/TrafficLab}, GitHub
+  repository
+
+\end{thebibliography}

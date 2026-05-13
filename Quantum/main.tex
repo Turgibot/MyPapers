@@ -1,0 +1,90 @@
+\documentclass[11pt]{book}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{booktabs}
+\usepackage{siunitx}
+
+% Bibliography
+\usepackage[style=numeric, sorting=none]{biblatex}
+\addbibresource{references.bib}
+
+% Title information
+\title{Quantum Computing Master}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+
+\frontmatter
+
+\maketitle
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\mainmatter
+
+% PART I — The Mathematical Foundations
+\part{The Mathematical Foundations}
+
+\input{chapters/part1/chapter01}
+\input{chapters/part1/chapter02}
+
+% PART II — The Physics Foundations (Expanded)
+\part{The Physics Foundations (Expanded)}
+
+\cleardoublepage
+\input{chapters/part2/chapter03}
+\input{chapters/part2/chapter04}
+\input{chapters/part2/chapter05}
+\input{chapters/part2/chapter06}
+\input{chapters/part2/chapter07}
+\input{chapters/part2/chapter08}
+\input{chapters/part2/chapter09}
+
+% PART III — Quantum Computation
+\part{Quantum Computation}
+
+\input{chapters/part3/chapter09}
+\input{chapters/part3/chapter10}
+\input{chapters/part3/chapter11}
+
+% PART IV — Quantum Error Correction
+\part{Quantum Error Correction}
+
+\input{chapters/part4/chapter12}
+\input{chapters/part4/chapter13}
+\input{chapters/part4/chapter14}
+\input{chapters/part4/chapter15}
+
+% PART V — Specialization Tracks
+\part{Specialization Tracks}
+
+\input{chapters/part5/trackA}
+\input{chapters/part5/trackB}
+\input{chapters/part5/trackC}
+\input{chapters/part5/trackD}
+
+% PART VI — Practical Quantum Computing
+\part{Practical Quantum Computing}
+
+\input{chapters/part6/chapter16}
+\input{chapters/part6/chapter17}
+
+\backmatter
+
+\printbibliography
+
+\end{document}
+
+
+
+
+

@@ -1,0 +1,14 @@
+\section{Methods for Work Execution}
+
+The work will involve literature review, software development (implementing baseline models and extending DSTRA-GNN), experimental design and execution, data analysis, and documentation.
+
+\textbf{Data Collection and Preprocessing:} Existing benchmark datasets (NYC Taxi, Porto Taxi, or similar) will be enhanced with missing features (explicit routes, dynamic graph structures, vehicle-level interactions) using statistically valid methods that preserve the original data properties. Preprocessing includes chronological partitioning, feature normalization, temporal window construction ($H=30$ snapshots), route sequence encoding, and target normalization.
+
+\textbf{Analysis Techniques:} Performance evaluation using standard regression metrics (MAE, RMSE, MAPE) computed per-vehicle and aggregated across trip categories. Ablation studies will compare route-aware vs. route-agnostic variants, temporal vs. non-temporal variants, and dynamic vs. static graph structures. Statistical analysis includes confidence intervals, significance testing, and error analysis across scenarios.
+
+\textbf{Validation Methods:} Experiments will follow rigorous protocols including chronological data partitioning, hyperparameter tuning with early stopping, multiple runs with random seeds (42, 43, 44) for reproducibility, and model selection based on lowest validation MAE.
+
+\textbf{Ground Truth and Evaluation:} Ground truth will be the actual travel times from the original real-world dataset. The enhanced dataset maintains these real-world travel times while adding necessary structural features, enabling fair comparison where all models are evaluated against the same ground truth.
+
+\textbf{Baseline Comparison:} Comprehensive comparison on the enhanced dataset, ensuring all models (DSTRA-GNN, DeepTTE, STAD, DCRNN, ST-GCN, DuETA) are evaluated on identical traffic patterns. All code and configurations will be documented for reproducibility.
+

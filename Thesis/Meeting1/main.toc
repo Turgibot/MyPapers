@@ -1,0 +1,26 @@
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
+\contentsline {section}{\numberline {2}Why Not Use Simulation-Only Datasets?}{2}{section.2}%
+\contentsline {section}{\numberline {3}Existing ETA Prediction Datasets and Their Characteristics}{2}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Flow Prediction Datasets}{2}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Trip-Based ETA Datasets}{2}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Porto: The Only Public Dataset Left}{3}{section.4}%
+\contentsline {section}{\numberline {5}Challenges with Porto Dataset}{3}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Very Sparse Data}{3}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}GPS Inaccuracy}{3}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Invalid GPS Coordinate Jumps}{3}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Picking and Dropping Passengers}{4}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}Taxi-Specific Road Usage}{4}{subsection.5.5}%
+\contentsline {section}{\numberline {6}Exploratory Data Analysis}{4}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Porto SUMO Network Analysis}{4}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Dataset Size and Coverage}{5}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Missing and Invalid Data Analysis}{6}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Statistical Analysis of Trajectories}{6}{subsection.6.4}%
+\contentsline {subsubsection}{\numberline {6.4.1}Trajectory Length Distribution}{6}{subsubsection.6.4.1}%
+\contentsline {subsubsection}{\numberline {6.4.2}Travel Time Distribution}{7}{subsubsection.6.4.2}%
+\contentsline {subsubsection}{\numberline {6.4.3}Speed Distribution}{7}{subsubsection.6.4.3}%
+\contentsline {subsubsection}{\numberline {6.4.4}GPS Jump Analysis}{7}{subsubsection.6.4.4}%
+\contentsline {subsubsection}{\numberline {6.4.5}Spatial Coverage}{8}{subsubsection.6.4.5}%
+\contentsline {section}{\numberline {7}Current Tool Status}{8}{section.7}%
+\contentsline {section}{\numberline {8}Next Steps}{9}{section.8}%
+\contentsline {section}{\numberline {9}Conclusion}{9}{section.9}%
+\contentsline {section}{\numberline {A}EDA Scripts and Methodology}{9}{appendix.A}%

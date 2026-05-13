@@ -1,0 +1,33 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Coulomb's torsion balance experiment (1785). Coulomb used this apparatus to measure the force between charged spheres at different distances, establishing the inverse square law for electrostatic forces. The balance measures the electrostatic force by detecting the angular deflection of the suspended rod when charges are placed at various distances.}}{10}{figure.3.1}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Force vs charge product at constant distance ($r = 1$ m). The linear relationship shows that force is directly proportional to the product $q_1 q_2$. Negative values indicate attractive forces (opposite charges), positive values indicate repulsive forces (like charges).}}{11}{figure.3.2}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Force vs distance at constant charge product. Left: Linear scale showing the rapid decrease of force with distance. Right: Log-log scale revealing the inverse square relationship ($F \propto 1/r^2$), evident from the straight line with slope $-2$.}}{11}{figure.3.3}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Electric field around a positive point charge, illustrating the field representation of Coulomb's law. The field lines radiate outward from the charge, with the field strength decreasing as $1/r^2$ with distance, as given by equation \textup {\hbox {\mathsurround \z@ \normalfont (\ignorespaces \ref {eq:coulomb_field}\unskip \@@italiccorr )}}. The color intensity represents the magnitude of the electric field.}}{12}{figure.3.4}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Ørsted's experiment (1820) demonstrating that an electric current deflects a compass needle, revealing the connection between electricity and magnetism. When current flows through the vertical wire, the compass needles align perpendicular to the wire, indicating a circular magnetic field around the current. Ampère later quantified this relationship mathematically.}}{13}{figure.3.5}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Magnetic field around a current-carrying wire, illustrating Ampère's law (equations \textup {\hbox {\mathsurround \z@ \normalfont (\ignorespaces \ref {eq:ampere_integral}\unskip \@@italiccorr )}} and \textup {\hbox {\mathsurround \z@ \normalfont (\ignorespaces \ref {eq:ampere_differential}\unskip \@@italiccorr )}}). The magnetic field forms circular loops around the wire, with the field strength decreasing as $1/r$ with distance from the wire. The dot at the center indicates current flowing out of the page.}}{15}{figure.3.6}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Faraday's induction experiment (1831). When a magnet is moved near a coil of wire, or when the magnetic field through a loop changes, an electric current is induced in the coil, detected by the galvanometer. The direction of the induced current opposes the change in magnetic flux (Lenz's law). This discovery established the fundamental relationship between changing magnetic fields and electric currents.}}{16}{figure.3.7}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Faraday's law of electromagnetic induction (equations \textup {\hbox {\mathsurround \z@ \normalfont (\ignorespaces \ref {eq:faraday_integral}\unskip \@@italiccorr )}} and \textup {\hbox {\mathsurround \z@ \normalfont (\ignorespaces \ref {eq:faraday_differential}\unskip \@@italiccorr )}}). Left panel: A uniform magnetic field increasing into the page (indicated by X symbols) induces a circular electric field. Right panel: A changing magnetic flux through a coil induces a current in the coil, with the current direction opposing the change in flux (Lenz's law).}}{17}{figure.3.8}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Visualization of all four Maxwell's equations. Top-left: Gauss's law for electricity shows electric field lines emanating from charges. Top-right: Gauss's law for magnetism shows closed magnetic field loops (no magnetic monopoles). Bottom-left: Faraday's law shows how changing magnetic fields create circulating electric fields. Bottom-right: Ampère-Maxwell law shows how changing electric fields create circulating magnetic fields.}}{21}{figure.3.9}%
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Visualization of vector field operators. Top-left: Positive divergence (source field) where field lines spread outward. Top-right: Negative divergence (sink field) where field lines converge. Bottom-left: Non-zero curl showing rotational motion. Bottom-right: Uniform field with zero divergence and curl.}}{22}{figure.3.10}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

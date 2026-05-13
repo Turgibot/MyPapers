@@ -1,0 +1,74 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{times}  % Using Times as serif font (similar to David font for English documents)
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{microtype}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+
+% Formatting according to Open University guidelines
+\geometry{margin=2.5cm}  % Right margins: 2-3 cm (using 2.5cm)
+\onehalfspacing  % Line spacing: One and a half lines in body
+
+% Footnotes: Single spacing and smaller font
+\renewcommand{\footnotesize}{\small}
+\setlength{\footnotesep}{0.5\baselineskip}
+
+% Page numbering: First page numbered 1, continuous numbering
+% (Cover page will be unnumbered, numbering starts from personal info page)
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+\begin{document}
+
+% Cover Page (no page number)
+\input{sections/cover}
+
+\clearpage
+
+% Page numbering starts from personal information page
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% Personal Information
+\input{sections/personal_info}
+
+\clearpage
+
+% Main Content Sections
+\input{sections/work_objective}
+\input{sections/background}
+\input{sections/work_description}
+\input{sections/work_importance}
+\input{sections/methods}
+\input{sections/timeline}
+\input{sections/sources}
+
+\clearpage
+% Bibliography: Single spacing according to guidelines
+\begin{spacing}{1.0}
+\bibliographystyle{ieeetr}
+\bibliography{references}
+\end{spacing}
+
+% Appendices
+\clearpage
+\input{sections/appendix}
+
+\end{document}

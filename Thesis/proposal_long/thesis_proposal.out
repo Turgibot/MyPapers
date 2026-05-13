@@ -1,0 +1,23 @@
+\BOOKMARK [1][-]{section.1}{Work Objective}{}% 1
+\BOOKMARK [1][-]{section.2}{Background with Reference to Sources}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Previous Work in Route-Aware Traffic Prediction}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{State-of-the-Art ETA Prediction Methods}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Limitations of Existing Approaches}{section.2}% 5
+\BOOKMARK [1][-]{section.3}{Work Description}{}% 6
+\BOOKMARK [2][-]{subsection.3.1}{Research Methodology}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.2}{Multi-Variant Dataset Generation}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.3}{Main Components and Stages}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.4}{Expected Deliverables}{section.3}% 10
+\BOOKMARK [1][-]{section.4}{Work Importance}{}% 11
+\BOOKMARK [1][-]{section.5}{Methods for Work Execution}{}% 12
+\BOOKMARK [2][-]{subsection.5.1}{Types of Activities}{section.5}% 13
+\BOOKMARK [2][-]{subsection.5.2}{Tools and Software}{section.5}% 14
+\BOOKMARK [2][-]{subsection.5.3}{Data Collection and Preprocessing}{section.5}% 15
+\BOOKMARK [2][-]{subsection.5.4}{Analysis Techniques}{section.5}% 16
+\BOOKMARK [2][-]{subsection.5.5}{Validation Methods}{section.5}% 17
+\BOOKMARK [1][-]{section.6}{Work Execution Timeline}{}% 18
+\BOOKMARK [1][-]{section.7}{Initial Source List}{}% 19
+\BOOKMARK [1][-]{appendix.A}{Previous Work: Dynamic Route-Aware Graph Neural Networks for Accurate ETA Prediction}{}% 20
+\BOOKMARK [2][-]{subsection.A.1}{Key Contributions}{appendix.A}% 21
+\BOOKMARK [2][-]{subsection.A.2}{Model Architecture}{appendix.A}% 22
+\BOOKMARK [2][-]{subsection.A.3}{Experimental Results}{appendix.A}% 23

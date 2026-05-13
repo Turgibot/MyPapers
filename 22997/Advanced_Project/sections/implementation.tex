@@ -22,82 +22,128 @@ The project was developed in a Linux environment using Docker for containerizati
     \item \textbf{Containerization}: Docker and Docker Compose for deployment
 \end{itemize}
 
-\subsection{Traffic-DSTG-Gen: Dataset Generation System}
+\subsection{Traffic-DSTG-Gen: Multi-Variant Dataset Generation System}
 
-The dataset generation system is responsible for creating training data from SUMO simulations.
+The multi-variant dataset generation system is responsible for creating synchronized data formats from a single SUMO simulation, enabling fair comparison across different model architectures for both flow forecasting and ETA prediction.
 
 \subsubsection{Architecture}
 
-The system follows a pipeline architecture with five main stages:
+The system follows a pipeline architecture with six main stages:
 
 \begin{enumerate}
-    \item \textbf{Simulation Stage}: Generate traffic snapshots using SUMO
-    \item \textbf{Labeling Stage}: Generate per-snapshot ETA labels
-    \item \textbf{EDA Stage}: Generate feature statistics and analysis
-    \item \textbf{Conversion Stage}: Convert to PyTorch Geometric format
-    \item \textbf{Validation Stage}: Verify dataset integrity
+    \item \textbf{Simulation Stage}: Generate traffic snapshots using SUMO with configurable scenarios
+    \item \textbf{Multi-Variant Extraction Stage}: Extract four synchronized variants (dynamic graph, trajectory, static graph, route segment) from the same simulation
+    \item \textbf{Labeling Stage}: Generate per-snapshot labels for both flow prediction (speed, volume, occupancy) and ETA prediction (travel times)
+    \item \textbf{EDA Stage}: Generate feature statistics and analysis for each variant
+    \item \textbf{Conversion Stage}: Convert each variant to its native format (PyTorch Geometric for graphs, CSV/JSON for trajectories and route segments)
+    \item \textbf{Validation Stage}: Verify dataset integrity, temporal synchronization, and consistent train/validation/test splits across all variants
 \end{enumerate}
 
 \subsubsection{Key Components}
 
-\textbf{Graph Entities} (\texttt{graph/entities.py}):
+\textbf{Simulation Manager} (\texttt{graph/entities.py}):
 \begin{itemize}
-    \item \texttt{SimManager}: Main controller for simulation state
+    \item \texttt{SimManager}: Main controller for simulation state and multi-variant extraction
     \item Junction and Vehicle node abstractions
     \item Dynamic edge representations
     \item Route-aware feature encoding
+    \item Multi-variant data extraction coordination
 \end{itemize}
 
 \textbf{Main Entry Point} (\texttt{main.py}):
-The main entry point orchestrates the entire simulation:
+The main entry point orchestrates the entire simulation and multi-variant extraction:
 \begin{itemize}
     \item Loads SUMO network configuration
     \item Initializes traffic simulation with vehicle schedules
     \item Extracts dynamic graph snapshots at configurable intervals (default: 30 seconds)
-    \item Saves snapshots as JSON files for further processing
+    \item Extracts GPS trajectories for trajectory-based models
+    \item Aggregates sensor readings for static graph models
+    \item Extracts route segments for route-aware models
+    \item Saves all variants as synchronized JSON files for further processing
 \end{itemize}
 
-\textbf{Dataset Tools}:
+\textbf{Multi-Variant Dataset Tools}:
 \begin{itemize}
-    \item \texttt{dataset\_creator.py}: Converts JSON snapshots to PyTorch Geometric .pt files
-    \item \texttt{create\_labels\_json.py}: Generates per-snapshot ETA labels
-    \item \texttt{EDA.py}: Comprehensive exploratory data analysis
+    \item \texttt{dataset\_creator.py}: Converts JSON snapshots to PyTorch Geometric .pt files (dynamic graph variant)
+    \item \texttt{trajectory\_extractor.py}: Extracts GPS trajectory sequences from vehicle movements (trajectory variant)
+    \item \texttt{static\_graph\_aggregator.py}: Aggregates sensor readings at fixed locations (static graph variant)
+    \item \texttt{route\_segment\_extractor.py}: Extracts route segments with aggregated features (route segment variant)
+    \item \texttt{create\_labels\_json.py}: Generates per-snapshot labels for both flow and ETA prediction
+    \item \texttt{synchronization\_validator.py}: Validates temporal synchronization and consistent splits across variants
+    \item \texttt{EDA.py}: Comprehensive exploratory data analysis for each variant
     \item \texttt{visualize\_graph.py}: Graph visualization utilities
 \end{itemize}
 
-\subsubsection{Dataset Features}
+\subsubsection{Multi-Variant Dataset Structure}
 
-The generated dataset includes:
+The generated dataset includes four synchronized variants, each tailored to different model architectures:
 
-\textbf{Node Features (28 dimensions)}:
+\textbf{Variant 1: Dynamic Graph} (for DSTRA-GNN and similar models):
 \begin{itemize}
-    \item \textbf{Junction Nodes}: Zone, position, type, traffic state
-    \item \textbf{Vehicle Nodes}: Speed, acceleration, position, route progress, destination, route\_left information
+    \item \textbf{Node Features (28 dimensions)}:
+    \begin{itemize}
+        \item \textbf{Junction Nodes}: Zone, position, type, traffic state
+        \item \textbf{Vehicle Nodes}: Speed, acceleration, position, route progress, destination, route\_left information
+    \end{itemize}
+    \item \textbf{Edge Features (7 dimensions)}:
+    \begin{itemize}
+        \item \textbf{Static Edges}: Length, lanes, speed limits
+        \item \textbf{Dynamic Edges}: Current speed, demand, occupancy
+    \end{itemize}
+    \item \textbf{Route Awareness}: Explicit route encoding with complete remaining route per vehicle
+    \item \textbf{Format}: PyTorch Geometric .pt files with temporal sequences
+    \item \textbf{Labels}: Both flow (speed, volume, occupancy at junctions) and ETA (per-vehicle travel times)
 \end{itemize}
 
-\textbf{Edge Features (7 dimensions)}:
+\textbf{Variant 2: Trajectory} (for DeepTTE, STAD, and similar models):
 \begin{itemize}
-    \item \textbf{Static Edges}: Length, lanes, speed limits
-    \item \textbf{Dynamic Edges}: Current speed, demand, occupancy
+    \item \textbf{Format}: GPS trajectory sequences—ordered lists of (latitude, longitude, timestamp) tuples per trip
+    \item \textbf{Features}: Trip-level metadata (origin, destination, start time, duration)
+    \item \textbf{Labels}: ETA (per-trip travel times)
+    \item \textbf{Format}: CSV/JSON files with trajectory sequences
 \end{itemize}
 
-\textbf{Route Awareness}:
+\textbf{Variant 3: Static Graph} (for DCRNN, ST-GCN, and similar models):
 \begin{itemize}
-    \item Explicit route encoding with complete remaining route per vehicle
-    \item Route-Left features: Discounted demand and occupancy along remaining path
-    \item Temporal consistency: Route information updates as vehicles progress
+    \item \textbf{Format}: Aggregated sensor readings at fixed locations (junctions or road segments)
+    \item \textbf{Graph Structure}: Static road network topology with fixed node and edge structure
+    \item \textbf{Features}: Time-series of aggregated measurements (speed, flow, occupancy) at each sensor
+    \item \textbf{Labels}: Flow prediction (speed, volume, occupancy at fixed locations)
+    \item \textbf{Format}: PyTorch Geometric .pt files with static graph and time-series features
 \end{itemize}
 
-\subsection{SUMO Integration}
+\textbf{Variant 4: Route Segment} (for DuETA and similar models):
+\begin{itemize}
+    \item \textbf{Format}: Trip-level records with explicit route sequences
+    \item \textbf{Features}: Route represented as ordered list of road segments or waypoints, segment-level aggregated features (length, speed limit, historical travel time)
+    \item \textbf{Labels}: ETA (per-trip travel times) with duration-aware categorization
+    \item \textbf{Format}: CSV/JSON files with route sequences and segment features
+\end{itemize}
 
-The SUMO integration was implemented using the Python TraCI library to control running simulations in real-time. The integration provides:
+\textbf{Synchronization and Consistency}:
+\begin{itemize}
+    \item All variants derived from the same underlying SUMO simulation
+    \item Identical train/validation/test splits (chronological partitioning)
+    \item Synchronized timestamps for temporal alignment
+    \item Consistent trip identifiers across variants for cross-variant analysis
+    \item Same traffic patterns and scenarios across all variants
+\end{itemize}
+
+\subsection{SUMO Integration and Multi-Variant Extraction}
+
+The SUMO integration was implemented using the Python TraCI library to control running simulations in real-time and extract multiple synchronized variants. The integration provides:
 
 \begin{itemize}
-    \item Dynamic vehicle tracking and state extraction
-    \item Traffic light state monitoring
-    \item Network topology extraction
+    \item Dynamic vehicle tracking and state extraction for all variants
+    \item Traffic light state monitoring for flow prediction
+    \item Network topology extraction for static graph variant
     \item Real-time route planning using Dijkstra's algorithm
-    \item Graph structure generation for model input
+    \item Graph structure generation for dynamic graph variant
+    \item GPS trajectory extraction for trajectory variant
+    \item Sensor aggregation at fixed locations for static graph variant
+    \item Route segment extraction with aggregated features for route segment variant
+    \item Temporal synchronization across all variants
+    \item Consistent labeling for both flow and ETA prediction
 \end{itemize}
 
 \subsection{Model Inference Implementation}

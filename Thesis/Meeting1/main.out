@@ -1,0 +1,26 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Why Not Use Simulation-Only Datasets?}{}% 2
+\BOOKMARK [1][-]{section.3}{Existing ETA Prediction Datasets and Their Characteristics}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Flow Prediction Datasets}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Trip-Based ETA Datasets}{section.3}% 5
+\BOOKMARK [1][-]{section.4}{Porto: The Only Public Dataset Left}{}% 6
+\BOOKMARK [1][-]{section.5}{Challenges with Porto Dataset}{}% 7
+\BOOKMARK [2][-]{subsection.5.1}{Very Sparse Data}{section.5}% 8
+\BOOKMARK [2][-]{subsection.5.2}{GPS Inaccuracy}{section.5}% 9
+\BOOKMARK [2][-]{subsection.5.3}{Invalid GPS Coordinate Jumps}{section.5}% 10
+\BOOKMARK [2][-]{subsection.5.4}{Picking and Dropping Passengers}{section.5}% 11
+\BOOKMARK [2][-]{subsection.5.5}{Taxi-Specific Road Usage}{section.5}% 12
+\BOOKMARK [1][-]{section.6}{Exploratory Data Analysis}{}% 13
+\BOOKMARK [2][-]{subsection.6.1}{Porto SUMO Network Analysis}{section.6}% 14
+\BOOKMARK [2][-]{subsection.6.2}{Dataset Size and Coverage}{section.6}% 15
+\BOOKMARK [2][-]{subsection.6.3}{Missing and Invalid Data Analysis}{section.6}% 16
+\BOOKMARK [2][-]{subsection.6.4}{Statistical Analysis of Trajectories}{section.6}% 17
+\BOOKMARK [3][-]{subsubsection.6.4.1}{Trajectory Length Distribution}{subsection.6.4}% 18
+\BOOKMARK [3][-]{subsubsection.6.4.2}{Travel Time Distribution}{subsection.6.4}% 19
+\BOOKMARK [3][-]{subsubsection.6.4.3}{Speed Distribution}{subsection.6.4}% 20
+\BOOKMARK [3][-]{subsubsection.6.4.4}{GPS Jump Analysis}{subsection.6.4}% 21
+\BOOKMARK [3][-]{subsubsection.6.4.5}{Spatial Coverage}{subsection.6.4}% 22
+\BOOKMARK [1][-]{section.7}{Current Tool Status}{}% 23
+\BOOKMARK [1][-]{section.8}{Next Steps}{}% 24
+\BOOKMARK [1][-]{section.9}{Conclusion}{}% 25
+\BOOKMARK [1][-]{appendix.A}{EDA Scripts and Methodology}{}% 26

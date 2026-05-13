@@ -1,0 +1,37 @@
+\appendix
+
+\section{Previous Work: Dynamic Route-Aware Graph Neural Networks for Accurate ETA Prediction}
+
+This appendix presents the paper "Dynamic Route-Aware Graph Neural Networks for Accurate ETA Prediction" by Tordjman and Voloch~\cite{Tordjman2025DSTRA}, which serves as the foundation for this thesis research. The paper introduces a dynamic spatio-temporal Graph Neural Network (GNN) architecture that explicitly encodes vehicle route intent and models traffic networks as hybrid graph structures combining static infrastructure (junctions and roads) with dynamic vehicle nodes. The graph structure includes time-varying edges that create junction-vehicle-vehicle-junction relations: traversal edges connect vehicles to junctions, and interaction edges connect vehicles to other vehicles on the same road segment, enabling rich modeling of vehicle interactions and traffic flow dynamics.
+
+\subsection{Key Contributions}
+
+The paper demonstrates that:
+\begin{itemize}
+    \item Explicit route information significantly improves ETA prediction accuracy, with route-aware models achieving over 40\% lower error compared to models that infer routes implicitly (e.g., DeepTTE~\cite{deepTTE2018}, STAD~\cite{abbar2020stad})
+    \item Vehicle-level dynamic graph representation captures traffic dynamics more effectively than static sensor networks (e.g., DCRNN~\cite{dcrnn2018}, ST-GCN~\cite{yu2018stgcn})
+    \item Temporal learning from stable road edges provides additional refinement, achieving 82.3\% improvement over baseline methods
+    \item The combination of explicit route intent, dynamic graph structure, and temporal aggregation yields state-of-the-art results
+\end{itemize}
+
+\subsection{Model Architecture}
+
+The DSTRA-GNN (Dynamic Spatio-Temporal Route-Aware GNN) architecture integrates:
+\begin{itemize}
+    \item \textbf{Graph Encoder:} Multi-layer GATv2-based encoder processing dynamic graph snapshots
+    \item \textbf{Temporal Aggregator:} Transformer-based module learning temporal context from stable road edges
+    \item \textbf{Route Encoder:} Edge-ID embedding encoding the remaining route sequence for each vehicle
+    \item \textbf{MoE Head:} Sparse Mixture-of-Experts for specialized prediction across heterogeneous traffic regimes
+\end{itemize}
+
+\subsection{Experimental Results}
+
+On a four-week urban simulation dataset:
+\begin{itemize}
+    \item Average baseline: 260.6\,s MAE
+    \item Route-aware non-temporal variant: 58.4\,s MAE
+    \item Temporal route-aware model: 46.2\,s MAE (82.3\% improvement)
+\end{itemize}
+
+These results validate the value of explicit route intent and vehicle-level dynamic graph modeling for ETA prediction. This thesis extends this work by further investigating the contribution of route information and exploring additional improvements to the architecture.
+

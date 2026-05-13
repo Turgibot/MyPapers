@@ -1,0 +1,79 @@
+\BOOKMARK [-1][-]{part.1}{I The Mathematical Foundations}{}% 1
+\BOOKMARK [0][-]{chapter.1}{Linear Algebra for Quantum Computing}{part.1}% 2
+\BOOKMARK [1][-]{section.1.1}{Vector Spaces}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.2}{Inner Product Spaces}{chapter.1}% 4
+\BOOKMARK [1][-]{section.1.3}{Linear Operators}{chapter.1}% 5
+\BOOKMARK [1][-]{section.1.4}{Special Matrices in Quantum Theory}{chapter.1}% 6
+\BOOKMARK [1][-]{section.1.5}{Eigenvalues and Eigenvectors}{chapter.1}% 7
+\BOOKMARK [1][-]{section.1.6}{Tensor Products}{chapter.1}% 8
+\BOOKMARK [1][-]{section.1.7}{Dirac Notation}{chapter.1}% 9
+\BOOKMARK [0][-]{chapter.2}{Probability \046 Statistics for Quantum Theory}{part.1}% 10
+\BOOKMARK [1][-]{section.2.1}{Classical Probability Basics}{chapter.2}% 11
+\BOOKMARK [1][-]{section.2.2}{Distributions in Quantum Experiments}{chapter.2}% 12
+\BOOKMARK [1][-]{section.2.3}{Measurement Statistics}{chapter.2}% 13
+\BOOKMARK [1][-]{section.2.4}{Statistical Estimation Methods}{chapter.2}% 14
+\BOOKMARK [-1][-]{part.2}{II The Physics Foundations \(Expanded\)}{}% 15
+\BOOKMARK [0][-]{chapter.3}{Historical Foundations}{part.2}% 16
+\BOOKMARK [1][-]{section.3.1}{Maxwell's Equations and Electromagnetic Waves}{chapter.3}% 17
+\BOOKMARK [2][-]{subsection.3.1.1}{The Need for Maxwell's Theory}{section.3.1}% 18
+\BOOKMARK [2][-]{subsection.3.1.2}{The Vector Operators}{section.3.1}% 19
+\BOOKMARK [2][-]{subsection.3.1.3}{Light as an Electromagnetic Wave}{section.3.1}% 20
+\BOOKMARK [2][-]{subsection.3.1.4}{The Wave Nature of Light}{section.3.1}% 21
+\BOOKMARK [1][-]{section.3.2}{Wave Equation Derivation}{chapter.3}% 22
+\BOOKMARK [1][-]{section.3.3}{The Photoelectric Effect}{chapter.3}% 23
+\BOOKMARK [1][-]{section.3.4}{Wave-Particle Dualism}{chapter.3}% 24
+\BOOKMARK [1][-]{section.3.5}{The Need for Quantum Mechanics}{chapter.3}% 25
+\BOOKMARK [0][-]{chapter.4}{Mathematical Structure of Quantum Theory}{part.2}% 26
+\BOOKMARK [1][-]{section.4.1}{Postulates of QM}{chapter.4}% 27
+\BOOKMARK [1][-]{section.4.2}{Hilbert Spaces \046 Operators}{chapter.4}% 28
+\BOOKMARK [1][-]{section.4.3}{State Representations}{chapter.4}% 29
+\BOOKMARK [1][-]{section.4.4}{Observables \046 Commutation}{chapter.4}% 30
+\BOOKMARK [0][-]{chapter.5}{Quantum Dynamics}{part.2}% 31
+\BOOKMARK [1][-]{section.5.1}{Schr\366dinger Picture}{chapter.5}% 32
+\BOOKMARK [1][-]{section.5.2}{Heisenberg Picture}{chapter.5}% 33
+\BOOKMARK [1][-]{section.5.3}{Interaction Picture}{chapter.5}% 34
+\BOOKMARK [1][-]{section.5.4}{Measurement Theory}{chapter.5}% 35
+\BOOKMARK [1][-]{section.5.5}{Open Quantum Systems}{chapter.5}% 36
+\BOOKMARK [0][-]{chapter.6}{Core Quantum Phenomena}{part.2}% 37
+\BOOKMARK [1][-]{section.6.1}{Superposition}{chapter.6}% 38
+\BOOKMARK [1][-]{section.6.2}{Entanglement \(Deep\)}{chapter.6}% 39
+\BOOKMARK [1][-]{section.6.3}{Identical Particles}{chapter.6}% 40
+\BOOKMARK [1][-]{section.6.4}{Tunneling}{chapter.6}% 41
+\BOOKMARK [1][-]{section.6.5}{Harmonic Oscillator}{chapter.6}% 42
+\BOOKMARK [1][-]{section.6.6}{Spin \046 Angular Momentum}{chapter.6}% 43
+\BOOKMARK [0][-]{chapter.7}{Foundations of Quantum Information}{part.2}% 44
+\BOOKMARK [1][-]{section.7.1}{Classical vs Quantum Info}{chapter.7}% 45
+\BOOKMARK [1][-]{section.7.2}{Ensembles \046 Density Matrices}{chapter.7}% 46
+\BOOKMARK [1][-]{section.7.3}{Quantum Entropy}{chapter.7}% 47
+\BOOKMARK [1][-]{section.7.4}{Quantum Channels}{chapter.7}% 48
+\BOOKMARK [1][-]{section.7.5}{Quantum Thermodynamics}{chapter.7}% 49
+\BOOKMARK [0][-]{chapter.8}{Physical Realizations of Qubits}{part.2}% 50
+\BOOKMARK [1][-]{section.8.1}{Spin Qubits}{chapter.8}% 51
+\BOOKMARK [1][-]{section.8.2}{Superconducting Qubits}{chapter.8}% 52
+\BOOKMARK [1][-]{section.8.3}{Ion Trap Qubits}{chapter.8}% 53
+\BOOKMARK [1][-]{section.8.4}{Photonic Qubits}{chapter.8}% 54
+\BOOKMARK [1][-]{section.8.5}{Neutral Atom Qubits}{chapter.8}% 55
+\BOOKMARK [1][-]{section.8.6}{Topological Qubits}{chapter.8}% 56
+\BOOKMARK [0][-]{chapter.9}{Quantum Foundations \046 Interpretations}{part.2}% 57
+\BOOKMARK [1][-]{section.9.1}{Measurement Problem}{chapter.9}% 58
+\BOOKMARK [1][-]{section.9.2}{Interpretations}{chapter.9}% 59
+\BOOKMARK [1][-]{section.9.3}{Contextuality}{chapter.9}% 60
+\BOOKMARK [1][-]{section.9.4}{Bell's Theorem}{chapter.9}% 61
+\BOOKMARK [1][-]{section.9.5}{Classical Limit}{chapter.9}% 62
+\BOOKMARK [-1][-]{part.3}{III Quantum Computation}{}% 63
+\BOOKMARK [0][-]{chapter.10}{Qubits, Gates, and Circuits}{part.3}% 64
+\BOOKMARK [0][-]{chapter.11}{Quantum Algorithms}{part.3}% 65
+\BOOKMARK [0][-]{chapter.12}{Variational \046 NISQ Algorithms}{part.3}% 66
+\BOOKMARK [-1][-]{part.4}{IV Quantum Error Correction}{}% 67
+\BOOKMARK [0][-]{chapter.13}{Foundations of QEC}{part.4}% 68
+\BOOKMARK [0][-]{chapter.14}{Stabilizer Codes}{part.4}% 69
+\BOOKMARK [0][-]{chapter.15}{Surface Codes}{part.4}% 70
+\BOOKMARK [0][-]{chapter.16}{Fault-Tolerant Quantum Computing}{part.4}% 71
+\BOOKMARK [-1][-]{part.5}{V Specialization Tracks}{}% 72
+\BOOKMARK [0][-]{chapter.17}{Track A \204 Quantum Algorithms}{part.5}% 73
+\BOOKMARK [0][-]{chapter.18}{Track B \204 Quantum Hardware}{part.5}% 74
+\BOOKMARK [0][-]{chapter.19}{Track C \204 Quantum Machine Learning}{part.5}% 75
+\BOOKMARK [0][-]{chapter.20}{Track D \204 Quantum Cryptography}{part.5}% 76
+\BOOKMARK [-1][-]{part.6}{VI Practical Quantum Computing}{}% 77
+\BOOKMARK [0][-]{chapter.21}{Quantum Programming}{part.6}% 78
+\BOOKMARK [0][-]{chapter.22}{Running Quantum Experiments}{part.6}% 79

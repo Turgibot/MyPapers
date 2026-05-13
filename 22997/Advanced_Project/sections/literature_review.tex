@@ -1,78 +1,141 @@
-\section{Literature Review}
+\section{Existing Datasets and Systems}
 
-\subsection{Graph Neural Networks in Traffic Prediction}
+\subsection{Overview}
 
-Graph Neural Networks (GNNs) have emerged as powerful tools for traffic prediction due to their ability to model complex spatial and temporal relationships in transportation networks. Recent work has shown significant improvements over traditional methods:
+Before developing the proposed framework, it is important to examine the datasets and systems currently used for traffic and ETA prediction. Existing resources can be grouped into two categories: (1) traffic-flow datasets designed for predicting aggregate speed or volume, and (2) trip-based datasets intended for estimating travel time or ETA. In addition, several commercial and academic systems provide real-time prediction or simulation but are limited in accessibility or flexibility.
 
-\begin{itemize}
-    \item \textbf{DCRNN} (Li et al., 2018): Introduced diffusion convolution for traffic prediction, capturing spatial dependencies through diffusion processes
-    \item \textbf{ST-GCN} (Yu et al., 2018): Applied graph convolution to spatio-temporal data, enabling effective modeling of temporal patterns
-    \item \textbf{Graph WaveNet} (Wu et al., 2019): Combined graph convolution with dilated convolution for multi-scale temporal feature extraction
-    \item \textbf{DSTRA-GNN} (Tordjman \& Voloch, 2025): Introduced dynamic route-aware graph neural networks with explicit route encoding, achieving 82\% improvement in ETA prediction accuracy
-\end{itemize}
+\subsection{Existing Traffic-Flow Datasets}
 
-The DSTRA-GNN model, which forms the foundation of this project, introduces several innovations:
-\begin{itemize}
-    \item Dynamic graph representation with both vehicles and junctions as nodes
-    \item Route-aware encoding of planned vehicle trajectories
-    \item Mixture-of-Experts architecture for adaptive model specialization
-    \item Temporal aggregation of stable road infrastructure features
-\end{itemize}
+Well-known benchmark datasets such as METR-LA~\cite{METR-LA}, PeMS-Bay~\cite{dcrnn2018}, and SEATTLE Loop~\cite{cui2019seattle} have been widely adopted in spatio-temporal modeling research. These datasets record aggregated measurements (speed, flow, occupancy) collected from fixed sensors or loop detectors on major highways. Each sensor corresponds to a node in a static graph, where edges represent physical proximity or roadway connectivity.
 
-\subsection{Real-time Traffic Simulation}
+\textbf{METR-LA} contains traffic speed data from 207 loop detectors on highways in Los Angeles County, collected over four months (March–June 2012) at 5-minute intervals. The dataset provides approximately 34,000 time steps of aggregated speed measurements, making it suitable for flow forecasting models that operate on static sensor networks.
 
-SUMO (Simulation of Urban Mobility) has become the standard platform for traffic simulation research:
+\textbf{PeMS-Bay} (Performance Measurement System) contains data from 325 sensors in the San Francisco Bay Area, collected over six months (January–June 2017) at 5-minute intervals. Similar to METR-LA, it provides aggregated speed and flow measurements suitable for sensor-based graph neural networks.
+
+\textbf{SEATTLE Loop} contains data from 323 loop detectors in the Seattle metropolitan area, providing speed and flow measurements at regular intervals. This dataset has been used extensively for evaluating spatio-temporal graph convolutional networks.
+
+These datasets have driven advances in flow forecasting but are not suitable for ETA prediction, since they lack:
 
 \begin{itemize}
-    \item \textbf{SUMO}: Comprehensive traffic simulation suite providing microscopic traffic simulation with individual vehicle behavior modeling
-    \item \textbf{TraCI}: Traffic Control Interface for real-time interaction with running simulations, enabling external applications to query and modify simulation state
-    \item \textbf{Python-SUMO}: Python bindings for SUMO integration enabling programmatic control of simulations
+    \item Individual vehicle trajectories—data is aggregated at sensor locations
+    \item Dynamic edge relationships—graph structure remains static over time
+    \item Ground-truth travel times for specific trips—only aggregate speed/flow is available
+    \item Route information—no explicit path data for individual vehicles
+    \item Vehicle-level features—no per-vehicle attributes or states
 \end{itemize}
 
-The integration with SUMO in this project enables generation of realistic traffic scenarios with varying congestion patterns, traffic light timings, and vehicle interactions, providing a controlled environment for model testing.
+\subsection{Trip-Based ETA Datasets}
 
-\subsection{Web-based Traffic Systems}
+Several public and private datasets contain trip-level travel times, each with different characteristics and limitations:
 
-Recent developments in web-based traffic systems include:
+\textbf{NYC Taxi Dataset}~\cite{nyc_tlc} contains millions of taxi trips from New York City's Taxi and Limousine Commission, collected over multiple years. Each trip record includes origin and destination coordinates, pickup and dropoff timestamps, trip distance, and total duration. While comprehensive in scale, the dataset lacks intermediate GPS waypoints, explicit route information, and graph structure. Models trained on this dataset (e.g., DeepTTE~\cite{deepTTE2018}) must infer routes implicitly from origin-destination pairs.
 
+\textbf{Porto Taxi Dataset}~\cite{moreira2013porto} contains GPS trajectories for taxi rides in Porto, Portugal, collected over one year. Unlike NYC Taxi, this dataset provides GPS coordinate sequences along each trip, enabling trajectory-based learning approaches. However, it still lacks explicit graph structures, junction information, and route planning data.
+
+\textbf{DiDi Ride-Hailing Datasets}~\cite{didi2016} from Chengdu and Xi'an contain ride-sharing trips with precise timestamps and travel durations. These datasets were partially released for research competitions and include GPS trajectories, but access is limited and the data does not include explicit route segments or graph connectivity information.
+
+\textbf{Uber Movement Dataset} provides aggregated travel times between city zones rather than individual trip records. The data is aggregated for privacy reasons, making it unsuitable for vehicle-level or trajectory-based modeling approaches.
+
+Although valuable, these datasets share common limitations: they lack explicit graph structures, do not model vehicle-to-junction interactions, and are mostly aggregated or proprietary. Consequently, they cannot be used directly for graph-based learning approaches that depend on dynamic connectivity and node features. More critically, each dataset supports only a narrow range of model architectures, preventing comprehensive comparison across different approaches.
+
+\subsection{Model-Specific Data Requirements}
+
+Different state-of-the-art ETA prediction models require fundamentally different data formats, creating a challenge for fair comparison:
+
+\textbf{Trajectory-Based Models} (e.g., DeepTTE~\cite{deepTTE2018}, STAD~\cite{abbar2020stad}) require GPS trajectory sequences—ordered lists of (latitude, longitude, timestamp) tuples for each trip. These models learn patterns from the spatial-temporal evolution of vehicle paths but do not explicitly model road network topology or junction interactions. They infer routes implicitly from trajectory data.
+
+\textbf{Static Graph Models} (e.g., DCRNN~\cite{dcrnn2018}, ST-GCN~\cite{yu2018stgcn}) require aggregated sensor network data with fixed graph topology. Nodes represent sensor locations or road segments, edges represent spatial connectivity, and features are aggregated measurements (speed, flow, occupancy) at fixed time intervals. These models excel at flow forecasting but cannot handle individual vehicle trajectories or dynamic graph structures.
+
+\textbf{Route-Aware Models} (e.g., DuETA~\cite{dueta2023}) require trip-level records with explicit route sequences. Each trip includes a predefined route (ordered list of road segments or waypoints), segment-level features (length, speed limit, historical travel time), and trip-level metadata. These models leverage explicit route information but typically operate on aggregated segment features rather than dynamic vehicle-junction interactions.
+
+\textbf{Dynamic Graph Models} (e.g., DSTRA-GNN~\cite{Tordjman2025}) require dynamic graph snapshots where nodes represent both static entities (junctions, road segments) and dynamic entities (vehicles), with edges that evolve over time to capture vehicle-to-junction and vehicle-to-vehicle relationships. These models can leverage explicit route information while modeling fine-grained traffic dynamics.
+
+The fundamental challenge is that no existing dataset provides all these formats simultaneously, making it impossible to fairly compare models across different architectural paradigms.
+
+\subsection{Comparative Summary}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|l|l|l|l|l|l|}
+\hline
+\textbf{Dataset} & \textbf{Purpose} & \textbf{Graph Structure} & \textbf{Dynamic Edges} & \textbf{Vehicle-Level} & \textbf{Ground-Truth ETA} & \textbf{Route Info} & \textbf{Public} \\
+\hline
+METR-LA & Flow & Static (sensor) & No & No & No & No & Yes \\
+\hline
+PeMS-Bay & Flow & Static (sensor) & No & No & No & No & Yes \\
+\hline
+SEATTLE Loop & Flow & Static (sensor) & No & No & No & No & Yes \\
+\hline
+NYC Taxi & ETA & None & No & Yes & Yes & No & Yes \\
+\hline
+Porto Taxi & ETA & None (GPS traces) & No & Yes & Yes & No & Yes \\
+\hline
+DiDi (Chengdu/Xi'an) & ETA & Partial & No & Yes & Yes & No & No \\
+\hline
+Uber Movement & ETA & Zonal (static) & No & No & Yes & No & Yes \\
+\hline
+Proposed Dataset & ETA & Dynamic Graph & Yes & Yes & Yes & Yes & Yes (simulated) \\
+\hline
+\end{tabular}
+\caption{Comparison of existing traffic datasets with the proposed framework}
+\label{tab:dataset_comparison}
+\end{table}
+
+\subsection{Existing Traffic Prediction Systems}
+
+Commercial navigation and ride-sharing platforms such as Google Maps~\cite{derrowpinion2021googlemaps}, Waze~\cite{hoseinzadeh2020waze}, and Here provide ETA predictions based on historical averages, real-time GPS data, and proprietary machine-learning models. While highly accurate in practice, these systems are closed-source and offer no access to underlying data or algorithms.
+
+Academic models—such as DCRNN~\cite{dcrnn2018}, ST-GCN~\cite{yu2018stgcn}, and Graph WaveNet~\cite{wu2019graphwavenet}—focus primarily on flow forecasting using static graphs derived from sensor networks. They achieve strong results for highway speed prediction but cannot handle dynamic graph structures or individual vehicle trajectories.
+
+Traffic simulators like SUMO~\cite{SUMO2018}, MATSim, and CityFlow allow microscopic simulation but provide only raw state data without automated conversion into graph datasets or integrated visualization of model predictions.
+
+\subsection{Multi-Variant Dataset Requirements}
+
+To enable fair comparison across different model architectures, a multi-variant dataset must be generated from a single underlying traffic simulation. This approach ensures that all models are evaluated on identical traffic patterns while receiving data in their native format. The multi-variant dataset should provide four primary variants:
+
+\textbf{Dynamic Graph Variant} for DSTRA-GNN and similar models, containing dynamic graph snapshots with:
 \begin{itemize}
-    \item \textbf{Google Maps}: Real-time traffic visualization and routing capabilities, processing billions of route requests daily
-    \item \textbf{Waze}: Community-based traffic information platform leveraging crowd-sourced data for accurate traffic reporting
-    \item \textbf{OpenStreetMap}: Open-source mapping platform providing infrastructure data for custom applications
+    \item Static junction nodes with spatial and topological features
+    \item Dynamic vehicle nodes with position, speed, acceleration, and route information
+    \item Time-varying edges creating junction-vehicle-vehicle-junction relations
+    \item Explicit route encoding with complete remaining route per vehicle
+    \item Temporal sequences of graph snapshots at regular intervals (e.g., 30 seconds)
 \end{itemize}
 
-These systems demonstrate the importance of web-based interfaces for traffic applications, inspiring the design choices for the implemented system.
-
-\subsection{System Integration Challenges}
-
-\subsubsection{Data Plane Limitations}
-Programmable switches impose harsh constraints that affect algorithm implementation:
+\textbf{Trajectory Variant} for trajectory-based models (DeepTTE, STAD), containing:
 \begin{itemize}
-    \item Limited processing capabilities in each pipeline stage
-    \item Restricted memory access patterns
-    \item Feed-forward packet processing architecture
-    \item Limited support for dependent memory operations
+    \item GPS trajectory sequences extracted from vehicle movements
+    \item Ordered lists of (latitude, longitude, timestamp) tuples per trip
+    \item Trip-level metadata (origin, destination, start time, duration)
+    \item No explicit route or graph structure information
 \end{itemize}
 
-\subsubsection{Real-time Requirements}
-Real-time traffic prediction systems face several challenges:
+\textbf{Static Graph Variant} for static sensor network models (DCRNN, ST-GCN), containing:
 \begin{itemize}
-    \item Latency constraints requiring sub-100ms response times
-    \item Throughput requirements supporting high concurrent user loads
-    \item Data freshness ensuring predictions reflect current traffic conditions
-    \item Scalability to handle growing user bases and traffic volumes
+    \item Aggregated sensor readings at fixed locations (junctions or road segments)
+    \item Static road network topology with fixed node and edge structure
+    \item Time-series of aggregated features (speed, flow, occupancy) at each sensor
+    \item No individual vehicle trajectories or dynamic relationships
 \end{itemize}
 
-\subsection{Research Gap}
-
-While significant progress has been made in individual components, there was a lack of integrated systems that combine:
+\textbf{Route Segment Variant} for route-aware models (DuETA), containing:
 \begin{itemize}
-    \item Real-time traffic simulation
-    \item Advanced GNN models with route awareness
-    \item Web-based user interfaces
-    \item Comprehensive data collection and analysis
-    \item Real-time evaluation capabilities
+    \item Trip-level records with explicit route sequences
+    \item Route represented as ordered list of road segments or waypoints
+    \item Segment-level aggregated features (length, speed limit, historical travel time)
+    \item Trip-level metadata and duration-aware categorization
 \end{itemize}
 
-This project fills this gap by creating a unified platform that integrates all these components, enabling practical deployment and continuous evaluation of traffic prediction models.
+All variants must share:
+\begin{itemize}
+    \item The same underlying traffic simulation to ensure identical traffic patterns
+    \item Consistent train/validation/test splits (chronological partitioning)
+    \item Identical trip identifiers to enable cross-variant analysis
+    \item Synchronized timestamps for temporal alignment
+\end{itemize}
 
+This multi-variant approach ensures that performance differences reflect model capabilities rather than dataset variations, enabling rigorous comparison across architectural paradigms.
+
+\subsection{Discussion}
+
+Across all existing datasets and systems, a consistent gap is evident: no open-source framework offers dynamic, graph-structured, vehicle-level data with ground-truth ETAs and a real-time testing interface. More critically, no existing dataset provides multiple variants that enable fair comparison across different model architectures. The proposed project fills this gap by uniting microscopic simulation, multi-variant dataset generation, and browser-based evaluation into a single reproducible environment. This integration enables both controlled experimentation and intuitive visualization, bridging the divide between theoretical model development and practical system deployment while supporting comprehensive model comparison.

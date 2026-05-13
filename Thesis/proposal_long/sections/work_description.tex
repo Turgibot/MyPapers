@@ -1,0 +1,34 @@
+\section{Work Description}
+
+This thesis will extend the DSTRA-GNN architecture~\cite{Tordjman2025DSTRA} to further investigate the contribution of explicit route information to ETA prediction accuracy and explore additional improvements to the model. The work will be conducted through systematic experimental evaluation, architectural enhancements, and comprehensive comparison with state-of-the-art baselines.
+
+\subsection{Research Methodology}
+
+The research will follow an iterative experimental methodology combining model development, ablation studies, and comparative evaluation. The work will leverage a four-week urban simulation dataset generated using SUMO~\cite{SUMO2018}, which provides dynamic traffic snapshots with explicit route information for each vehicle. The dataset will be partitioned chronologically to ensure temporal separation between training, validation, and test sets, capturing diverse traffic patterns including rush hours, weekends, and varying trip durations.
+
+\subsection{Multi-Variant Dataset Generation}
+
+To enable fair comparison across different model architectures, this work will generate a multi-variant dataset from a single SUMO simulation. Rather than converting a single dataset format to match different model requirements (which could introduce bias or information loss), multiple variants will be extracted from the same underlying traffic simulation, ensuring all models are evaluated on identical traffic patterns while receiving data in their native format.
+
+The multi-variant dataset will include four primary variants: (1) \textbf{dynamic graph variant} for DSTRA-GNN, containing dynamic graph snapshots with static junction nodes, dynamic vehicle nodes, and time-varying edges creating junction-vehicle-vehicle-junction relations; (2) \textbf{trajectory variant} for trajectory-based models (DeepTTE~\cite{deepTTE2018}, STAD~\cite{abbar2020stad}), containing GPS trajectory sequences extracted from vehicle movements; (3) \textbf{static graph variant} for static sensor network models (DCRNN~\cite{dcrnn2018}, ST-GCN~\cite{yu2018stgcn}), containing aggregated sensor readings at fixed locations with static road network topology; and (4) \textbf{route segment variant} for route-aware models (DuETA~\cite{dueta2023}), containing trip-level records with route sequences and aggregated segment features.
+
+This approach ensures that all models are evaluated on the same underlying traffic simulation, providing a fair comparison while respecting each model's specific data requirements. The consistent train/validation/test splits across all variants further guarantee that performance differences reflect model capabilities rather than dataset variations.
+
+\subsection{Main Components and Stages}
+
+\textbf{Stage 1: Baseline Comparison and Validation}
+The first stage will establish comprehensive baselines by implementing and evaluating existing state-of-the-art methods using their respective dataset variants. This includes: (1) trajectory-based models that infer routes implicitly (DeepTTE~\cite{deepTTE2018}, STAD~\cite{abbar2020stad}) evaluated on the trajectory variant, (2) static sensor network approaches (DCRNN~\cite{dcrnn2018}, ST-GCN~\cite{yu2018stgcn}) evaluated on the static graph variant, and (3) route-aware methods (DuETA~\cite{dueta2023}) evaluated on the route segment variant. The evaluation will use standard metrics (MAE, RMSE, MAPE) to establish performance benchmarks and validate the dataset's suitability for route-aware ETA prediction research.
+
+\textbf{Stage 2: Route Information Contribution Analysis}
+Building on the DSTRA-GNN foundation, this stage will conduct systematic ablation studies to quantify the contribution of explicit route information. Experiments will compare: (1) route-aware variants that explicitly encode predefined vehicle routes, (2) route-agnostic variants that infer routes implicitly from origin-destination pairs, and (3) hybrid approaches that combine both strategies. The analysis will measure performance differences across trip categories (short, medium, long distances) and traffic conditions (congested vs. free-flow) to identify scenarios where route information provides the greatest benefit.
+
+\textbf{Stage 3: Architectural Enhancements}
+This stage will explore improvements to the DSTRA-GNN architecture, focusing on: (1) enhanced route encoding mechanisms beyond simple edge-ID embeddings (e.g., attention-based route sequence modeling, hierarchical route representations), (2) improved temporal aggregation strategies for capturing long-term traffic patterns, (3) refinement of the Mixture-of-Experts routing mechanism for better specialization across heterogeneous traffic regimes, and (4) integration of additional contextual features (weather, events, historical patterns) that may influence ETA accuracy.
+
+\textbf{Stage 4: Comprehensive Evaluation and Analysis}
+The final stage will conduct extensive evaluation of the enhanced model across multiple dimensions: (1) performance comparison with all baseline methods on standard metrics, (2) analysis of prediction accuracy across different trip characteristics (distance, duration, route complexity), (3) evaluation of computational efficiency and scalability, (4) error analysis to identify failure modes and limitations, and (5) visualization of learned representations to provide interpretability insights. The results will be analyzed to draw conclusions about the value of explicit route information and the effectiveness of the proposed enhancements.
+
+\subsection{Expected Deliverables}
+
+The work will produce: (1) an enhanced dynamic GNN architecture for route-aware ETA prediction, (2) a multi-variant dataset enabling fair comparison across different model architectures, (3) comprehensive experimental results demonstrating the contribution of route information and architectural improvements, (4) detailed ablation studies quantifying the impact of different model components, (5) comparison with state-of-the-art baselines across multiple evaluation metrics, and (6) analysis and insights regarding when and why explicit route information improves ETA prediction accuracy.
+

@@ -1,0 +1,11 @@
+\section{Work Importance}
+
+This thesis extends the foundation established in~\cite{voloch2021,SmartSimulativeRoute2025} by developing a dynamic Graph Neural Network architecture that models traffic at the vehicle level with explicit route information. The proposed approach represents a significant advancement by combining: (1) vehicle-level dynamic graph representation with static infrastructure nodes and dynamic vehicle nodes, where time-varying edges create junction-vehicle-vehicle-junction relations that capture vehicle interactions and traffic flow dynamics, (2) explicit encoding of predefined vehicle routes, and (3) temporal learning from stable road edges across recent history.
+
+Initial results from the DSTRA-GNN model (detailed in Appendix A~\cite{Tordjman2025DSTRA}) demonstrate the value of this approach. On a four-week urban simulation dataset, the route-aware temporal model achieved 46.2\,s MAE, representing an 82.3\% improvement over the average baseline (260.6\,s MAE). These results validate that explicit route intent combined with vehicle-level dynamic graph modeling significantly improves ETA prediction accuracy compared to methods that infer routes implicitly (e.g., DeepTTE~\cite{deepTTE2018}, STAD~\cite{abbar2020stad}).
+
+The theoretical contribution of this work lies in demonstrating that explicit route information is a decisive feature for ETA prediction, with route-aware models achieving over 40\% lower error compared to models that infer routes implicitly (e.g., DeepTTE~\cite{deepTTE2018}, STAD~\cite{abbar2020stad}) or use static sensor networks (e.g., DCRNN~\cite{dcrnn2018}, ST-GCN~\cite{yu2018stgcn}). The practical value includes improved accuracy for navigation systems, fleet management, and logistics operations, enabling better travel decisions and congestion management.
+
+This research addresses critical gaps in existing ETA prediction methods by providing a unified framework that integrates explicit route intent, dynamic vehicle-junction-vehicle graphs (with vehicle-to-vehicle interaction edges), and temporal learning, advancing the state-of-the-art in traffic prediction research.
+
+

@@ -1,0 +1,75 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{enumitem}
+\usepackage{titlesec}
+
+% Compact spacing for single page
+\titlespacing*{\section}{0pt}{6pt}{3pt}
+\titlespacing*{\subsection}{0pt}{4pt}{2pt}
+\setlength{\parskip}{2pt}
+\setlength{\parindent}{0pt}
+\setlength{\topmargin}{-0.5in}
+\setlength{\headheight}{0pt}
+\setlength{\headsep}{0pt}
+\setlength{\footskip}{0pt}
+
+\title{\textbf{Open University Course 22996 - CS Colloquium}}
+\author{Lecture Review - Guy Tordjman}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\vspace{-15pt}
+
+\noindent\textbf{Lecture Name:} Soft Local Completeness - Rethinking Completeness in XAI \\
+\textbf{By:} Ziv Weiss Haddad - Tel Aviv University\\
+\textbf{Date:} January 7, 2026 \\
+
+\vspace{8pt}
+
+\section*{Motivation}
+As AI and ML systems become more and more complex we less and less understand how they work - we need to find a way to explain the model's decisions and processes to the user to increase trust and transparency.
+For example a model that was trained to predict a cancer diagnosis from skin photos, mistakenly predicted that photos of a possible cancerous area are actual cancer due to the presence of a ruller in the photo. This happened because the model was trained with a dataset that contained photos of cancerous areas with a ruller in the photo.
+
+\section*{What is Exaplainable AI(XAI) via feature attribution?}
+Given an image $x$, we want to produce an explanation of the model prediction using an attributions map the highlights the features that are most important for the model to predict the correct class.
+
+\section*{Relevant Work}
+Out of the few families of methods for XAI via feature attribution, The speaker focused on two that are relevant to the SLOC method:
+\textbf{RISE} (Randomized Input Sampling for Explanation) is a perturbation-based method by using random masks to perturb the input image and observe the model's response.
+by masking an area of the image and observing the model's prediction confidence, we can get an idea of the importance of the features in that area. If the model's response is very different when the area is masked, then the features in that area are important for the model to predict the correct class. The final attrbution of a pixel is the average of the importance of all the masks that contain that pixel.
+\textbf{Meaningful Perturbation} is an optimization-based method that uses a perturbation to the input image and observe the model's prediction confidence. In this method random masks are produced and used to smooth out a pixel and not to totally black out the pixel.
+a loss function is created and gradient descent is used to find the area where the perturbation is most effective.
+
+\section*{How good is an explanation?}
+To evaluate the quality of an explanation the speaker discussed how visual inpection is not enough as first the user evaluation is subjective and second the user can be misled by the explanation - not knowing what the model actually saw.
+Therefore the speaker proposed to use a deletion and insertion Area Under the Curve (AUC) metric to evaluate the quality of an explanation.
+In the deletion technique, the researchers gradually remove pixels from the image ordered by the importance or attribution score and observe the class probability after each removal.
+The AUC of the class probability per pixel removed graph is used to evaluate the quality of the explanation.
+In the insertion technique, in opposite to the deletion technique, the researchers gradually insert pixels into the image ordered by the importance or attribution score and observe AUC of the class probability per pixel inserted graph.
+
+These perturbation techniques are criticized since once the date is perturbed, they evalute the model's prediction confidence to data that is not necessarily in the same distribution as the original data which can also explain the model's response.
+
+\section*{SLOC Method}
+\textbf{Model response} is the difference between the model's prediction for a specific input image and its prediction for a black image baseline.
+\textbf{Completeness} is a global metric that is satisfied if for all pixels, the sum of a pixel's attribution is equal to the model's response.
+Completeness is considered a weak constrains as it can be satusfied by generating a map with a normalized attribution values that sum to the model's response.
+Hence in SLOC the researchers use fost local completeness constraints.
+Idealy the attribution map satisfies the local completeness constraint for all masks (as in the owl toy example) but in practice it is not possible to generate a map that satisfies the local completeness constraint for all masks (as in the two birds example).
+Therefore the researchers propose to use a \textbf{soft} local completeness constraint that is satisfied if for a specific mask.
+The researchers define the \textbf{completeness gap} as the difference between the sum of the attribution map and the model's response for the corresponding input mask. They then defined the loss function to be the sum of the completeness gaps for all masks.
+Now that the loss function is defined the researchers use a two step optimization process to find the attribution map that minimizes the loss function.
+\textbf{Step 1:} The researchers created M random masks and used them to create M perturbed images. Then, they run the model on the perturbed images and stored the corresponding model's response.
+\textbf{Step 2:} The researchers then use the dataset of masks and model's response to create a new attribution map that minimizes the loss function.
+
+The Model itself is an untouched black box and the only information the researchers have is the model's response to the perturbed images. This is why the SLOC method is called a \textbf{black-box} method.
+The researchers showed that SLOC results are superiot to other STOA methods in DEL/INS evaluation metrics.
+
+\end{document}

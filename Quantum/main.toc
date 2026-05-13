@@ -1,0 +1,89 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\contentsline {part}{I\hspace {1em}The Mathematical Foundations}{1}{part.1}%
+\contentsline {chapter}{\numberline {1}Linear Algebra for Quantum Computing}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Vector Spaces}{3}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Inner Product Spaces}{3}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Linear Operators}{3}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Special Matrices in Quantum Theory}{3}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Eigenvalues and Eigenvectors}{3}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Tensor Products}{3}{section.1.6}%
+\contentsline {section}{\numberline {1.7}Dirac Notation}{3}{section.1.7}%
+\contentsline {chapter}{\numberline {2}Probability \& Statistics for Quantum Theory}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Classical Probability Basics}{5}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Distributions in Quantum Experiments}{5}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Measurement Statistics}{5}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Statistical Estimation Methods}{5}{section.2.4}%
+\contentsline {part}{II\hspace {1em}The Physics Foundations (Expanded)}{7}{part.2}%
+\contentsline {chapter}{\numberline {3}Historical Foundations}{9}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Maxwell's Equations and Electromagnetic Waves}{9}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}The Need for Maxwell's Theory}{9}{subsection.3.1.1}%
+\contentsline {subsubsection}{Coulomb's Law (1785)}{9}{section*.4}%
+\contentsline {subsubsection}{Ampère's Law (1820)}{13}{section*.5}%
+\contentsline {subsubsection}{Faraday's Law of Induction (1831)}{14}{section*.6}%
+\contentsline {subsubsection}{The Incompleteness of the Early Laws}{17}{section*.7}%
+\contentsline {subsubsection}{First Equation: Gauss's Law for Electricity}{18}{section*.8}%
+\contentsline {subsubsection}{Second Equation: Gauss's Law for Magnetism}{18}{section*.9}%
+\contentsline {subsubsection}{Third Equation: Faraday's Law of Induction}{19}{section*.10}%
+\contentsline {subsubsection}{Fourth Equation: Ampère's Law with Maxwell's Correction}{19}{section*.11}%
+\contentsline {subsubsection}{Maxwell's Equations: The Complete Picture}{20}{section*.12}%
+\contentsline {subsection}{\numberline {3.1.2}The Vector Operators}{20}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}Light as an Electromagnetic Wave}{23}{subsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.1.4}The Wave Nature of Light}{23}{subsection.3.1.4}%
+\contentsline {section}{\numberline {3.2}Wave Equation Derivation}{24}{section.3.2}%
+\contentsline {section}{\numberline {3.3}The Photoelectric Effect}{24}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Wave-Particle Dualism}{24}{section.3.4}%
+\contentsline {section}{\numberline {3.5}The Need for Quantum Mechanics}{24}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Mathematical Structure of Quantum Theory}{25}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Postulates of QM}{25}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Hilbert Spaces \& Operators}{25}{section.4.2}%
+\contentsline {section}{\numberline {4.3}State Representations}{25}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Observables \& Commutation}{25}{section.4.4}%
+\contentsline {chapter}{\numberline {5}Quantum Dynamics}{27}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Schrödinger Picture}{27}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Heisenberg Picture}{27}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Interaction Picture}{27}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Measurement Theory}{27}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Open Quantum Systems}{27}{section.5.5}%
+\contentsline {chapter}{\numberline {6}Core Quantum Phenomena}{29}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Superposition}{29}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Entanglement (Deep)}{29}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Identical Particles}{29}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Tunneling}{29}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Harmonic Oscillator}{29}{section.6.5}%
+\contentsline {section}{\numberline {6.6}Spin \& Angular Momentum}{29}{section.6.6}%
+\contentsline {chapter}{\numberline {7}Foundations of Quantum Information}{31}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Classical vs Quantum Info}{31}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Ensembles \& Density Matrices}{31}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Quantum Entropy}{31}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Quantum Channels}{31}{section.7.4}%
+\contentsline {section}{\numberline {7.5}Quantum Thermodynamics}{31}{section.7.5}%
+\contentsline {chapter}{\numberline {8}Physical Realizations of Qubits}{33}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Spin Qubits}{33}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Superconducting Qubits}{33}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Ion Trap Qubits}{33}{section.8.3}%
+\contentsline {section}{\numberline {8.4}Photonic Qubits}{33}{section.8.4}%
+\contentsline {section}{\numberline {8.5}Neutral Atom Qubits}{33}{section.8.5}%
+\contentsline {section}{\numberline {8.6}Topological Qubits}{33}{section.8.6}%
+\contentsline {chapter}{\numberline {9}Quantum Foundations \& Interpretations}{35}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Measurement Problem}{35}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Interpretations}{35}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Contextuality}{35}{section.9.3}%
+\contentsline {section}{\numberline {9.4}Bell's Theorem}{35}{section.9.4}%
+\contentsline {section}{\numberline {9.5}Classical Limit}{35}{section.9.5}%
+\contentsline {part}{III\hspace {1em}Quantum Computation}{37}{part.3}%
+\contentsline {chapter}{\numberline {10}Qubits, Gates, and Circuits}{39}{chapter.10}%
+\contentsline {chapter}{\numberline {11}Quantum Algorithms}{41}{chapter.11}%
+\contentsline {chapter}{\numberline {12}Variational \& NISQ Algorithms}{43}{chapter.12}%
+\contentsline {part}{IV\hspace {1em}Quantum Error Correction}{45}{part.4}%
+\contentsline {chapter}{\numberline {13}Foundations of QEC}{47}{chapter.13}%
+\contentsline {chapter}{\numberline {14}Stabilizer Codes}{49}{chapter.14}%
+\contentsline {chapter}{\numberline {15}Surface Codes}{51}{chapter.15}%
+\contentsline {chapter}{\numberline {16}Fault-Tolerant Quantum Computing}{53}{chapter.16}%
+\contentsline {part}{V\hspace {1em}Specialization Tracks}{55}{part.5}%
+\contentsline {chapter}{\numberline {17}Track A — Quantum Algorithms}{57}{chapter.17}%
+\contentsline {chapter}{\numberline {18}Track B — Quantum Hardware}{59}{chapter.18}%
+\contentsline {chapter}{\numberline {19}Track C — Quantum Machine Learning}{61}{chapter.19}%
+\contentsline {chapter}{\numberline {20}Track D — Quantum Cryptography}{63}{chapter.20}%
+\contentsline {part}{VI\hspace {1em}Practical Quantum Computing}{65}{part.6}%
+\contentsline {chapter}{\numberline {21}Quantum Programming}{67}{chapter.21}%
+\contentsline {chapter}{\numberline {22}Running Quantum Experiments}{69}{chapter.22}%

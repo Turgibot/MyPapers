@@ -1,48 +1,66 @@
 \section{Introduction}
 
-\subsection{Project Background}
+\subsection{Background}
 
-Accurate Estimated Time of Arrival (ETA) prediction is fundamental to modern navigation systems and intelligent transportation applications. The DSTRA-GNN model, developed in previous research, represents a significant advancement in this field by integrating vehicle-level dynamics, junction states, and explicit route intent within a unified Mixture-of-Experts framework.
+Efficient transportation is one of the most pressing challenges of modern urban life. As cities grow denser and vehicle ownership rises, congestion, delays, and energy waste become increasingly common. Accurate Estimated Time of Arrival (ETA) prediction has therefore become a cornerstone of intelligent transportation systems—enabling better route planning, logistics optimization, and overall traffic management~\cite{deepTTE2018}.
 
-The model achieved remarkable performance improvements, reducing Mean Absolute Error (MAE) from 260 seconds to 46 seconds (82\% improvement) on large-scale simulated traffic datasets. However, while the model demonstrated excellent performance in offline evaluation scenarios, there was a critical need for real-time testing capabilities that allow users to interact with the model and evaluate its performance in realistic traffic conditions.
+Recent advances in graph-based modeling and Graph Neural Networks (GNNs)~\cite{kipf2017gcn} have introduced new possibilities for learning complex spatial-temporal relationships in road networks. Because traffic flow inherently forms a network of interconnected entities—junctions, roads, and vehicles—graph representations allow models to capture how local events propagate through the wider system. However, building and evaluating such models requires high-quality datasets that represent both the spatial structure and the temporal evolution of traffic in sufficient detail.
 
-This project addresses this need by creating a comprehensive web-based platform that enables real-time testing and evaluation of ETA prediction models in realistic traffic simulations.
+\subsection{Problem Statement}
+
+Despite the growing adoption of machine-learning-based traffic prediction, there remains a fundamental challenge in comparing different model architectures. Existing datasets are typically designed for specific model types: sensor-based datasets (METR-LA, PeMS-Bay) support flow forecasting models but lack vehicle-level trajectories; trajectory-based datasets (NYC Taxi, Porto Taxi) support ETA prediction models but lack graph structures; and route-aware datasets (Baidu Maps) are proprietary and inaccessible. This fragmentation prevents fair comparison across different modeling paradigms, as each model is evaluated on different datasets with different characteristics.
+
+The absence of a unified, multi-variant dataset creates several problems for the research community: (1) models cannot be fairly compared since they are evaluated on different data sources, (2) performance differences may reflect dataset characteristics rather than model capabilities, (3) researchers must manually preprocess data or build custom environments for each model type, and (4) there is no standardized benchmark that supports both flow forecasting and ETA prediction simultaneously.
+
+Another challenge is evaluation and visualization. Once a model is trained, assessing its performance in a realistic, time-varying environment is difficult. Typical evaluation relies on offline numerical metrics such as MAE or RMSE, which fail to show how predictions behave under real-time conditions or varying traffic scenarios.
+
+\subsection{Motivation}
+
+To address these limitations, this project proposes an integrated framework composed of two complementary components that contribute to the research community:
+
+\textbf{A Multi-Variant Dataset Generator} capable of producing synchronized data formats from a single SUMO traffic simulation, enabling fair comparison across different model architectures. The generator creates four variants: (1) dynamic graph snapshots for dynamic GNN models, (2) GPS trajectory sequences for trajectory-based models, (3) aggregated sensor readings for static graph models, and (4) route segment records for route-aware models. All variants are derived from the same underlying simulation, ensuring identical traffic patterns while providing data in each model's native format. The dataset supports both flow prediction (aggregate speed, volume, occupancy at fixed locations) and ETA prediction (individual vehicle travel times), making it a comprehensive resource for traffic prediction research.
+
+\textbf{A Browser-Based Testing Application} that visualizes live simulations and allows users to test model predictions interactively. Through a web interface, users can select source and destination points, launch a trip, and compare predicted versus actual ETAs in real time. This transforms the evaluation process from a static analysis into an interactive and interpretable experience.
+
+Together, these components form a closed-loop ecosystem for generating, training, and evaluating traffic prediction models, with the multi-variant dataset serving as a standardized benchmark for the research community.
 
 \subsection{Project Objectives}
 
-The project aimed to achieve the following objectives:
+The specific objectives of the project are to:
 
-\subsubsection{Primary Objectives}
 \begin{enumerate}
-    \item Develop a real-time web-based testing system for DSTRA-GNN models
-    \item Integrate SUMO traffic simulation with the DSTRA-GNN model
-    \item Create an interactive web interface for user route planning and ETA prediction
-    \item Implement real-time data collection and statistical analysis capabilities
-    \item Build a comprehensive database system for storing and analyzing prediction results
+    \item Develop a multi-variant dataset generator built on SUMO~\cite{SUMO2018} that produces synchronized data formats for different model architectures, enabling fair comparison across trajectory-based, static graph, route-aware, and dynamic graph models
+    \item Create a comprehensive dataset that supports both flow forecasting (aggregate speed, volume, occupancy) and ETA prediction (individual vehicle travel times) from the same underlying simulation
+    \item Implement variant generation logic that extracts dynamic graph snapshots, GPS trajectory sequences, aggregated sensor readings, and route segment records while maintaining temporal synchronization and consistent train/validation/test splits
+    \item Design and build a browser-based visualization and testing platform for real-time model evaluation and comparison
+    \item Integrate both components into a unified workflow that supports simulation, multi-variant dataset creation, model training, inference, and statistical analysis
+    \item Provide the research community with a standardized benchmark dataset and evaluation framework for traffic prediction research
 \end{enumerate}
 
-\subsubsection{Secondary Objectives}
-\begin{enumerate}
-    \item Develop visualization tools for real-time traffic monitoring
-    \item Create automated reporting systems for model performance evaluation
-    \item Implement user authentication and session management
-    \item Design responsive web interface for multiple device compatibility
-    \item Establish API endpoints for potential integration with external systems
-\end{enumerate}
+\subsection{Project Scope and Deliverables}
 
-\subsection{Project Scope}
+The project focuses on the end-to-end workflow for ETA prediction—from data generation to visualization. Model development is included primarily to demonstrate the usefulness of the dataset and the testing environment.
 
-The project scope encompasses:
+\textbf{Scope:}
+
 \begin{itemize}
-    \item Full-stack web application development
-    \item Integration with SUMO traffic simulation engine
-    \item Deployment of DSTRA-GNN model inference service
-    \item Real-time data streaming and visualization
-    \item Comprehensive testing and documentation
-    \item Performance optimization and scalability considerations
+    \item Create reproducible SUMO scenarios (rush hour, events, road closures)
+    \item Generate dynamic, normalized graph datasets for GNNs
+    \item Implement a web-based interface for interactive simulation playback and prediction comparison
 \end{itemize}
 
-\subsection{Document Structure}
+\textbf{Deliverables:}
 
-This report is organized as follows: Chapter 2 reviews relevant literature in graph neural networks, traffic simulation, and web-based traffic systems. Chapter 3 describes the system architecture and design decisions. Chapter 4 details the implementation of each component. Chapter 5 presents testing methodologies and validation results. Chapter 6 discusses the results and achievements. Finally, Chapter 7 provides conclusions and future work directions.
+\begin{enumerate}
+    \item \textbf{Multi-Variant Dataset Generator Tool} – Python + SUMO system that exports synchronized data formats (dynamic graphs, trajectories, static graphs, route segments) with ground-truth flow and ETA labels
+    \item \textbf{Multi-Variant Dataset} – Comprehensive dataset with four synchronized variants supporting both flow forecasting and ETA prediction, with consistent train/validation/test splits
+    \item \textbf{Browser-Based Application} – Web client for route selection, simulation, and real-time model evaluation and comparison
+    \item \textbf{Integrated Framework} – A full pipeline for multi-variant dataset creation, model training, testing, and result visualization
+    \item \textbf{Research Contribution} – A standardized benchmark dataset and evaluation framework for the traffic prediction research community
+\end{enumerate}
+
+\subsection{Structure of the Report}
+
+The remainder of this report is organized as follows. Chapter 2 reviews existing traffic datasets and ETA prediction systems, analyzing their structures, limitations, and how they differ from the approach used in this project. Chapter 3 presents the overall system architecture, describing the dataset generator, the testing platform, and their interaction through the API layer. Chapter 4 details the implementation of each module, including technologies and data-processing pipelines. Chapter 5 discusses evaluation results and system performance, and Chapter 6 concludes the report with recommendations for future work.
+
 

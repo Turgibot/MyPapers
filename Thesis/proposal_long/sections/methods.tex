@@ -1,0 +1,86 @@
+\section{Methods for Work Execution}
+
+\subsection{Types of Activities}
+
+The work will involve several types of activities:
+
+\textbf{Literature Review and Analysis:} Comprehensive review of existing ETA prediction methods, graph neural network architectures, and route-aware modeling approaches. This includes analyzing published papers, understanding implementation details, and identifying gaps in current research.
+
+\textbf{Software Development and Programming:} Implementation of baseline models (DeepTTE~\cite{deepTTE2018}, STAD~\cite{abbar2020stad}, DCRNN~\cite{dcrnn2018}, ST-GCN~\cite{yu2018stgcn}, DuETA~\cite{dueta2023}) and extension of the DSTRA-GNN architecture. Development will include model architecture design, training pipelines, evaluation frameworks, and visualization tools.
+
+\textbf{Experimental Design and Execution:} Systematic experimental evaluation including baseline comparisons, ablation studies, and architectural enhancements. Experiments will be conducted with proper hyperparameter tuning, cross-validation, and statistical significance testing.
+
+\textbf{Data Analysis and Interpretation:} Statistical analysis of experimental results, error analysis, performance comparison across different scenarios, and visualization of learned representations. This includes identifying patterns, failure modes, and drawing insights about when route information is most beneficial.
+
+\textbf{Documentation and Writing:} Documentation of implementations, experimental protocols, results analysis, and thesis writing.
+
+\subsection{Tools and Software}
+
+\textbf{Programming Languages and Frameworks:}
+\begin{itemize}
+    \item \textbf{Python 3.8+}: Primary programming language for all implementations
+    \item \textbf{PyTorch}: Deep learning framework for implementing and training neural network models
+    \item \textbf{PyTorch Geometric}: Library for graph neural network operations and dynamic graph processing
+    \item \textbf{NumPy, Pandas}: Data manipulation and numerical computations
+    \item \textbf{Matplotlib, Seaborn}: Visualization and plotting of results
+\end{itemize}
+
+\textbf{Traffic Simulation and Data:}
+\begin{itemize}
+    \item \textbf{SUMO (Simulation of Urban MObility)~\cite{SUMO2018}}: Traffic simulation platform for generating dynamic traffic datasets with explicit route information
+    \item \textbf{Existing Simulation Dataset}: Four-week urban simulation dataset with dynamic traffic snapshots at 30-second intervals, including vehicle trajectories, route information, and traffic state features
+\end{itemize}
+
+\textbf{Development and Experimentation Tools:}
+\begin{itemize}
+    \item \textbf{Git}: Version control for code management
+    \item \textbf{Jupyter Notebooks}: Interactive development and analysis
+    \item \textbf{Weights \& Biases (wandb)} or \textbf{TensorBoard}: Experiment tracking and visualization
+    \item \textbf{Slurm} or \textbf{local GPU clusters}: Distributed training and experiment execution
+\end{itemize}
+
+\textbf{Analysis and Evaluation:}
+\begin{itemize}
+    \item \textbf{scikit-learn}: Additional machine learning utilities and metrics
+    \item \textbf{Statistical analysis libraries}: For significance testing and confidence intervals
+    \item \textbf{LaTeX}: Thesis and paper writing
+\end{itemize}
+
+\subsection{Data Collection and Preprocessing}
+
+The work will leverage the existing four-week SUMO simulation dataset, which includes:
+\begin{itemize}
+    \item Dynamic graph snapshots at 30-second intervals with static junction nodes, dynamic vehicle nodes, static road edges (junction-to-junction), and time-varying dynamic edges. The dynamic edges include: (1) traversal edges connecting vehicles to junctions (junction-vehicle and vehicle-junction), and (2) interaction edges connecting vehicles to other vehicles on the same road segment, creating junction-vehicle-vehicle-junction relations that capture vehicle interactions and traffic flow dynamics
+    \item Per-vehicle route information (\texttt{vehicle\_route\_left}) encoding the remaining path sequence
+    \item Node features (28 dimensions): junction/vehicle type, kinematics, temporal encodings, zone information, coordinates, current-edge attributes, demand/occupancy surrogates
+    \item Edge features (7 dimensions): average speed, lanes, length, demand, occupancy
+\end{itemize}
+
+Data preprocessing will include: (1) chronological partitioning into training (2 weeks), validation (1 week), and test (1 week) sets, (2) feature normalization and standardization, (3) temporal window construction ($H=30$ snapshots), (4) route sequence encoding and vocabulary construction, and (5) target normalization (log-transform and z-score normalization).
+
+\subsection{Analysis Techniques}
+
+\textbf{Performance Evaluation:} Standard regression metrics including Mean Absolute Error (MAE), Root Mean Squared Error (RMSE), and Mean Absolute Percentage Error (MAPE). Metrics will be computed per-vehicle and aggregated across different trip categories (short, medium, long distances) and traffic conditions.
+
+\textbf{Ablation Studies:} Systematic component removal and replacement to quantify individual contributions: (1) route-aware vs. route-agnostic variants, (2) temporal vs. non-temporal variants, (3) dynamic vs. static graph structures, (4) different route encoding mechanisms, and (5) MoE vs. single-head prediction.
+
+\textbf{Statistical Analysis:} Confidence intervals, significance testing (t-tests, Wilcoxon signed-rank tests), and effect size calculations to ensure robust conclusions about performance differences.
+
+\textbf{Error Analysis:} Identification of failure modes through analysis of prediction errors across different scenarios: trip characteristics (distance, duration, route complexity), traffic conditions (congested vs. free-flow), time-of-day patterns, and spatial zones.
+
+\textbf{Interpretability Analysis:} Visualization of learned representations, attention weights, expert routing patterns, and route encoding embeddings to understand model behavior and decision-making.
+
+\subsection{Validation Methods}
+
+\textbf{Experimental Validation:} All experiments will follow rigorous validation protocols:
+\begin{itemize}
+    \item \textbf{Temporal Split}: Chronological data partitioning to prevent data leakage and ensure realistic evaluation on future time periods
+    \item \textbf{Hyperparameter Tuning}: Grid search or Bayesian optimization on validation set with early stopping to prevent overfitting
+    \item \textbf{Multiple Runs}: Experiments repeated with different random seeds (e.g., seeds 42, 43, 44) to ensure reproducibility and account for variance
+    \item \textbf{Model Selection}: Selection based on lowest validation MAE, with final evaluation on held-out test set
+\end{itemize}
+
+\textbf{Baseline Comparison:} Comprehensive comparison with state-of-the-art methods ensures fair evaluation and validates the contribution of the proposed approach.
+
+\textbf{Reproducibility:} All code, configurations, and experimental protocols will be documented and made available to ensure reproducibility of results.
+

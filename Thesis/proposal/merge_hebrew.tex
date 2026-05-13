@@ -1,0 +1,14 @@
+\documentclass{article}
+\usepackage{pdfpages}
+
+\begin{document}
+
+% Include all pages from Hebrew abstract (should be 2 pages)
+\includepdf[pages=-]{hebrew_abstract.pdf}
+
+% Include pages 3 onwards from thesis proposal (skip first 2 pages)
+% Use backup to ensure we get the original pages
+\includepdf[pages=3-]{thesis_proposal.pdf}
+
+\end{document}
+

@@ -72,7 +72,7 @@ The API Gateway serves as the central communication hub:
 
 \subsubsection{SUMO Service}
 
-The SUMO service handles traffic simulation:
+The SUMO service handles traffic simulation and multi-variant dataset generation:
 \begin{itemize}
     \item \textbf{Technology}: Python with SUMO-Simulation library
     \item \textbf{Functionality}:
@@ -81,6 +81,10 @@ The SUMO service handles traffic simulation:
         \item Extract vehicle positions and states
         \item Monitor junction states and traffic lights
         \item Generate dynamic graph structures
+        \item Extract GPS trajectories for trajectory-based models
+        \item Aggregate sensor readings for static graph models
+        \item Extract route segments for route-aware models
+        \item Generate synchronized multi-variant data from single simulation
     \end{itemize}
     \item \textbf{Interface}: TraCI (Traffic Control Interface) for real-time control
 \end{itemize}

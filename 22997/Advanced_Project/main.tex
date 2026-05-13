@@ -1,6 +1,7 @@
 \documentclass[12pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
+\usepackage{times}  % Times font according to Open University guidelines
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{graphicx}
 \usepackage{cite}
@@ -10,6 +11,7 @@
 \usepackage{url}
 \usepackage[hidelinks]{hyperref}
 \usepackage{geometry}
+\usepackage{setspace}  % For line spacing control
 \usepackage{enumitem}
 \usepackage{tikz}
 \usepackage{listings}
@@ -17,7 +19,13 @@
 \usepackage{fancyhdr}
 \usepackage{array}
 
-\geometry{margin=2.5cm}
+% Formatting according to Open University guidelines
+\geometry{margin=2.5cm}  % Margins: 2-3 cm (using 2.5cm)
+\onehalfspacing  % Line spacing: One and a half lines in body
+
+% Footnotes: Single spacing and smaller font
+\renewcommand{\footnotesize}{\small}
+\setlength{\footnotesep}{0.5\baselineskip}
 
 % Header and footer
 \pagestyle{fancy}
@@ -25,6 +33,7 @@
 \fancyhead[L]{The Open University - Advanced Project Final Report}
 \fancyhead[R]{Guy Tordjman}
 \fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}  % No header rule according to guidelines
 
 % Title and author information now handled by cover page
 
@@ -54,8 +63,11 @@
 \input{sections/acknowledgments}
 
 \cleardoublepage
+% Bibliography: Single spacing according to guidelines
+\begin{spacing}{1.0}
 \bibliographystyle{ieeetr}
 \bibliography{references}
+\end{spacing}
 
 \end{document}
 

@@ -1,0 +1,508 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2025.11.15)  16 NOV 2025 13:30
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**merge_hebrew.tex
+(./merge_hebrew.tex
+LaTeX2e <2020-02-02> patch level 2
+L3 programming layer <2020-02-14>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
+)
+\c@part=\count167
+\c@section=\count168
+\c@subsection=\count169
+\c@subsubsection=\count170
+\c@paragraph=\count171
+\c@subparagraph=\count172
+\c@figure=\count173
+\c@table=\count174
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen134
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pdfpages.sty
+Package: pdfpages 2020/01/28 v0.5q Insert pages of external PDF documents (AM)
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count175
+\calc@Bcount=\count176
+\calc@Adimen=\dimen135
+\calc@Bdimen=\dimen136
+\calc@Askip=\skip49
+\calc@Bskip=\skip50
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count177
+\calc@Cskip=\skip51
+)
+(/usr/share/texlive/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+Package: eso-pic 2018/04/12 v2.0h eso-pic (RN)
+
+(/usr/share/texlive/texmf-dist/tex/generic/atbegshi/atbegshi.sty
+Package: atbegshi 2019/12/05 v1.19 At begin shipout hook (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2019/12/15 v1.24 LaTeX kernel commands for general use (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2019/11/07 v1.0c TeX engine tests
+))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 105.
+)
+\Gin@req@height=\dimen137
+\Gin@req@width=\dimen138
+)
+\AM@pagewidth=\dimen139
+\AM@pageheight=\dimen140
+
+(/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pppdftex.def
+File: pppdftex.def 2020/01/28 v0.5q Pdfpages driver for pdfTeX (AM)
+)
+\AM@pagebox=\box45
+\AM@global@opts=\toks15
+\AM@pagecnt=\count178
+\AM@toc@title=\toks16
+\c@AM@survey=\count179
+\AM@templatesizebox=\box46
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
+File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
+\l__kernel_color_stack_int=\count180
+\l__pdf_internal_box=\box47
+)
+(./merge_hebrew.aux)
+\openout1 = `merge_hebrew.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+\AtBeginShipoutBox=\box48
+
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count181
+\scratchdimen=\dimen141
+\scratchbox=\box49
+\nofMPsegments=\count182
+\nofMParguments=\count183
+\everyMPshowfont=\toks17
+\MPscratchCnt=\count184
+\MPscratchDim=\dimen142
+\MPnumerator=\count185
+\makeMPintoPDFobject=\count186
+\everyMPtoPDFconversion=\toks18
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+(/usr/share/texlive/texmf-dist/tex/latex/pdflscape/pdflscape.sty
+Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
+)
+Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
+)
+<hebrew_abstract.pdf, id=1, 614.295pt x 794.97pt>
+File: hebrew_abstract.pdf Graphic file (type pdf)
+<use hebrew_abstract.pdf>
+Package pdftex.def Info: hebrew_abstract.pdf  used on input line 7.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+File: hebrew_abstract.pdf Graphic file (type pdf)
+<use hebrew_abstract.pdf>
+Package pdftex.def Info: hebrew_abstract.pdf  used on input line 7.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+<hebrew_abstract.pdf, id=4, page=1, 614.295pt x 794.97pt>
+File: hebrew_abstract.pdf Graphic file (type pdf)
+<use hebrew_abstract.pdf, page 1>
+Package pdftex.def Info: hebrew_abstract.pdf , page1 used on input line 7.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+File: hebrew_abstract.pdf Graphic file (type pdf)
+<use hebrew_abstract.pdf, page 1>
+Package pdftex.def Info: hebrew_abstract.pdf , page1 used on input line 7.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: hebrew_abstract.pdf Graphic file (type pdf)
+<use hebrew_abstract.pdf, page 1>
+Package pdftex.def Info: hebrew_abstract.pdf , page1 used on input line 7.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: hebrew_abstract.pdf Graphic file (type pdf)
+<use hebrew_abstract.pdf, page 1>
+Package pdftex.def Info: hebrew_abstract.pdf , page1 used on input line 7.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: hebrew_abstract.pdf Graphic file (type pdf)
+<use hebrew_abstract.pdf, page 1>
+Package pdftex.def Info: hebrew_abstract.pdf , page1 used on input line 7.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+ [1
+
+ <./hebrew_abstract.pdf>]
+<hebrew_abstract.pdf, id=25, page=2, 614.295pt x 794.97pt>
+File: hebrew_abstract.pdf Graphic file (type pdf)
+<use hebrew_abstract.pdf, page 2>
+Package pdftex.def Info: hebrew_abstract.pdf , page2 used on input line 7.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: hebrew_abstract.pdf Graphic file (type pdf)
+<use hebrew_abstract.pdf, page 2>
+Package pdftex.def Info: hebrew_abstract.pdf , page2 used on input line 7.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: hebrew_abstract.pdf Graphic file (type pdf)
+<use hebrew_abstract.pdf, page 2>
+Package pdftex.def Info: hebrew_abstract.pdf , page2 used on input line 7.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+ [2 <./hebrew_abstract.pdf>]
+<thesis_proposal.pdf, id=29, 597.50829pt x 845.0471pt>
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf>
+Package pdftex.def Info: thesis_proposal.pdf  used on input line 11.
+(pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf>
+Package pdftex.def Info: thesis_proposal.pdf  used on input line 11.
+(pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
+<thesis_proposal.pdf, id=32, page=3, 597.50829pt x 845.0471pt>
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 3>
+Package pdftex.def Info: thesis_proposal.pdf , page3 used on input line 11.
+(pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 3>
+Package pdftex.def Info: thesis_proposal.pdf , page3 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 3>
+Package pdftex.def Info: thesis_proposal.pdf , page3 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 3>
+Package pdftex.def Info: thesis_proposal.pdf , page3 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 3>
+Package pdftex.def Info: thesis_proposal.pdf , page3 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+ [3 <./thesis_proposal.pdf{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}>]
+<thesis_proposal.pdf, id=47, page=4, 597.50829pt x 845.0471pt>
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 4>
+Package pdftex.def Info: thesis_proposal.pdf , page4 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 4>
+Package pdftex.def Info: thesis_proposal.pdf , page4 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 4>
+Package pdftex.def Info: thesis_proposal.pdf , page4 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+ [4 <./thesis_proposal.pdf>]
+<thesis_proposal.pdf, id=59, page=5, 597.50829pt x 845.0471pt>
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 5>
+Package pdftex.def Info: thesis_proposal.pdf , page5 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 5>
+Package pdftex.def Info: thesis_proposal.pdf , page5 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 5>
+Package pdftex.def Info: thesis_proposal.pdf , page5 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+ [5 <./thesis_proposal.pdf>]
+<thesis_proposal.pdf, id=63, page=6, 597.50829pt x 845.0471pt>
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 6>
+Package pdftex.def Info: thesis_proposal.pdf , page6 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 6>
+Package pdftex.def Info: thesis_proposal.pdf , page6 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 6>
+Package pdftex.def Info: thesis_proposal.pdf , page6 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+ [6 <./thesis_proposal.pdf>]
+<thesis_proposal.pdf, id=67, page=7, 597.50829pt x 845.0471pt>
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 7>
+Package pdftex.def Info: thesis_proposal.pdf , page7 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 7>
+Package pdftex.def Info: thesis_proposal.pdf , page7 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 7>
+Package pdftex.def Info: thesis_proposal.pdf , page7 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+ [7 <./thesis_proposal.pdf>]
+<thesis_proposal.pdf, id=72, page=8, 597.50829pt x 845.0471pt>
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 8>
+Package pdftex.def Info: thesis_proposal.pdf , page8 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 8>
+Package pdftex.def Info: thesis_proposal.pdf , page8 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 8>
+Package pdftex.def Info: thesis_proposal.pdf , page8 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+
+[8 <./thesis_proposal.pdf>]
+<thesis_proposal.pdf, id=81, page=9, 597.50829pt x 845.0471pt>
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 9>
+Package pdftex.def Info: thesis_proposal.pdf , page9 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 9>
+Package pdftex.def Info: thesis_proposal.pdf , page9 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 9>
+Package pdftex.def Info: thesis_proposal.pdf , page9 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+ [9 <./thesis_proposal.pdf>]
+<thesis_proposal.pdf, id=90, page=10, 597.50829pt x 845.0471pt>
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 10>
+Package pdftex.def Info: thesis_proposal.pdf , page10 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 10>
+Package pdftex.def Info: thesis_proposal.pdf , page10 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 10>
+Package pdftex.def Info: thesis_proposal.pdf , page10 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+ [10 <./thesis_proposal.pdf>]
+<thesis_proposal.pdf, id=99, page=11, 597.50829pt x 845.0471pt>
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 11>
+Package pdftex.def Info: thesis_proposal.pdf , page11 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 11>
+Package pdftex.def Info: thesis_proposal.pdf , page11 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 11>
+Package pdftex.def Info: thesis_proposal.pdf , page11 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+ [11 <./thesis_proposal.pdf>]
+<thesis_proposal.pdf, id=103, page=12, 597.50829pt x 845.0471pt>
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 12>
+Package pdftex.def Info: thesis_proposal.pdf , page12 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 12>
+Package pdftex.def Info: thesis_proposal.pdf , page12 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 12>
+Package pdftex.def Info: thesis_proposal.pdf , page12 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+ [12 <./thesis_proposal.pdf>]
+<thesis_proposal.pdf, id=123, page=13, 597.50829pt x 845.0471pt>
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 13>
+Package pdftex.def Info: thesis_proposal.pdf , page13 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 13>
+Package pdftex.def Info: thesis_proposal.pdf , page13 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 13>
+Package pdftex.def Info: thesis_proposal.pdf , page13 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+ [13 <./thesis_proposal.pdf>]
+<thesis_proposal.pdf, id=155, page=14, 597.50829pt x 845.0471pt>
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 14>
+Package pdftex.def Info: thesis_proposal.pdf , page14 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 14>
+Package pdftex.def Info: thesis_proposal.pdf , page14 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 14>
+Package pdftex.def Info: thesis_proposal.pdf , page14 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+ [14 <./thesis_proposal.pdf>]
+<thesis_proposal.pdf, id=219, page=15, 597.50829pt x 845.0471pt>
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 15>
+Package pdftex.def Info: thesis_proposal.pdf , page15 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 15>
+Package pdftex.def Info: thesis_proposal.pdf , page15 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 15>
+Package pdftex.def Info: thesis_proposal.pdf , page15 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+ [15 <./thesis_proposal.pdf>]
+<thesis_proposal.pdf, id=234, page=16, 597.50829pt x 845.0471pt>
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 16>
+Package pdftex.def Info: thesis_proposal.pdf , page16 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 16>
+Package pdftex.def Info: thesis_proposal.pdf , page16 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 16>
+Package pdftex.def Info: thesis_proposal.pdf , page16 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+
+[16 <./thesis_proposal.pdf>]
+<thesis_proposal.pdf, id=257, page=17, 597.50829pt x 845.0471pt>
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 17>
+Package pdftex.def Info: thesis_proposal.pdf , page17 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 17>
+Package pdftex.def Info: thesis_proposal.pdf , page17 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 17>
+Package pdftex.def Info: thesis_proposal.pdf , page17 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+ [17 <./thesis_proposal.pdf>]
+<thesis_proposal.pdf, id=268, page=18, 597.50829pt x 845.0471pt>
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 18>
+Package pdftex.def Info: thesis_proposal.pdf , page18 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 18>
+Package pdftex.def Info: thesis_proposal.pdf , page18 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 18>
+Package pdftex.def Info: thesis_proposal.pdf , page18 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+ [18 <./thesis_proposal.pdf>]
+<thesis_proposal.pdf, id=283, page=19, 597.50829pt x 845.0471pt>
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 19>
+Package pdftex.def Info: thesis_proposal.pdf , page19 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 19>
+Package pdftex.def Info: thesis_proposal.pdf , page19 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 19>
+Package pdftex.def Info: thesis_proposal.pdf , page19 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+ [19 <./thesis_proposal.pdf>]
+<thesis_proposal.pdf, id=295, page=20, 597.50829pt x 845.0471pt>
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 20>
+Package pdftex.def Info: thesis_proposal.pdf , page20 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 20>
+Package pdftex.def Info: thesis_proposal.pdf , page20 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+File: thesis_proposal.pdf Graphic file (type pdf)
+<use thesis_proposal.pdf, page 20>
+Package pdftex.def Info: thesis_proposal.pdf , page20 used on input line 11.
+(pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
+ [20 <./thesis_proposal.pdf>]
+(./merge_hebrew.aux) ) 
+Here is how much of TeX's memory you used:
+ 2747 strings out of 482598
+ 41632 string characters out of 5954035
+ 274404 words of memory out of 5000000
+ 17918 multiletter control sequences out of 15000+600000
+ 532338 words of font info for 24 fonts, out of 8000000 for 9000
+ 309 hyphenation exceptions out of 8191
+ 40i,18n,46p,243b,427s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/urw/times/utmri8a.pfb>
+Output written on merge_hebrew.pdf (20 pages, 837912 bytes).
+PDF statistics:
+ 310 PDF objects out of 1000 (max. 8388607)
+ 206 compressed objects within 3 object streams
+ 0 named destinations out of 1000 (max. 500000)
+ 131 words of extra memory for PDF output out of 10000 (max. 10000000)
+
