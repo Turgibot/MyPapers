@@ -9,9 +9,6 @@ This directory contains the extended version of the DSTRA-GNN paper for submissi
 - **Deadline**: December 31, 2025 (AoE, hard deadline)
 - **Submission Portal**: https://www.editorialmanager.com/sncs/default.aspx
 
-## Requirements
-See `REQUIREMENTS_SUMMARY.md` for detailed list of changes needed from the original IEEE submission.
-
 ## Status
 ✅ **Template downloaded** - Springer Nature LaTeX template (December 2024 version) is ready
 ✅ **Paper converted** - DSTRA-GNN paper successfully converted to SN Computer Science format
