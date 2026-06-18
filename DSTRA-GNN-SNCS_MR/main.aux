@@ -1,0 +1,156 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\bibstyle{sn-basic}
+\providecommand \oddpage@label [2]{}
+\Newlabel{1}{1}
+\Newlabel{2}{2}
+\citation{derrowpinion2021googlemaps,hoseinzadeh2020waze,amin-naseri2018waze}
+\citation{dijkstra1959}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Afternoon rush-hour snapshot spanning the network. Static junction nodes (light blue) and static road edges (gray) form the backbone; dynamic vehicle nodes (green) and traversal edges (orange arrows) reveal congestion corridors and high-flow funnels. Zones: A/B urban grids with dense signals and short links; C suburban ring with longer arterials and smoother flow; H connector hub that funnels inter-zone traffic and creates gateway bottlenecks.\relax }}{2}{figure.caption.2}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:rush-hour-intro}{{1}{2}{Afternoon rush-hour snapshot spanning the network. Static junction nodes (light blue) and static road edges (gray) form the backbone; dynamic vehicle nodes (green) and traversal edges (orange arrows) reveal congestion corridors and high-flow funnels. Zones: A/B urban grids with dense signals and short links; C suburban ring with longer arterials and smoother flow; H connector hub that funnels inter-zone traffic and creates gateway bottlenecks.\relax }{figure.caption.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{2}{section.1}\protected@file@percent }
+\newlabel{sec1}{{1}{2}{Introduction}{section.1}{}}
+\citation{chen2016xgboost}
+\citation{nyc_tlc,moreira2013porto}
+\citation{deepTTE2018}
+\citation{xu2020tadnm}
+\citation{wang2022metatte}
+\citation{abbar2020stad}
+\citation{dcrnn2018,yu2018stgcn,wu2019graphwavenet}
+\citation{nyc_tlc,moreira2013porto,didi2016,zheng2012geolife}
+\citation{voloch2021,SmartSimulativeRoute2025}
+\citation{dijkstra1959}
+\citation{bellman1958routing}
+\citation{pohl1971bi}
+\citation{goldberg2005}
+\citation{geisberger2008}
+\citation{delling2011}
+\citation{chen2016xgboost}
+\citation{nyc_tlc,moreira2013porto}
+\citation{deepTTE2018}
+\citation{nyc_tlc}
+\citation{moreira2013porto}
+\citation{didi2016}
+\citation{wang2022metatte}
+\citation{abbar2020stad}
+\citation{stann2021}
+\citation{SmartSimulativeRoute2025}
+\citation{dcrnn2018}
+\citation{dueta2023}
+\citation{constgat2020}
+\citation{dueta2023}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{4}{section.2}\protected@file@percent }
+\newlabel{sec2}{{2}{4}{Related Work}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Classical pathfinding and routing}{4}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Learning-based ETA and traffic forecasting}{4}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Spatio-temporal graph neural networks}{4}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}State-of-the-art production models}{5}{subsection.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Summary}{5}{subsection.2.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Methodology}{5}{section.3}\protected@file@percent }
+\newlabel{sec3}{{3}{5}{Methodology}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Dynamic Graph Representation}{5}{subsection.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Dynamic, multi-relational traffic graph: static junction nodes (labeled A--D) and road edges (solid gray) with dynamic vehicle nodes (hollow green circles) and interaction edges (blue dashed).\relax }}{6}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:dyn-graph}{{2}{6}{Dynamic, multi-relational traffic graph: static junction nodes (labeled A--D) and road edges (solid gray) with dynamic vehicle nodes (hollow green circles) and interaction edges (blue dashed).\relax }{figure.caption.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{Dynamic edge construction.}{6}{section*.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Route intent.}{6}{section*.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Key components: (a) two-layer GATv2 with edge features; (b) route intent via edge-ID embeddings and mean pooling; (c) sparse Top-$k=2$ routing over six experts with load balancing.\relax }}{7}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:components}{{3}{7}{Key components: (a) two-layer GATv2 with edge features; (b) route intent via edge-ID embeddings and mean pooling; (c) sparse Top-$k=2$ routing over six experts with load balancing.\relax }{figure.caption.4}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Graph encoder (last snapshot)}}}{7}{subfigure.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Route encoder (vehicle intent)}}}{7}{subfigure.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Router and Mixture-of-Experts}}}{7}{subfigure.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Temporal Windowing}{7}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Problem Statement}{7}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Model Architecture}{8}{subsection.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Model Configuration}{8}{subsection.3.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces DSTRA-GNN architecture. A window of $T{=}30$ dynamic graph snapshots (shown as an overlapped deck) is processed by a \emph  {shared} Graph Encoder; prediction is made at the last snapshot $t^*$. In the Full variant, a Route Encoder summarizes each vehicle's remaining path before Fusion and a Top-$k$ MoE head produces per-vehicle ETA.\relax }}{9}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:temporal-moe-eta}{{4}{9}{DSTRA-GNN architecture. A window of $T{=}30$ dynamic graph snapshots (shown as an overlapped deck) is processed by a \emph {shared} Graph Encoder; prediction is made at the last snapshot $t^*$. In the Full variant, a Route Encoder summarizes each vehicle's remaining path before Fusion and a Top-$k$ MoE head produces per-vehicle ETA.\relax }{figure.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Temporal Transformer detail: per-edge sequences across $H{-}1$ snapshots are projected, positionally encoded, encoded by a Transformer stack, reduced via last-token + norm, projected back to edge dimension, then pooled over edges.\relax }}{9}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:transformer-detail}{{5}{9}{Temporal Transformer detail: per-edge sequences across $H{-}1$ snapshots are projected, positionally encoded, encoded by a Transformer stack, reduced via last-token + norm, projected back to edge dimension, then pooled over edges.\relax }{figure.caption.8}{}}
+\citation{SUMO2018}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Loss Functions and Training Protocol}{10}{subsection.3.6}\protected@file@percent }
+\newlabel{sec:loss}{{3.6}{10}{Loss Functions and Training Protocol}{subsection.3.6}{}}
+\@writefile{toc}{\contentsline {paragraph}{Complexity and inference.}{10}{section*.9}\protected@file@percent }
+\citation{SUMO2018,dijkstra1959}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Experimental Evaluation}{11}{section.4}\protected@file@percent }
+\newlabel{sec4}{{4}{11}{Experimental Evaluation}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Dataset}{11}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Dataset Statistics}{11}{subsection.4.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces ETA distribution (seconds) with equal-thirds thresholds. Vertical dashed lines indicate short/medium ($\approx $277 s) and medium/long ($\approx $609 s) boundaries.\relax }}{12}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:eta-dist}{{6}{12}{ETA distribution (seconds) with equal-thirds thresholds. Vertical dashed lines indicate short/medium ($\approx $277 s) and medium/long ($\approx $609 s) boundaries.\relax }{figure.caption.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Experimental Setup}{12}{subsection.4.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces ETA distribution by route-length category (short/medium/long). Boxes summarize medians and IQRs; whiskers capture spread and outliers.\relax }}{13}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:eta-box}{{7}{13}{ETA distribution by route-length category (short/medium/long). Boxes summarize medians and IQRs; whiskers capture spread and outliers.\relax }{figure.caption.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Baselines and Ablations}{13}{subsection.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Evaluation Metrics}{13}{subsection.4.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces ETA versus hour-of-day showing strong diurnal effects (morning and evening peaks), with occasional evening events/spikes.\relax }}{14}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:eta-per-hour}{{8}{14}{ETA versus hour-of-day showing strong diurnal effects (morning and evening peaks), with occasional evening events/spikes.\relax }{figure.caption.12}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Results and Analysis}{14}{section.5}\protected@file@percent }
+\newlabel{sec5}{{5}{14}{Results and Analysis}{section.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Ablation variants and enabled components. Temporal uses a Transformer with static-road context for the first $H{-}1$ snapshots.\relax }}{15}{table.caption.14}\protected@file@percent }
+\newlabel{tab:ablation_variants}{{1}{15}{Ablation variants and enabled components. Temporal uses a Transformer with static-road context for the first $H{-}1$ snapshots.\relax }{table.caption.14}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Overall and per-bin validation MAE (seconds) averaged over seeds 42--44 (best epoch per seed). Improvement is relative to the AVG baseline.\relax }}{15}{table.caption.16}\protected@file@percent }
+\newlabel{tab:results_overall_bins}{{2}{15}{Overall and per-bin validation MAE (seconds) averaged over seeds 42--44 (best epoch per seed). Improvement is relative to the AVG baseline.\relax }{table.caption.16}{}}
+\citation{dueta2023}
+\citation{dcrnn2018,deepTTE2018,constgat2020}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Duration binning used throughout (validation split). Thresholds from Fig.\nobreakspace  {}\ref  {fig:eta-dist}.\relax }}{16}{table.caption.18}\protected@file@percent }
+\newlabel{tab:binning}{{3}{16}{Duration binning used throughout (validation split). Thresholds from Fig.~\ref {fig:eta-dist}.\relax }{table.caption.18}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Overall validation MAE and RMSE (seconds) and MAPE (\%). Best epoch per variant on validation; averaged over seeds 42--44 where available. MAPE values are estimated where missing in logs.\relax }}{16}{table.caption.20}\protected@file@percent }
+\newlabel{tab:mae_rmse_wape}{{4}{16}{Overall validation MAE and RMSE (seconds) and MAPE (\%). Best epoch per variant on validation; averaged over seeds 42--44 where available. MAPE values are estimated where missing in logs.\relax }{table.caption.20}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Discussion}{16}{section.6}\protected@file@percent }
+\newlabel{sec6}{{6}{16}{Discussion}{section.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{17}{section.7}\protected@file@percent }
+\newlabel{sec7}{{7}{17}{Conclusion}{section.7}{}}
+\citation{sumo_data_generator}
+\citation{sumo_data_generator}
+\citation{trafficlab}
+\citation{SmartSimulativeRoute2025}
+\@writefile{toc}{\contentsline {section}{\numberline {A}Explanation of Extended Material}{19}{appendix.a.A}\protected@file@percent }
+\newlabel{secA1}{{A}{19}{Explanation of Extended Material}{appendix.a.A}{}}
+\citation{SmartSimulativeRoute2025}
+\bibdata{references}
+\bibcite{abbar2020stad}{{1}{2020}{{Abbar et~al.}}{{Abbar, Anagnostopoulos, Bhagat, Cudre-Mauroux, and Kumar}}}
+\bibcite{amin-naseri2018waze}{{2}{2018}{{Amin-Naseri et~al.}}{{Amin-Naseri, Chakraborty, Sharma, Gilbert, and Hong}}}
+\bibcite{bellman1958routing}{{3}{1958}{{Bellman}}{{}}}
+\bibcite{chen2016xgboost}{{4}{2016}{{Chen and Guestrin}}{{}}}
+\bibcite{delling2011}{{5}{2011}{{Delling et~al.}}{{Delling, Goldberg, Pajor, and Werneck}}}
+\bibcite{derrowpinion2021googlemaps}{{6}{2021}{{Derrow-Pinion et~al.}}{{Derrow-Pinion, She, Wong, Lange, Hester, Perez, Nunkesser, Lee, Guo, Wiltshire, Battaglia, Gupta, Li, Xu, Sanchez-Gonzalez, Li, and Veličković}}}
+\bibcite{didi2016}{{7}{2016}{{DiDi Chuxing Research}}{{}}}
+\bibcite{dijkstra1959}{{8}{1959}{{Dijkstra}}{{}}}
+\bibcite{SUMO2018}{{9}{2018}{{DLR and contributors}}{{}}}
+\bibcite{geisberger2008}{{10}{2008}{{Geisberger et~al.}}{{Geisberger, Sanders, Schultes, and Vetter}}}
+\bibcite{goldberg2005}{{11}{2005}{{Goldberg and Harrelson}}{{}}}
+\bibcite{hoseinzadeh2020waze}{{12}{2020}{{Hoseinzadeh et~al.}}{{Hoseinzadeh, Liu, Han, Brakewood, and Mohammadnazar}}}
+\bibcite{dcrnn2018}{{13}{2018}{{Li et~al.}}{{Li, Yu, Shahabi, and Liu}}}
+\bibcite{moreira2013porto}{{14}{2013}{{Moreira-Matias et~al.}}{{Moreira-Matias, Gama, Ferreira, Mendes-Moreira, and Damas}}}
+\bibcite{nyc_tlc}{{15}{2013--}{{NYC TLC}}{{}}}
+\bibcite{pohl1971bi}{{16}{1971}{{Pohl}}{{}}}
+\bibcite{constgat2020}{{17}{2020}{{Song et~al.}}{{Song, Lin, Guo, Wan, Yu, Liang, and Xie}}}
+\bibcite{voloch2021}{{18}{2021}{{Voloch and Voloch-Bloch}}{{}}}
+\bibcite{SmartSimulativeRoute2025}{{19}{2025}{{Voloch et~al.}}{{Voloch, Penkar, and Tordjman}}}
+\bibcite{wang2022metatte}{{20}{2022}{{Wang et~al.}}{{Wang, Li, and Yuan}}}
+\bibcite{deepTTE2018}{{21}{2018}{{Wang et~al.}}{{Wang, Yin, Chen, Zhao, Xu, and Ye}}}
+\bibcite{wu2019graphwavenet}{{22}{2019}{{Wu et~al.}}{{Wu, Pan, Long, Jiang, and Zhang}}}
+\bibcite{xu2020tadnm}{{23}{2020}{{Xu et~al.}}{{Xu, Lin, Zhao, Zhang, and Yang}}}
+\bibcite{yu2018stgcn}{{24}{2018}{{Yu et~al.}}{{Yu, Yin, and Zhu}}}
+\bibcite{zheng2012geolife}{{25}{2009}{{Zheng et~al.}}{{Zheng, Zhang, Ma, Xie, and Ma}}}
+\bibcite{dueta2023}{{26}{2023}{{Zhou et~al.}}{{Zhou, Jin, Huang, and Tong}}}
+\bibcite{stann2021}{{27}{2021}{{Zhou et~al.}}{{Zhou, Liu, Wu, Xu, and Ye}}}
+\bibcite{sumo_data_generator}{{28}{2024}{{Ruppin-SmartTransportation}}{{}}}
+\bibcite{trafficlab}{{29}{2024}{{Ruppin-SmartTransportation}}{{}}}

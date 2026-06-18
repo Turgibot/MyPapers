@@ -1,273 +1,161 @@
-% ICSEE 2026 poster — 90 cm × 125 cm (portrait)
+% ICSEE 2026 poster — ASEMD template style, 90 cm × 125 cm (portrait)
+% Visual spec from Poster-Template-ASEMD2023-2.ppt:
+%   light-yellow background, dark-green text, Arial, fixed font sizes.
 \documentclass[
-  fontsize=22pt,
+  fontsize=17pt,
   size=custom,
   width=90,
   height=125,
   scale=1.0,
-  innermargin=1.4cm,
-  outermargin=1.0cm,
-  blockverticalspace=0.9cm,
-  colspace=1.1cm,
-  subcolspace=0.6cm,
+  innermargin=1.2cm,
+  outermargin=0.9cm,
+  blockverticalspace=0.65cm,
+  colspace=0.9cm,
+  subcolspace=0.5cm,
 ]{tikzposter}
 
-% Force exact poster dimensions (90 cm × 125 cm portrait)
 \usepackage{geometry}
-\geometry{paperwidth=90cm,paperheight=125cm,left=1cm,right=1cm,top=1cm,bottom=1cm}
+\geometry{paperwidth=90cm,paperheight=125cm,left=0.9cm,right=0.9cm,top=0.9cm,bottom=0.9cm}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{lmodern}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{amsmath}
 \usepackage{url}
-\usepackage{qrcode}
+\usepackage{xcolor}
 \usepackage{tikz}
 \usetikzlibrary{positioning,arrows.meta,calc}
 
-\definecolor{PosterBlue}{HTML}{0B3D6E}
-\definecolor{PosterTeal}{HTML}{0E7490}
-\definecolor{PosterLight}{HTML}{E8F4F8}
-\definecolor{PosterAccent}{HTML}{F59E0B}
-\definecolor{PosterGray}{HTML}{374151}
+% ASEMD template colors
+\definecolor{PosterBg}{HTML}{FFF9E6}
+\definecolor{PosterGreen}{HTML}{004225}
+\definecolor{PosterGreenLight}{HTML}{E8F5E9}
 
-\definecolorstyle{SimpleStyle}{
-  \colorlet{backgroundcolor}{white}
-  \colorlet{framecolor}{PosterBlue}
-  \colorlet{titlefgcolor}{white}
-  \colorlet{titlebgcolor}{PosterBlue}
-  \colorlet{blocktitlebgcolor}{PosterTeal}
-  \colorlet{blocktitlefgcolor}{white}
-  \colorlet{blockbodybgcolor}{PosterLight}
-  \colorlet{blockbodyfgcolor}{PosterGray}
+\definecolorstyle{ASEMDStyle}{
+  \colorlet{backgroundcolor}{PosterBg}
+  \colorlet{framecolor}{PosterGreen}
+  \colorlet{titlefgcolor}{PosterGreen}
+  \colorlet{titlebgcolor}{PosterBg}
+  \colorlet{blocktitlebgcolor}{PosterBg}
+  \colorlet{blocktitlefgcolor}{PosterGreen}
+  \colorlet{blockbodybgcolor}{PosterBg}
+  \colorlet{blockbodyfgcolor}{PosterGreen}
 }{}
-\usecolorstyle{SimpleStyle}
+\usecolorstyle{ASEMDStyle}
 \usebackgroundstyle{Empty}
 
-\title{Integrated Platform for Dynamic GNN ETA Prediction: Dataset Generation \& Testing}
+% Section heading helper (22 pt bold per template)
+\newcommand{\asec}[1]{\textbf{\fontsize{22}{26}\selectfont #1}\par\vspace{0.35em}}
+\newcommand{\bodytext}{\fontsize{17}{20}\selectfont}
+\newcommand{\figcaption}[2]{\par\vspace{0.4em}\fontsize{16}{19}\selectfont\textbf{Fig.~#1.} #2\par}
+\newcommand{\tablecap}[1]{\par\vspace{0.3em}\fontsize{16}{19}\selectfont\textbf{Table I.} #1\par}
 
-\author{Guy Tordjman \quad\textbar\quad Nadav Voloch}
-
-\institute{The Open University, Ra'anana \textbar{} Ruppin Academic Center, Emek Hefer \textbar{} ICSEE 2026}
+\pagecolor{PosterBg}
 
 \begin{document}
-\maketitle
 
-% ============================================================
-%  Row 1 — Motivation | Workflow | Key contributions
-% ============================================================
 \begin{columns}
-  \column{0.32}
-
-  \block{\Large Motivation}{
-    Accurate \textbf{Estimated Time of Arrival (ETA)} underpins navigation, dispatch, and traffic management. \textbf{Dynamic Graph Neural Networks (GNNs)} model evolving road networks and vehicle interactions, but progress is limited by:
-    \begin{itemize}
-      \item Static-sensor datasets with few features
-      \item Trajectory data lacking explicit route structure
-      \item No unified path from \emph{data creation} to \emph{live model testing}
-    \end{itemize}
-    \vspace{0.4em}
-    We present an \textbf{integrated open-source platform} that closes this gap: generate route-aware dynamic spatio-temporal graphs from SUMO simulation \emph{or} real GPS trajectories, then evaluate trained ETA models interactively in a web environment.
+  \column{1.0}
+  \block{}{%
+    {\color{PosterGreen}\fontsize{30}{36}\selectfont\bfseries
+    Integrated Dataset Generation and Testing Platform for Dynamic Graph Neural Network ETA Prediction\par}
+    \vspace{0.35em}
+    {\color{PosterGreen}\fontsize{20}{24}\selectfont
+    2026 International Conference on the Science of Electrical Engineering (ICSEE), Jerusalem, Israel, 10--11 June 2026\par}
+    \vspace{0.45em}
+    {\color{PosterGreen}\fontsize{24}{28}\selectfont\bfseries Guy Tordjman, Nadav Voloch\par}
+    \vspace{0.3em}
+    {\color{PosterGreen}\fontsize{20}{24}\selectfont
+    The Open University, Ra'anana, Israel; Ruppin Academic Center, Emek Hefer, Israel\par}
+    \vspace{0.25em}
+    {\color{PosterGreen}\fontsize{17}{20}\selectfont turgibot@gmail.com\quad nadavv@ruppin.ac.il\par}
   }
+\end{columns}
 
-  \column{0.36}
+\begin{columns}
+  \column{0.31}
 
-  \block{\Large End-to-End Workflow}{
-    \centering
-    \resizebox{0.98\linewidth}{!}{%
-    \begin{tikzpicture}[
-      font=\normalsize,
-      box/.style={
-        draw=PosterBlue, rounded corners=4pt, align=center,
-        inner sep=6pt, minimum width=3.1cm, line width=1pt,
-        fill=white
-      },
-      arr/.style={-{Stealth[length=2.5mm]}, thick, color=PosterTeal}
-    ]
-      \node[box, fill=PosterLight] (sumo) {\textbf{Simulation path}\\SUMO + TraCI};
-      \node[box, fill=PosterLight, right=0.35cm of sumo] (traj) {\textbf{Trajectory path}\\GPS repair \& match};
-      \coordinate (m) at ($(sumo.south)!0.5!(traj.south)$);
-      \node[box, below=0.45cm of m, fill=PosterTeal!15] (desk) {\textbf{Traffic-DSTG-Gen}\\Desktop dataset tool};
-      \node[box, below=0.4cm of desk] (snap) {\textbf{Graph snapshots}\\80{,}000+ time steps\\28-D nodes, 7-D edges};
-      \node[box, below=0.4cm of desk, right=0.55cm of snap, fill=PosterTeal!15] (web) {\textbf{TrafficLab}\\Web evaluation client};
-      \node[box, below=0.4cm of snap, fill=PosterAccent!12] (out) {\textbf{Logged outcomes}\\MAE, RMSE, journey DB};
-      \node[box, below=0.4cm of web] (out2) {\textbf{Reports \& plots}\\cohort analysis};
-      \draw[arr] (sumo.south) to[bend right=12] ([xshift=-1cm]desk.north);
-      \draw[arr] (traj.south) to[bend left=12] ([xshift=1cm]desk.north);
-      \draw[arr] (desk) -- (snap);
-      \draw[arr] (snap) -- (web);
-      \draw[arr] (snap) -- (out);
-      \draw[arr] (web) -- (out2);
-    \end{tikzpicture}%
+  \block{}{%
+    \asec{Abstract}
+    {\bodytext
+    Accurate Estimated Time of Arrival (ETA) prediction is essential for navigation, traffic management, and smart transportation. Dynamic Graph Neural Networks (GNNs) model evolving road networks, but research is hindered by limited datasets and the lack of a unified environment for data generation and model testing.
+
+    We present an integrated open-source platform combining \textbf{Traffic-DSTG-Gen} (route-aware dynamic spatio-temporal graphs from SUMO simulation or GPS trajectories) and \textbf{TrafficLab} (interactive web-based ETA evaluation). The system supports 80{,}000+ simulation snapshots with 28-dimensional node and 7-dimensional edge features, and logs thousands of real-time test journeys with MAE/RMSE analysis.
     }
-    \vspace{0.5em}
-    {\small Both construction paths export the \textbf{same graph schema}, enabling one training pipeline and one evaluation client.}
-  }
 
-  \column{0.32}
-
-  \block{\Large Platform at a Glance}{
-    \begin{minipage}[t]{0.48\linewidth}
-      \textbf{\color{PosterTeal}Traffic-DSTG-Gen}
-      \begin{itemize}
-        \item Route-aware dynamic graphs from SUMO
-        \item Hybrid static/dynamic nodes \& edges
-        \item Simulation \& trajectory conversion
-        \item Configurable temporal snapshots
-        \item PySide6 desktop GUI
-      \end{itemize}
-    \end{minipage}\hfill
-    \begin{minipage}[t]{0.48\linewidth}
-      \textbf{\color{PosterTeal}TrafficLab}
-      \begin{itemize}
-        \item Real-time ETA inference
-        \item Interactive trip evaluation
-        \item Vue.js + FastAPI + PostgreSQL
-        \item MAE / RMSE benchmarking
-        \item Path-independent validation
-      \end{itemize}
-    \end{minipage}
     \vspace{0.6em}
-    \begin{center}
-    \begin{tabular}{@{}l r@{}}
-      \toprule
-      \textbf{Dataset scale} & 80{,}000+ snapshots \\
-      \textbf{Node features} & 28 dimensions \\
-      \textbf{Edge features} & 7 dimensions \\
-      \textbf{Example bundles} & 3-zone city + Porto taxi \\
-      \bottomrule
-    \end{tabular}
-    \end{center}
-  }
+    \asec{Keywords}
+    {\bodytext
+    Graph Neural Networks; ETA Prediction; SUMO Simulation; Dataset Generation; Route-Aware Graphs; Testing Platform
+    }
 
-\end{columns}
+    \vspace{0.6em}
+    \asec{II. Principle}
+    {\bodytext
+    ETA prediction requires data that links road topology, vehicle motion, and trip labels. Static-sensor and plain trajectory datasets often lack explicit routes and rich features for dynamic GNNs.
 
-% ============================================================
-%  Row 2 — Graph model | Desktop UI | Web UI
-% ============================================================
-\begin{columns}
-  \column{0.34}
-
-  \block{\Large Route-Aware Dynamic Graph}{
-    \centering
-    \includegraphics[width=0.92\linewidth]{../nodes.png}
-    \vspace{0.4em}
-
-    {\small
-    \textbf{Static layer:} junction nodes (A--D) connected by road edges.\\
-    \textbf{Dynamic layer:} vehicle nodes with dashed relations to junctions and other vehicles, updated each snapshot.\\
-    \textbf{Features:} speed, position, route progress, destination --- enabling vehicle-level ETA prediction.
+    \textbf{Principle:} one shared \emph{route-conditioned dynamic graph}, built via (1)~\textbf{simulation}---SUMO/TraCI with reproducible snapshots; or (2)~\textbf{trajectory conversion}---GPS traces map-matched to the same schema (e.g.\ Porto taxi). Both paths feed one training pipeline and one web evaluation client.
     }
   }
 
-  \column{0.32}
-
-  \block{\Large Dataset Generation (Desktop)}{
-    \centering
-    \includegraphics[width=\linewidth]{../../Academia/images/dataset_projects.png}
-    \vspace{0.4em}
-    {\small
-    Two bundled examples: \textbf{3-zone city simulation} (left) and \textbf{Porto taxi conversion} (right). Operators configure SUMO scenarios or import GPS CSVs, validate routes on the map, and export time-stamped graph bundles for training.
-    }
-  }
-
-  \column{0.34}
-
-  \block{\Large Interactive Evaluation (Web)}{
-    \centering
-    \includegraphics[width=\linewidth]{../../Academia/images/web_sim.png}
-    \vspace{0.4em}
-    {\small
-    Users select origin/destination, receive a \textbf{predicted ETA}, run the journey in SUMO, and log realized duration. Dashboard panels show recent journeys and aggregate model performance --- the same UI works for simulation-derived and trajectory-converted networks.
-    }
-  }
-
-\end{columns}
-
-% ============================================================
-%  Row 3 — Results | Example journey | Takeaways
-% ============================================================
-\begin{columns}
   \column{0.38}
 
-  \block{\Large Evaluation Results}{
-    \begin{minipage}[t]{0.52\linewidth}
-      \centering
-      \includegraphics[width=\linewidth]{../mae_vs_time_plot_inverted.png}
-      \vspace{0.3em}
-      {\small MAE vs.\ trip duration (ICSEE paper figure). Short trips show lower error; the platform supports cohort analysis across duration buckets.}
-    \end{minipage}\hfill
-    \begin{minipage}[t]{0.44\linewidth}
-      \centering
-      \includegraphics[width=\linewidth]{../../Academia/images/3onesmae.png}
-      \vspace{0.3em}
-      {\small Per-journey absolute error vs.\ duration on the simulation bundle (2{,}707 logged trips).}
-      \vspace{0.8em}
+  \block{}{%
+    \asec{III. Theoretical Modelling}
+    {\bodytext
+    \textbf{Hybrid graph:} static junction nodes and road edges; dynamic vehicle nodes; time-varying junction--vehicle--vehicle--junction edges. \textbf{Features:} 28-D nodes, 7-D edges; sequential snapshots for temporal models.
 
-      \scriptsize
-      \begin{tabular}{@{}l rr@{}}
-        \toprule
-        & \textbf{Sim.} & \textbf{Porto} \\
-        \midrule
-        Journeys ($n$) & 2{,}707 & 3{,}055 \\
-        MAE (s) & 46.2 & 52.4 \\
-        RMSE (s) & 107.2 & 121.5 \\
-        MedAE (s) & 31.2 & 35.5 \\
-        \bottomrule
-      \end{tabular}
-      \vspace{0.4em}
+    \textbf{Traffic-DSTG-Gen} (desktop, PySide6 + SUMO): scenario configuration, trajectory import, export. \textbf{TrafficLab} (Vue.js + FastAPI + PostgreSQL): route selection, ETA inference, journey persistence, cohort metrics.
+    }
 
-      {\small Web-tool metrics closely match held-out training evaluation, confirming end-to-end integration.}
-    \end{minipage}
-  }
-
-  \column{0.30}
-
-  \block{\Large Example Journey}{
     \centering
-    \includegraphics[width=0.88\linewidth]{../../Academia/images/web3.png}
-    \vspace{0.4em}
-    {\small
-    Journey \#2709: 13.5\,km route, predicted duration 17:11, realized arrival within \textbf{19 seconds} (98.1\% accuracy). Each completed trip is persisted for aggregate reporting.
-    }
+    \includegraphics[width=0.95\linewidth]{../nodes.png}
+    \figcaption{1}{Static and dynamic graph structure: junction nodes (black), vehicle nodes (green), static roads (grey), dynamic relations (blue dashed).}
+
+    \includegraphics[width=0.95\linewidth]{../../Academia/images/dataset_projects.png}
+    \figcaption{2}{Traffic-DSTG-Gen desktop: 3-zone city simulation and Porto taxi conversion projects.}
+
+    \includegraphics[width=0.95\linewidth]{../../Academia/images/web_sim.png}
+    \figcaption{3}{TrafficLab web UI: interactive ETA testing on a SUMO network.}
   }
 
-  \column{0.32}
+  \column{0.31}
 
-  \block{\Large Conclusions \& Links}{
-    \textbf{Contributions}
-    \begin{itemize}
-      \item Unified toolchain: SUMO simulation \emph{and} GPS trajectory $\rightarrow$ dynamic graphs
-      \item Route-aware representation suited to vehicle-level ETA GNNs
-      \item Closed validation loop from dataset export to interactive web testing
-      \item Open-source release for reproducible smart-transportation research
-    \end{itemize}
-    \vspace{0.4em}
-    \textbf{Future work:} federated learning, additional real-world data sources, broader city deployments.
-
-    \vspace{0.6em}
-    \begin{minipage}[c]{0.28\linewidth}
-      \centering
-      \qrcode[height=2.6cm]{https://github.com/Ruppin-SmartTransportation/Traffic-DSTG-Gen}\\[0.2em]
-      {\scriptsize DSTG-Gen}
-    \end{minipage}\hfill
-    \begin{minipage}[c]{0.28\linewidth}
-      \centering
-      \qrcode[height=2.6cm]{https://github.com/Ruppin-SmartTransportation/TrafficLab}\\[0.2em]
-      {\scriptsize TrafficLab}
-    \end{minipage}\hfill
-    \begin{minipage}[c]{0.28\linewidth}
-      \centering
-      \qrcode[height=2.6cm]{https://demo.smart-transport.cloud/}\\[0.2em]
-      {\scriptsize Live demo}
-    \end{minipage}
-
-    \vspace{0.6em}
-    {\small
-    \textbf{Acknowledgment:} Supported by Ruppin Academic Center and the Israeli Ministry of Innovation, Science and Technology (Proposal 0007846); grant 34836.
+  \block{}{%
+    \asec{V. Results and Analyses}
+    {\bodytext
+    \textbf{Dataset scale:} 80{,}000+ snapshots; multi-zone urban scenarios. \textbf{Web evaluation:} 2{,}707 simulation and 3{,}055 trajectory journeys logged independently of training data.
     }
+
+    \tablecap{Web-tool ETA error (seconds) vs.\ held-out training evaluation.}
+    \centering
+    \bodytext
+    \begin{tabular}{@{}l r r r r@{}}
+      \toprule
+      Source & $n$ & MAE & RMSE & MedAE \\
+      \midrule
+      Simulation & 2{,}707 & 46.2 & 107.2 & 31.2 \\
+      Trajectory & 3{,}055 & 52.4 & 121.5 & 35.5 \\
+      \bottomrule
+    \end{tabular}
+
+    \includegraphics[width=\linewidth]{../mae_vs_time_plot_inverted.png}
+    \figcaption{4}{MAE vs.\ trip duration; per-journey errors align with training evaluation within $\sim$2\,s MAE.}
+
+    \vspace{0.5em}
+    \asec{VI. Conclusion}
+    {\bodytext
+    Integrated platform for dynamic GNN ETA research: dataset generation (simulation or trajectories) and real-time testing in one workflow. Open source: \url{https://github.com/Ruppin-SmartTransportation/Traffic-DSTG-Gen} and TrafficLab; demo: \url{https://demo.smart-transport.cloud/}.
+
+    \textbf{Future work:} federated learning, additional data sources, larger-network deployment.
+    }
+
+    \vspace{0.4em}
+    \fontsize{14}{17}\selectfont
+    \textbf{Acknowledgment:} Supported by Ruppin Academic Center and the Israeli Ministry of Innovation, Science and Technology (Proposal 0007846); grant 34836.
   }
 
 \end{columns}
