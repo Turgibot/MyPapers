@@ -1,0 +1,59 @@
+% TikZ: Dynamic, multi-relational traffic graph
+% Junction nodes (V^j) vs. vehicle nodes (V^v_t); road / traversal / interaction edges, with legend.
+\tikzset{
+  junc/.style={draw, fill=black, text=white, rectangle, rounded corners=1pt, minimum size=7mm, font=\bfseries\small, inner sep=0pt},
+  veh/.style={draw=green!45!black, fill=green!15, circle, minimum size=5.5mm, thick, inner sep=0pt},
+  roadedge/.style={-{Latex[length=2.2mm]}, thick, black},
+  travedge/.style={-{Latex[length=2mm]}, thick, dashed, orange!75!black},
+  interedge/.style={-{Latex[length=2mm]}, thick, dotted, red!65!black},
+  note/.style={font=\footnotesize, align=left}
+}
+
+\begin{tikzpicture}[>=Latex]
+% --- Junction nodes (static topology) ---
+\node[junc] (A) at (0, 3) {A};
+\node[junc] (B) at (0, 0) {B};
+\node[junc] (C) at (4.6, 1.5) {C};
+\node[junc] (D) at (10.4, 1.5) {D};
+
+% --- Vehicle nodes (dynamic) ---
+% Segment B--C: single vehicle (its own head and tail)
+\node[veh] (v1) at (2.2, 0.25) {};
+% Segment C--D: 3-vehicle chain, ordered by position vh (head, k=1) -> vm (k=2) -> vt (tail, k=3)
+\node[veh] (vh) at (6.1, 0.35) {};
+\node[veh] (vm) at (7.45, 0.35) {};
+\node[veh] (vt) at (8.8, 0.35) {};
+
+% --- Road edges: static junction-junction topology ---
+\draw[roadedge] (A) -- (C);
+\draw[roadedge] (B) -- (C);
+\draw[roadedge] (C) -- (D);
+
+% --- Traversal edges: only head/tail vehicle of each segment's chain <-> its junction ---
+\draw[travedge] (B) -- (v1);
+\draw[travedge] (v1) -- (C);
+\draw[travedge] (C) -- (vh);
+\draw[travedge] (vt) -- (D);
+
+% --- Interaction edges: chain of consecutive same-segment vehicles, k = chain order ---
+\draw[interedge] (vh) -- (vm) node[midway, below, font=\scriptsize] {$\omega(d_{1,2})$};
+\draw[interedge] (vm) -- (vt) node[midway, below, font=\scriptsize] {$\omega(d_{2,3})$};
+
+% --- Legend ---
+\begin{scope}[yshift=-1.55cm]
+  % row 1: node types
+  \node[junc, scale=0.75] (lj) at (0,0) {};
+  \node[note, anchor=west] at (0.35,0) {Junction node $V^j$};
+  \node[veh, scale=0.75] (lv) at (4.3,0) {};
+  \node[note, anchor=west] at (4.65,0) {Vehicle node $V_t^v$};
+
+  % row 2: edge types
+  \draw[roadedge] (0,-0.65) -- (0.7,-0.65);
+  \node[note, anchor=west] at (0.85,-0.65) {Road edge (static)};
+  \draw[travedge] (4.3,-0.65) -- (5.0,-0.65);
+  \node[note, anchor=west] at (5.15,-0.65) {Traversal edge (junction$\leftrightarrow$vehicle)};
+  \draw[interedge] (4.3,-1.2) -- (5.0,-1.2);
+  \node[note, anchor=west] at (5.15,-1.2) {Interaction edge (vehicle$\leftrightarrow$vehicle)};
+\end{scope}
+
+\end{tikzpicture}

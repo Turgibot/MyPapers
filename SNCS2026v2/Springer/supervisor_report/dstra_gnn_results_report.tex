@@ -1,0 +1,120 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[margin=0.55in]{geometry}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{amssymb}
+
+\hypersetup{colorlinks=true, linkcolor=black, urlcolor=blue}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\setlist[itemize]{leftmargin=1.2em, topsep=2pt, itemsep=1pt}
+\titlespacing*{\section}{0pt}{6pt}{2pt}
+\titlespacing*{\subsection}{0pt}{4pt}{1pt}
+
+\title{\vspace{-1.3em}\textbf{DSTRA-GNN Results Summary}\\[-0.2em]
+\large Short report for supervisor}
+\author{Guy Tordjman}
+\date{June 2026}
+
+\begin{document}
+\maketitle
+\vspace{-1.8em}
+
+\section{Purpose and Evaluation Protocol}
+
+This report summarizes the final experimental results for DSTRA-GNN, a dynamic spatio-temporal route-aware graph neural network for per-vehicle ETA prediction. The model represents traffic as a dynamic graph with static road topology, vehicle nodes, interaction edges, explicit remaining-route features, temporal context, and a Mixture-of-Experts ETA head.
+
+The evaluation uses two graph datasets and one trajectory-native dataset for external baselines. SUMO is the controlled simulation domain. After detecting a rare extreme-duration simulator tail, all reported SUMO statistics and broad-population results use a p95-filtered corpus that removes trips longer than 2,587 s, retaining 798,919 trips. Porto-G is the graph-converted Porto taxi dataset. Porto-T is the trajectory-native filtered Porto dataset used for comparison with DeepTTE, MetaTTE, and other trajectory baselines.
+
+\textbf{Protocol.} All datasets use chronological train/validation/test splits with no leakage across splits. SUMO uses two weeks for training, one week for validation, and one week for testing. Porto uses the shared calendar split: train 2013-07-01--2014-02-28, validation 2014-03-01--2014-04-01, and test 2014-05-01--2014-07-01. Graph models use 30-s snapshots, 30-snapshot windows, and one ETA prediction per trip start. Porto-T and Porto-G are evaluated in the 315--945 s MetaTTE-style protocol range; SUMO is reported both in that shared range and on the broader p95-filtered population. Model selection is by validation MAE. A3--A6 are reported as mean $\pm$ standard deviation over seeds 42/43/44; A1--A2 use seed 42. Headline metrics are test-set MAE, RMSE, and MAPE after inverting the normalized log target to seconds.
+
+\section{Ablation Variants and Results}
+
+The six DSTRA-GNN variants isolate the effect of dynamic edges, route awareness, and temporal context. A6 is the full model with all three components enabled.
+
+\begin{table}[h]
+\centering
+\caption{Ablation variants and enabled components.}
+\scriptsize
+\begin{tabular}{@{}lccc@{}}
+\toprule
+\textbf{Variant} & \textbf{Dyn. edges} & \textbf{Route feat.} & \textbf{Temporal GRU} \\
+\midrule
+A1 base\_graph & -- & -- & -- \\
+A2 dynamic\_graph & $\checkmark$ & -- & -- \\
+A3 route\_aware\_graph & $\checkmark$ & $\checkmark$ & -- \\
+A4 temporal\_base & -- & -- & $\checkmark$ \\
+A5 temporal\_dynamic & $\checkmark$ & -- & $\checkmark$ \\
+A6 temporal\_route\_aware & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Full DSTRA-GNN ablation results. A3--A6 report mean $\pm$ std across seeds 42/43/44; A1--A2 use seed 42 only.}
+\scriptsize
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lccc ccc ccc@{}}
+\toprule
+& \multicolumn{3}{c}{\textbf{Porto-G protocol}} & \multicolumn{3}{c}{\textbf{SUMO protocol}} & \multicolumn{3}{c}{\textbf{SUMO p95}} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}\cmidrule(l){8-10}
+\textbf{Variant} & \textbf{MAE} & \textbf{RMSE} & \textbf{MAPE} & \textbf{MAE} & \textbf{RMSE} & \textbf{MAPE} & \textbf{MAE} & \textbf{RMSE} & \textbf{MAPE} \\
+\midrule
+A1 static only & 93.29 & 122.04 & 17.28 & 80.10 & 211.86 & 12.03 & 78.33 & 235.56 & 25.13 \\
+A2 +dyn. edges & 91.76 & 120.63 & 16.88 & 74.96 & 135.63 & 11.59 & 77.56 & 244.34 & 23.54 \\
+A3 +route+dyn. & 74.81$\pm$0.52 & 100.30$\pm$0.88 & 13.96 & 66.81$\pm$0.64 & 110.23$\pm$0.93 & 10.06 & 76.22$\pm$1.42 & 218.98$\pm$2.01 & 22.34 \\
+A4 +temp. & 90.00$\pm$0.66 & 118.67$\pm$1.01 & 17.05 & 76.29$\pm$0.73 & 121.26$\pm$1.08 & 12.05 & 80.38$\pm$1.23 & 232.16$\pm$2.12 & 24.35 \\
+A5 +temp.+dyn. & 87.99$\pm$0.61 & 107.83$\pm$0.94 & 16.76 & 64.08$\pm$0.66 & 97.38$\pm$1.01 & 9.76 & 75.81$\pm$1.82 & 219.22$\pm$2.19 & 22.22 \\
+A6 full model & \textbf{68.05$\pm$0.48} & \textbf{90.01$\pm$0.86} & \textbf{13.20} & \textbf{54.75$\pm$0.71} & \textbf{82.72$\pm$0.96} & \textbf{8.33} & \textbf{72.44$\pm$1.31} & \textbf{214.50$\pm$2.92} & \textbf{19.71} \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+The protocol-range results give the cleanest cross-domain comparison because Porto-G and Porto-T are duration-matched to the 315--945 s MetaTTE-style range, while SUMO can be evaluated on the same range. In this shared range, A6 gives 27\% MAE reduction on Porto-G and 32\% on SUMO relative to A1. The broader SUMO p95 view includes trips up to 2,587 s; even there, A6 remains the best variant with 72.44 s MAE. This supports the main architectural claim: route information and temporal context are complementary rather than interchangeable.
+
+\section{Porto Baseline Positioning}
+
+Porto is the main setting where DSTRA-GNN can be compared with external trajectory-native baselines under a shared chronological split. The comparison should be read as a modality comparison: DSTRA-GNN uses graph snapshots and explicit remaining-route state on Porto-G, while DeepTTE, MetaTTE, WDR, and STNN use GPS trajectory sequences on Porto-T.
+
+\begin{table}[h]
+\centering
+\caption{Porto test-set comparison with strongest external baselines.}
+\small
+\begin{tabular}{@{}llccc@{}}
+\toprule
+\textbf{Model} & \textbf{Input} & \textbf{MAE} & \textbf{RMSE} & \textbf{MAPE} \\
+\midrule
+GBM (LightGBM) & Porto-T trajectory/tabular & 86.41 s & 113.21 s & 15.00\% \\
+DeepTTE & Porto-T trajectory & 68.59 s & 90.68 s & \textbf{12.13\%} \\
+MetaTTE & Porto-T trajectory & 69.46 s & 91.74 s & 12.34\% \\
+WDR & Porto-T trajectory & 72.11 s & 94.60 s & 12.81\% \\
+STNN & Porto-T trajectory & 74.15 s & 97.27 s & 13.05\% \\
+DCRNN & Porto-G graph & 131.32 s & 172.82 s & 28.95\% \\
+\textbf{DSTRA-GNN A6} & \textbf{Porto-G graph} & \textbf{68.05 s} & \textbf{90.01 s} & 13.20\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+DSTRA-GNN is in the same accuracy band as the strongest trajectory-native deep baselines. It has slightly better MAE and RMSE than DeepTTE and MetaTTE, while DeepTTE retains the best MAPE. The important result is therefore not a large separation from trajectory models, but that a graph-native, route-aware formulation reaches comparable performance while operating on dynamic graph snapshots.
+
+\section{Interpretation}
+
+\begin{itemize}
+    \item \textbf{Route intent is the strongest non-temporal signal.} Adding route features on top of dynamic edges reduces MAE substantially in both domains, especially on Porto-G where sparse taxi observations make local traffic interactions less informative by themselves.
+    \item \textbf{Temporal context provides additional gains.} The full A6 model improves over both the route-aware non-temporal model and the temporal dynamic model, showing that route state and temporal aggregation capture different information.
+    \item \textbf{Dynamic edges help more in dense traffic.} SUMO has roughly 288 active vehicles per snapshot after p95 filtering, while Porto-G has about 8. Dynamic vehicle--vehicle and vehicle--junction edges are therefore more useful in SUMO than in the sparse Porto taxi graph.
+    \item \textbf{The p95 SUMO correction improves scientific validity.} Removing trips above 2,587 s avoids letting a rare simulator tail dominate aggregate metrics, while keeping nearly 95\% of the generated trips. The retained SUMO population is still broader than the Porto protocol range and is used consistently throughout the final paper.
+\end{itemize}
+
+\section{Bottom Line}
+
+The final results support the paper's central claim: DSTRA-GNN provides an open, route-aware dynamic graph formulation for ETA prediction that combines static road structure, vehicle dynamics, temporal context, and remaining-route intent. On both SUMO and Porto-G, the full route-aware temporal model is the best graph variant. On Porto, it reaches the accuracy range of strong trajectory-native deep baselines, demonstrating that graph-native ETA prediction can be competitive when explicit route state is available.
+
+\end{document}

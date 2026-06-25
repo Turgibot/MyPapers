@@ -1,0 +1,130 @@
+\section{Experimental Evaluation}\label{sec4}
+
+\subsection{Datasets}\label{sec:porto-dataset}
+We evaluate on the three datasets defined in Sect.~\ref{sec:porto-conversion}: SUMO and Porto-G for graph-based models, and Porto-T for trajectory-native baselines.
+
+All three datasets use chronological train/validation/test splits with no overlap. SUMO is split into two weeks for training, followed by one week for validation and one week for testing. Porto-T and Porto-G use the shared calendar split train: 2013-07-01--2014-02-28, validation: 2014-03-01--2014-04-01, and test: 2014-05-01--2014-07-01. Table~\ref{tab:dataset-stats} summarizes the split sizes, scale, and trip statistics used in evaluation. Topology and snapshot counts apply only to the graph datasets, so they are omitted for Porto-T.
+
+\begin{table}[t]
+    \centering
+    \caption{Dataset topology, scale, and trip statistics (all splits combined). Porto-G figures reflect the duration-matched population used throughout this paper, as described in Sect.~\ref{sec:porto-conversion}. Road edges also give the Route Encoder's vocabulary size.}\label{tab:dataset-stats}
+    {\footnotesize\setlength{\tabcolsep}{4pt}%
+    \begin{tabular}{@{}lccc@{}}
+        \toprule
+         & \textbf{SUMO} & \textbf{Porto-G} & \textbf{Porto-T} \\
+        \midrule
+        Junctions                       & 362     & 75{,}264 & -- \\
+        Road edges                      & 1{,}294 & 79{,}160 & -- \\
+        Network length (km)             & 676     & 4{,}945  & -- \\
+        Sampling period (s)             & 30      & 30       & 15 \\
+        Snapshots (train/val/test)      & 40{,}312 / 20{,}160 / 20{,}221 & 682{,}968 / 89{,}936 / 172{,}560 & -- \\
+        Window overlap (snapshots)      & 10      & 10       & -- \\
+        Trips (total)                   & 798{,}919 & 420{,}958 & 819{,}517 \\
+        Avg.\ active vehicles/snapshot  & 287.8   & 8.1 & -- \\
+        Trip duration mean / median (s) & 856 / 851       & 580 / 570       & 584 / 570 \\
+        Trip duration std (s)           & 432             & 161             & 164 \\
+        Trip distance mean / median (m) & 11{,}253 / 12{,}107 & 2{,}698 / 2{,}421 & 3{,}851 / 3{,}634 \\
+        Mean vehicle speed (m/s)        & 13.87               & 6.53            & 6.77 \\
+        Protocol-range fraction         & 0.52                & 1.00            & 1.00 \\
+        \bottomrule
+    \end{tabular}}%
+\end{table}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.95\linewidth]{figures/sumo_trip_duration_distance_distributions.png}
+    \caption{SUMO trip duration and distance distributions by chronological split.}\label{fig:sumo-trip-dist}
+\end{figure}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.95\linewidth]{figures/porto_t_trip_duration_distance_distributions.png}
+    \caption{Porto-T trip duration and GPS-polyline distance distributions by chronological split. The split-level curves overlap closely after MetaTTE-style filtering.}\label{fig:porto-t-trip-dist}
+\end{figure}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.95\linewidth]{figures/porto_g_trip_duration_distance_distributions.png}
+    \caption{Porto-G trip duration and graph-route distance distributions by chronological split. The split-level curves overlap closely after duration matching.}\label{fig:porto-trip-dist}
+\end{figure}
+
+\FloatBarrier
+
+\noindent Figs.~\ref{fig:sumo-trip-dist}--\ref{fig:porto-trip-dist} show trip-duration and trip-distance distributions by chronological split. The train, validation, and test curves overlap closely in all three datasets, supporting the split choice without visible distributional drift. In Fig.~\ref{fig:sumo-trip-dist}, the duration axis is capped at 6{,}000\,s for readability and the dashed vertical line marks the p95 cutoff at 2{,}587\,s. We report SUMO results in both the shared protocol range and the broader p95-filtered population defined in Sect.~\ref{sec:porto-conversion}; even after p95 filtering, SUMO remains broader than the Porto datasets and has a bimodal distance profile, consistent with distinct intra-zone and inter-zone trip populations. Fig.~\ref{fig:porto-g-vs-t} separately compares the Porto-T and Porto-G populations and their different distance definitions.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.95\linewidth]{figures/sumo_speed_volume_by_hour.png}
+    \caption{SUMO mean vehicle speed and traffic volume by hour of day (train split). Speed dips and volume peaks coincide at the morning ($\sim$8--9h) and evening ($\sim$17h) rush hours, with a secondary midday volume dip and speed recovery.}\label{fig:sumo-hourly}
+\end{figure}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.95\linewidth]{figures/porto_t_speed_volume_by_hour.png}
+    \caption{Porto-T mean trip speed and trip volume by hour of day (train split). Trip volume rises sharply in the morning and remains active through the day, while mean trip speed varies more mildly.}\label{fig:porto-t-hourly}
+\end{figure}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.95\linewidth]{figures/porto_g_speed_volume_by_hour.png}
+    \caption{Porto-G mean vehicle speed and traffic volume by hour of day (train split). The same diurnal pattern recurs at a much smaller scale (single-digit to low-teens active vehicles), with a sharper morning ramp-up and no distinct midday dip.}\label{fig:porto-hourly}
+\end{figure}
+
+The hourly profiles in Figs.~\ref{fig:sumo-hourly}--\ref{fig:porto-hourly} show the expected diurnal pattern: traffic volume rises during commuting hours while speed tends to fall. SUMO's profile reflects its scripted peak periods, while Porto-T and Porto-G show taxi-demand patterns at trip and graph-snapshot levels respectively.
+
+\textbf{Limitations.} Porto-G captures one taxi fleet in one city and therefore one traffic mix (no buses/trucks, no zone semantics). Sect.~\ref{sec6} discusses what this scope does and does not support.
+
+\subsection{Evaluation Protocol}\label{sec:eval-protocol}
+For SUMO and Porto-G, graph windows are built with $H{=}30$ snapshots (15 minutes) and stride 10; the first $H{-}1$ snapshots of each split are discarded so that no window crosses a split boundary. Porto-T is trip-level and is evaluated directly at the trajectory level.
+
+Protocol-range evaluation uses one prediction per trip start so that graph-based models are compared against trajectory-based baselines on the same unit of prediction: one ETA per trajectory. Porto-G and Porto-T fall within the $[315,945]$\,s protocol range by construction. SUMO is reported in two views: the shared protocol range, and the broader p95-filtered population obtained by retaining vehicles whose trip-start duration is at most 2{,}587\,s as described in Sect.~\ref{sec:porto-conversion}. P95 SUMO tables are then evaluated on the retained vehicles' labeled test rows after applying the $H{=}30$ split-boundary rule.
+
+Training uses the normalized log target defined in Sect.~\ref{sec:loss}. For each dataset and variant, model selection uses the lowest \emph{validation} MAE per seed, with validation reserved exclusively for early stopping and checkpoint selection. All headline numbers are computed on the held-out \emph{test} split: for variants A3--A6, we report the mean $\pm$ std across three seeds (42, 43, 44), while A1 and A2 are reported for seed 42 only. Seed variability is shown for MAE and RMSE, the primary scale-preserving metrics; MAPE is computed directly from predictions and labels but reported as a point estimate because it is secondary and less stable for small ETA denominators.
+
+\subsection{Ablation Variants}\label{sec:ablation-variants}
+We compare six code-defined variants (shared encoder and training protocol) on \emph{both} SUMO and Porto-G. Table~\ref{tab:ablation_variants} summarizes the variants and which components are enabled:
+\begin{itemize}
+    \item \texttt{base\_graph}: static road graph only, no dynamic edges, no temporal, no route features.
+    \item \texttt{dynamic\_graph}: adds dynamic edges (junction$\to$vehicle, vehicle$\to$vehicle, vehicle$\to$junction), no temporal, no route features.
+    \item \texttt{route\_aware\_graph}: adds route features/encoder and dynamic edges, no temporal.
+    \item \texttt{temporal\_base}: temporal context from static-road edges only for the first $H{-}1$ snapshots, no route features, spatial encoder uses only static edges.
+    \item \texttt{temporal\_dynamic}: temporal context from the first $H{-}1$ snapshots is aggregated over static-road edges, spatial encoder uses dynamic edges, no route features.
+    \item \texttt{temporal\_route\_aware}: full model with dynamic edges, route features/encoder, and temporal context aggregated from static-road edges for the first $H{-}1$ snapshots.
+\end{itemize}
+
+\begin{table}[t]
+    \centering
+    \caption{Ablation variants and enabled components. Temporal uses a GRU over static-road edge sequences for the first $H{-}1$ snapshots. Each variant is trained and evaluated independently on SUMO and on Porto-G.}
+    \label{tab:ablation_variants}
+    \begin{tabular}{@{}lccc@{}}
+        \toprule
+        \textbf{Variant} & \textbf{Dyn. Edges} & \textbf{Route Feat.} & \textbf{Temporal} \\
+        \midrule
+        base\_graph              & --- & --- & --- \\
+        dynamic\_graph           & $\checkmark$ & --- & --- \\
+        route\_aware\_graph      & $\checkmark$ & $\checkmark$ & --- \\
+        temporal\_base           & --- & --- & $\checkmark$ \\
+        temporal\_dynamic        & $\checkmark$ & --- & $\checkmark$ \\
+        temporal\_route\_aware    & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{External Baselines}\label{sec:baselines}
+To address the concern that comparisons rely mainly on internal ablations and a single average-time baseline, we retrain and evaluate a ladder of external reference methods on Porto-T (trip-level trajectory input) or Porto-G (graph snapshot input), aligning chronological splits, duration range, label definition, and metrics as defined in Sect.~\ref{sec:eval-protocol} and Sect.~\ref{sec:porto-dataset}:
+\begin{itemize}
+    \item \textbf{AVG}: historical OD-and-hour average travel time, falling back to coarser OD and global averages when a bucket is unseen (MetaTTE-style). Evaluated on Porto-T and SUMO.
+    \item \textbf{Linear Regression (LR)}: ridge-regularized linear model over the same trip-geometry features as GBM. Included as a linear ceiling for the tabular feature set and evaluated on Porto-T and SUMO.
+    \item \textbf{GBM}: gradient-boosted trees (LightGBM) over trip- and route-geometry features (origin/destination coordinates, polyline or route distance, OD distance, bearing, hour-of-day, day-of-week). Evaluated on Porto-T and SUMO.
+    \item \textbf{TEMP}: MetaTTE-style historical segment-speed baseline. Each Porto-T trajectory is split into consecutive GPS segments, and segment travel time is estimated from training-set segment speeds in the same spatial cell and hour-of-day bucket, with cell-only and global-speed fallbacks.
+    \item \textbf{Route-sum}: sum of per-edge remaining travel times along \texttt{vehicle\_route\_left}, using per-edge historical average speeds from the training split. Evaluated on Porto-G and SUMO.
+    \item \textbf{WDR} (Wide-and-Deep Regression): a wide-and-deep neural model combining a linear component (trip metadata features) with a deep component (learned embeddings) for trip-level ETA prediction. Evaluated on Porto-T.
+    \item \textbf{STNN} (Spatio-Temporal Neural Network): a recurrent sequence encoder operating on trip GPS coordinate sequences with spatial and temporal features. Evaluated on Porto-T.
+    \item \textbf{DeepTTE}~\cite{deepTTE2018}: our reimplementation of the deep spatial-temporal network for ETA from raw GPS traces, trained on Porto-T with the same calendar split as the graph model.
+    \item \textbf{MetaTTE}~\cite{wang2022metatte}: our reimplementation, trained under the same protocol as DeepTTE on Porto-T.
+    \item \textbf{DCRNN}~\cite{dcrnn2018}: diffusion convolutional recurrent neural network adapted to the road-edge line graph, predicting per-vehicle ETA from the same $H{=}30$ snapshot window and evaluated on the same graph-native protocol.
+\end{itemize}
+DeepTTE, MetaTTE, TEMP, WDR, and STNN use trip-level Porto-T inputs. AVG, LR, and GBM use trip/geometry tables derived from Porto-T or SUMO; Route-sum, DCRNN, and DSTRA-GNN use graph snapshots on Porto-G or SUMO. SUMO is used for both controlled DSTRA-GNN ablations and a compact p95 external-baseline comparison.
+
+\subsection{Evaluation Metrics}
+We report Mean Absolute Error (MAE) and Root Mean Squared Error (RMSE) in seconds, and Mean Absolute Percentage Error (MAPE), computed directly from stored predictions and ground-truth labels (not estimated).

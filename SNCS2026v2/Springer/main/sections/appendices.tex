@@ -1,0 +1,25 @@
+\begin{appendices}
+
+\section{Explanation of Extended Material}\label{secA1}
+
+This extended version includes at least 30\% new material compared to the foundation paper ``Estimating Accurate Traffic Time by Smart Simulative Route Predictions''~\cite{SmartSimulativeRoute2025}, submitted to the I3E 2025 conference. That paper introduced route-aware traffic modeling via a static graph of junction vertices and road-segment edges, computing paths that minimize a Total Edge Weight (TEW) combining physical distance and predicted congestion. The present work replaces this heuristic simulation with a learned dynamic graph neural network. Table~\ref{tab:extension-summary} summarizes the additions by section.
+
+\begin{table}[h]
+\centering
+\caption{New material added relative to the foundation paper~\cite{SmartSimulativeRoute2025}, by section.}
+\label{tab:extension-summary}
+\begin{tabular}{@{}lp{6.3cm}r@{}}
+\toprule
+\textbf{Section} & \textbf{Main additions} & \textbf{New material} \\
+\midrule
+Related Work (\ref{sec2}) & Subsections on classical pathfinding, non-graph ETA prediction (DeepTTE, MetaTTE, STAD, STANN), graph-based models without route awareness (DCRNN, ST-GCN, Graph WaveNet), and route-aware production models (Google Maps, ConSTGAT, DuETA), with a comparison table and explicit positioning vs.\ the foundation paper & $\sim$15\% \\
+Methodology (\ref{sec3}) & Dynamic graph with vehicle/interaction nodes and edges, route intent as learned edge-ID embeddings (vs.\ TEW path costs), temporal windowing, full model/training configuration & $\sim$10\% \\
+Experimental Evaluation (\ref{sec4}) & Dataset statistics, experimental setup, and ablation variants for the learned model evaluated on dynamic graph snapshots & --- \\
+Discussion (\ref{sec6}) & Deeper result analysis, comparison with state-of-the-art baselines, and discussion of how the neural approach improves on the heuristic TEW method & $\sim$5\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The most significant advance is the shift from heuristic TEW-based path costs to learned feature representations: route intent is now encoded as edge-ID embeddings processed by graph neural network layers, and temporal context is learned from historical road-edge states -- both entirely new relative to the foundation paper, which used neither.
+
+\end{appendices}
